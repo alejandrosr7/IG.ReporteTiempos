@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">Reporte de Tiempos</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_splash">Splash</string>
+    <string name="title_activity_register">register</string>
+    <string name="title_view_times">View times</string>
+    <string name="title_activity_reporter">Reportar tiempos</string>
+
+    <!-- Textos generales-->
+    <string name="continuar">Continuar</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="NameManager">¿Quién es tu gerente?</string>
+    <string name="NameConceptHour">¿Cuál es tu concepto de hora?</string>
+    <string name="NameClassificationConceptHour">Clasificación de concepto de hora</string>
+    <string name="NameProyect">¿Cuál es tu proyecto?</string>
+    <string name="Namefunctionality">¿A cuál funcionalidad reportarás?</string>
+    <string name="Namediscipline">¿Cuál es tu disciplina?</string>
+    <string name="NameActvity">¿Cuál es tu actividad?</string>
+
+
+    <string name="activity">Actividad realizada</string>
+    <string name="date">Fecha</string>
+    <string name="hour">Horas</string>
+    <string name="description">Descripción</string>
+    <string name="requiriments">Requerimiento/Oc</string>
+    <string name="register">REPORTAR</string>
+
+
+    <!-- Mensaje de validación en registro y actualziar datos-->
+    <string name="title_incomplete_fields">Campos incompletos</string>
+    <string name="title_invalid_fields">Campos no válidos</string>
+    <string name="message_email_empty">Debes ingresar tu correo electrónico.</string>
+    <string name="message_email_invalid">Correo electrónico no válido, por favor verifiquelo.</string>
+    <string name="message_password_empty">Debes ingresar una contraseña.</string>
+
+    <!-- Hint para la actividad registro de tiempos-->
+    <string name="hintSelectManager">Selecciona tu gerente</string>
+    <string name="hintSelectConceptHour">Selecciona tu concepto de hora</string>
+    <string name="hintSelectClassificationConceptHour">Selecciona la clasificación</string>
+    <string name="hintSelectProyect">Seleccione el proyecto</string>
+    <string name="hintSelectfunctionality">Seleccione la funcionalidad</string>
+    <string name="hintSelectActivity">Seleccione actividad</string>
+    <string name="hintSelectActivityCompleted">Actividad completada</string>
+    <string name="hintSelectdiscipline">Seleccione disciplina</string>
+    <string name="hintSelectDate">Seleccione Fecha</string>
+    <string name="hintHours">Esfuerzo en horas</string>
+    <string name="hintDescription">Descripción de la actividad</string>
+
+    <string name="title_activity_menu">menu</string>
+    <string name="view_report_times">Ver reporte de tiempos</string>
+    <string name="weekly">Semanal</string>
+    <string name="monthly">Mensual</string>
+    <string name="byDate">Por fecha</string>
+    <string name="search">Buscar</string>
+    <string name="mdtp_from">DESDE</string>
+    <string name="mdtp_to">HASTA</string>
+    <string name="title_internet">Apreciado usuario</string>
+    <string name="text_interntet">Por favor valide su conexión a internet</string>
+    <string name="first_item_menu_manager">Por colaborador</string>
+    <string name="second_item_menu_manager">Por proyecto</string>
+</resources>
+

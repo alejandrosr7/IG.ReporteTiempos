@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/listTitle"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
+            android:gravity="left|top"
+            android:text="Leidy Carolina Zulaga"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="1"
+      android:orientation="horizontal">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+          <TextView
+              android:id="@+id/tvred"
+              android:layout_width="wrap_content"
+              android:layout_height="55dp"
+              android:layout_weight="1.2"
+              android:layout_alignParentTop="true"
+              android:singleLine="true"
+              android:textIsSelectable="false"
+              android:gravity="bottom|center"
+              android:textSize="25dp"
+              android:text="40"
+              android:textColor="#B71400"
+              android:textStyle="bold"/>
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="13dp"
+              android:textSize="10dp"
+              android:text="Por reportar"
+              android:gravity="center|top"/>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="3dp"
+              android:layout_marginTop="3dp"
+              android:background="#B71400"
+              android:orientation="vertical">
+
+          </LinearLayout>
+      </LinearLayout>
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvgreen"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_weight="1.2"
+        android:layout_alignParentTop="true"
+        android:singleLine="true"
+        android:textIsSelectable="false"
+        android:gravity="bottom|center"
+        android:textSize="25dp"
+        android:text="130"
+        android:textColor="#46A724"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:textSize="10dp"
+        android:text="Reportado"
+        android:gravity="center|top"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="3dp"
+        android:background="#46A724"
+        android:orientation="vertical">
+</LinearLayout>
+
+
+
+
+
+  </LinearLayout>
+
+
+</LinearLayout>
+</LinearLayout>

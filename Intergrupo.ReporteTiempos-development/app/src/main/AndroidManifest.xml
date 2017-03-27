@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.intergrupo.reportedetiemposig">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".Helper.ApplicationContext"
+        android:allowBackup="true"
+        android:icon="@mipmap/logoig"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Ui.Controller.Splash"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Ui.Controller.Login"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Ui.Controller.MenuActivity"
+            android:label="@string/title_activity_menu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NotificationBar" />
+        <activity
+            android:name=".Ui.Controller.register"
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NotificationBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ui.Controller.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".Ui.Controller.ViewTimes"
+            android:label="@string/title_view_times"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NotificationBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ui.Controller.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".Ui.Controller.ViewTimesManager"
+            android:label="View times gerent"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NotificationBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ui.Controller.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".Ui.Controller.ViewTimesManagerDetailActivity"
+            android:label="View times manager"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NotificationBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Ui.Controller.MenuActivity" />
+        </activity>
+
+    </application>
+
+</manifest>

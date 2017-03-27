@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/back_login"
+    android:orientation="vertical"
+    tools:context="com.intergrupo.reportedetiemposig.Ui.Controller.Login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".4">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".4">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30sp"
+            android:layout_marginRight="30sp"
+            android:layout_marginTop="15sp">
+
+
+            <LinearLayout
+                android:id="@+id/Login_lnForUSer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/user" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".6">
+
+                    <EditText
+                        android:id="@+id/Login_edUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="sans-serif"
+                        android:inputType="textEmailAddress"
+                        android:hint="ID del usuario"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Login_lnSeparatedUser"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/Login_lnForUSer"
+                android:background="@android:color/darker_gray"></TextView>
+
+            <LinearLayout
+                android:id="@+id/Login_lnForPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_lnSeparatedUser"
+                android:layout_marginTop="25sp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/pass" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".6">
+
+                    <EditText
+                        android:id="@+id/Login_edPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:fontFamily="sans-serif"
+                        android:background="@null"
+                        android:inputType="textPassword"
+                        android:backgroundTint="@android:color/transparent"
+                        android:hint="Contraseña"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Login_lnSeparatedPass"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="0.5dp"
+                android:layout_below="@+id/Login_lnForPass"
+                android:background="@android:color/darker_gray"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Login_lnSeparatedPass"
+                android:layout_marginTop="15sp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight=".01" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight=".9"
+                    android:text="Recordar datos de acceso"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1">
+
+                    |<CheckBox
+                        android:id="@+id/Login_chkRememberData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".2"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".4"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".6">
+
+            <Button
+                android:id="@+id/Login_btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#034CA1"
+                android:text="INGRESAR"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
