@@ -27,8 +27,6 @@ import com.intergrupo.reportedetiemposig.Util.Constants;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -92,7 +90,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                 if(iValidateInternet.isConnected()) {
                     listDetail = (ArrayList<ViewTimesManagerDetail>) App.getInstance().GetTimesManagerDetail(idManager, startDate, finishDate);
                     if (listDetail == null) {
-                        showsublistgerent(false, Constants.message_error_get_times, update);
+                        showsublistgerent(false, Constants.MESSAGE_ERROR_GET_TIMES, update);
 
 
                     } else {
@@ -101,7 +99,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                             showsublistgerent(true, "", update);
                         } else {
                             listDetail = null;
-                            showsublistgerent(false, Constants.message_manager_without_times, update);
+                            showsublistgerent(false, Constants.MESSAGE_MANAGER_WITHOUT_TIMES, update);
                         }
                     }
                 }else {

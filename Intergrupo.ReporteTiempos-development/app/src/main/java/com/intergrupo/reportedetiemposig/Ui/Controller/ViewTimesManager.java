@@ -104,7 +104,7 @@ public class ViewTimesManager extends AppCompatActivity {
                     listTimesGerent = (ArrayList<TimesForManager>) App.getInstance().GetTimesForManager(idManager, startDate, finishDate);
 
                     if (listTimesGerent == null) {
-                        showSublistManager(false, Constants.message_error_get_times, update);
+                        showSublistManager(false, Constants.MESSAGE_ERROR_GET_TIMES, update);
 
 
                     } else {
@@ -166,7 +166,7 @@ public class ViewTimesManager extends AppCompatActivity {
 
                         } else {
                             listTimesGerent = null;
-                            showSublistManager(false, Constants.message_manager_without_times, update);
+                            showSublistManager(false, Constants.MESSAGE_MANAGER_WITHOUT_TIMES, update);
                         }
                     }
 

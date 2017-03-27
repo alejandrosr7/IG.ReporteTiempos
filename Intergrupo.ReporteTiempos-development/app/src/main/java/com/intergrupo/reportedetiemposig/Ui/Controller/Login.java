@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -55,7 +56,7 @@ public class Login extends AppCompatActivity {
 
 
         this.progressDialog = new ProgressDialog(this);
-        this.progressDialog.setMessage("Por favor espere...");
+        this.progressDialog.setMessage(Constants.WAIT_MESSAGE);
         this.progressDialog.setCancelable(false);
     }
 
@@ -133,7 +134,7 @@ public class Login extends AppCompatActivity {
                     if (tiemposResponse != null) {
                         Toast.makeText(Login.this, tiemposResponse.getTexto(), Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(Login.this, Constants.message_user_error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this, Constants.MESSAGE_USER_ERROR, Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -148,7 +149,7 @@ public class Login extends AppCompatActivity {
      */
     private Boolean ValidateData() {
 
-        if (!validation.theStringIsEmpty(EdUser.getText().toString().trim())) {
+        if (TextUtils.isEmpty(EdUser.getText().toString().trim())) {
             showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_email_empty), EdUser);
             return false;
         }
@@ -158,7 +159,7 @@ public class Login extends AppCompatActivity {
                  return false;
              }
         }
-        if (!validation.theStringIsEmpty(EdPassword.getText().toString().trim())) {
+        if (TextUtils.isEmpty(EdPassword.getText().toString().trim())) {
             showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_password_empty), EdPassword);
             return false;
         }

@@ -1,7 +1,6 @@
 package com.intergrupo.reportedetiemposig.Ui.Controller;
 
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,8 +12,6 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,8 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
-import com.intergrupo.reportedetiemposig.Helper.DateDialog;
-import com.intergrupo.reportedetiemposig.Helper.DateDialogByDate;
 import com.intergrupo.reportedetiemposig.Helper.ExpandableListAdapter;
 import com.intergrupo.reportedetiemposig.Helper.ShowAlertDialogValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.ValidateInternet;
@@ -49,7 +44,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.InjectView;
-import butterknife.OnItemClick;
 
 /**
  * Created by Usuario on 1/05/2016.
@@ -210,7 +204,7 @@ public class ViewTimes extends AppCompatActivity {
                 listTimesCollaborator = App.getInstance().GetViewTimesForCollaborator(userCode);
 
                 if(listTimesCollaborator == null){
-                    showProyects(false,Constants.message_error_get_times,update);
+                    showProyects(false,Constants.MESSAGE_ERROR_GET_TIMES,update);
                 }else{
 
                     if(listTimesCollaborator.size()>0){
@@ -319,7 +313,7 @@ public class ViewTimes extends AppCompatActivity {
                         showProyects(true,null,update);
                     }else{
                         listProyects = null;
-                        showProyects(false,Constants.message_collaborator_without_times,update);
+                        showProyects(false,Constants.MESSAGE_COLLABORATOR_WITHOUT_TIMES,update);
                     }
                 }
             }
@@ -486,7 +480,7 @@ public class ViewTimes extends AppCompatActivity {
             tvReported.setText("0");
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimes.this);
             alertDialogBuilder.setTitle("Advertencia");
-            alertDialogBuilder.setMessage(Constants.message_collaborator_without_times);
+            alertDialogBuilder.setMessage(Constants.MESSAGE_COLLABORATOR_WITHOUT_TIMES);
             alertDialogBuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -524,7 +518,7 @@ public class ViewTimes extends AppCompatActivity {
             tvReported.setText("0");
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimes.this);
             alertDialogBuilder.setTitle("Advertencia");
-            alertDialogBuilder.setMessage(Constants.message_collaborator_without_times);
+            alertDialogBuilder.setMessage(Constants.MESSAGE_COLLABORATOR_WITHOUT_TIMES);
             alertDialogBuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -562,7 +556,7 @@ public class ViewTimes extends AppCompatActivity {
                         weekly = false;
                         monthly = false;
                         if(startDate.getTime()>finishDate.getTime()){
-                            Toast.makeText(ViewTimes.this, Constants.message_user_fecha_menos, Toast.LENGTH_LONG).show();
+                            Toast.makeText(ViewTimes.this, Constants.MESSAGE_USER_DATE_LESS, Toast.LENGTH_LONG).show();
                         }else{
                             dateFilter = new ArrayList<Date>();
                             dateFilter.add(startDate);
@@ -578,7 +572,7 @@ public class ViewTimes extends AppCompatActivity {
         );
         dpd.setAccentColor(getResources().getColor(R.color.colorPrimary));
         dpd.show(getFragmentManager(), "Datepickerdialog");
-        dpd.setStartTitle(Constants.from);
+        dpd.setStartTitle(Constants.FROM);
         dpd.setEndTitle(Constants.to);
         GregorianCalendar gregorianCalendar = new GregorianCalendar();
         gregorianCalendar.add(Calendar.WEEK_OF_YEAR,-2);
@@ -599,8 +593,8 @@ public class ViewTimes extends AppCompatActivity {
    */
     public void ConfirmationDeleteTime(final ViewTimesModel activity) {
         AlertDialog.Builder alert = new AlertDialog.Builder(ViewTimes.this);
-        alert.setTitle(Constants.tittle_delete_time);
-        alert.setMessage(Constants.delete_confirmation_message);
+        alert.setTitle(Constants.TITLE_DELETE_TIME);
+        alert.setMessage(Constants.DELETE_CONFIRMATION_MESSAGE);
         alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int whichButton) {
@@ -669,7 +663,7 @@ public class ViewTimes extends AppCompatActivity {
                 public void run() {
                     progressDialogdelete.dismiss();
                     if(delete){
-                        Toast.makeText(ViewTimes.this, Constants.deleted_time,Toast.LENGTH_LONG);
+                        Toast.makeText(ViewTimes.this, Constants.DELETED_TIME,Toast.LENGTH_LONG);
                         getProyectsList(userCode,true);
                     }else{
                         Toast.makeText(ViewTimes.this, "Error eliminando tiempo",Toast.LENGTH_LONG);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,19 +40,15 @@ import com.intergrupo.reportedetiemposig.Util.Constants;
 import org.json.JSONObject;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -394,7 +391,7 @@ public class register extends AppCompatActivity {
                         }
 
                     }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR, Constants.message_no_found_clasification_concept_hours);
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR, Constants.MESSAGE_NO_FOUND_CLASIFICATION_CONCEPT_HOURS);
                     }
 
 
@@ -472,7 +469,7 @@ public class register extends AppCompatActivity {
 
                         }else{
                             if(!isAdministrative && ProyectList.get(0).getNombre().equals("Administrativo")){
-                                showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants.message_no_found_proyects);
+                                showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants.MESSAGE_NO_FOUND_PROYECTS);
                             }else{
                                 DialogSearch dialogSearch = new DialogSearch(register.this, proy, Constants.REGISTER_TITLE_DIALOG_PROYECT, "", new DialogSearch.IDialogSelection() {
                                     @Override
@@ -488,7 +485,7 @@ public class register extends AppCompatActivity {
                             }
                         }
                     }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants.message_no_found_proyects);
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants.MESSAGE_NO_FOUND_PROYECTS);
                     }
                 }
             });
@@ -577,7 +574,7 @@ public class register extends AppCompatActivity {
                             builder.show();
                         }
                     }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY, Constants.message_no_found_functionalities);
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY, Constants.MESSAGE_NO_FOUND_FUNCTIONALITIES);
                     }
 
                 }
@@ -747,7 +744,7 @@ public class register extends AppCompatActivity {
 //                            }
 //                        });
                     }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_DISCIPLINE, Constants.message_no_found_discipline);
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_DISCIPLINE, Constants.MESSAGE_NO_FOUND_DISCIPLINE);
                     }
 
                 }
@@ -867,7 +864,7 @@ public class register extends AppCompatActivity {
 //                        });
                     }else{
                         if(showPopup)
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_ACTIVITY, Constants.message_no_found_activity);
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_ACTIVITY, Constants.MESSAGE_NO_FOUND_ACTIVITY);
                         if(isUpdate){
                             showPopup = true;
                             isUpdate = false;
@@ -933,7 +930,7 @@ public class register extends AppCompatActivity {
 //                                }
 //                            });
                         }else{
-                            showPopup(Constants.REGISTER_TITLE_DIALOG_CONCEPT_HOUR, Constants.message_no_found_concept_hours);
+                            showPopup(Constants.REGISTER_TITLE_DIALOG_CONCEPT_HOUR, Constants.MESSAGE_NO_FOUND_CONCEPT_HOURS);
                         }
 
                 }
@@ -1007,7 +1004,7 @@ public class register extends AppCompatActivity {
 //                        });
 
                     }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_DIRECTOR, Constants.message_no_found_managers);
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_DIRECTOR, Constants.MESSAGE_NO_FOUND_MANAGERS);
                     }
 
                 }
@@ -1330,19 +1327,19 @@ public class register extends AppCompatActivity {
         String error = "";
         double horas = 0;
 
-        if(!validator.theStringIsEmpty(editDiscipline.getText().toString().trim())){
+        if(TextUtils.isEmpty(editDiscipline.getText().toString().trim())){
             error += "- "+Constants.REGISTER_TITLE_DIALOG_DISCIPLINE+"\n";
         }
-        if(!validator.theStringIsEmpty(editActivity.getText().toString().trim())){
+        if(!TextUtils.isEmpty(editActivity.getText().toString().trim())){
             error += "- "+Constants.REGISTER_TITLE_DIALOG_ACTIVITY+"\n";
         }
-        if(!validator.theStringIsEmpty(editfunctionality.getText().toString().trim())){
+        if(TextUtils.isEmpty(editfunctionality.getText().toString().trim())){
             error += "- "+Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY+"\n";
         }
-        if(!validator.theStringIsEmpty(editClassificationConceptHour.getText().toString().trim())){
+        if(TextUtils.isEmpty(editClassificationConceptHour.getText().toString().trim())){
             error += "- "+Constants.REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR+"\n";
         }
-        if(!validator.theStringIsEmpty(edHour.getText().toString().trim())){
+        if(TextUtils.isEmpty(edHour.getText().toString().trim())){
             error += "- "+Constants.ERROR_SELECT_HOUR+"\n";
         }else{
             horas = Double.valueOf(edHour.getText().toString());
@@ -1351,12 +1348,12 @@ public class register extends AppCompatActivity {
             }
         }
 
-        if(!validator.theStringIsEmpty(edDate.getText().toString().trim())){
+        if(TextUtils.isEmpty(edDate.getText().toString().trim())){
             error += Constants.ERROR_SELECT_DATE+"\n";
         }
 
         if(totalWeek != null && totalWeek.size()>0 && currentWeek != null&& totalWeek.get(currentWeek)!= null &&totalWeek.get(currentWeek)+horas > 55){
-            error += Constants.message_hours_reported+"\n";
+            error += Constants.MESSAGE_HOURS_REPORTED +"\n";
         }
 
         if(error.equals("")){
@@ -1401,7 +1398,7 @@ public class register extends AppCompatActivity {
                         List<Proyect> proyects = App.getInstance().GetProyect(codeManager);
                         if(proyects == null){
                             progressDialog.dismiss();
-                            showPopUpThread(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY,Constants.message_error_get_functionality);
+                            showPopUpThread(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY,Constants.MESSAGE_ERROR_GET_FUNCTIONALITY);
                         }else{
                             SetProyectsList(proyects);
                         }

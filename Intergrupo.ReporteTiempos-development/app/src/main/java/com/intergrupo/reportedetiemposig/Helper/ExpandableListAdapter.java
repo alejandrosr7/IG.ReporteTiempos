@@ -13,12 +13,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Objects;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +27,6 @@ import android.widget.TextView;
 import com.intergrupo.reportedetiemposig.Model.ViewTimesModel;
 import com.intergrupo.reportedetiemposig.R;
 import com.intergrupo.reportedetiemposig.Ui.Controller.ViewTimes;
-import com.intergrupo.reportedetiemposig.Ui.Controller.register;
 import com.intergrupo.reportedetiemposig.Util.Constants;
 
 
@@ -75,16 +72,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_item_times, null);
         }
 
-        TextView txtListChild = (TextView) convertView
+        TextView tvTimeItem = (TextView) convertView
                 .findViewById(R.id.tvTimeItem);
 
-        txtListChild.setText(childText.getDescripcion().toString());
-        txtListChild.setOnClickListener(new View.OnClickListener() {
+        tvTimeItem.setText(childText.getDescripcion().toString());
+        tvTimeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog;
                 alertDialog = new AlertDialog.Builder(_context);
-                alertDialog.setTitle(Constants.report);
+                alertDialog.setTitle(Constants.REPORT);
                 alertDialog.setMessage(childText.getDescripcion().toString());
                 alertDialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
