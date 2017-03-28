@@ -15,7 +15,6 @@ public interface Constants {
     String PREFS = "MyPrefs   File";
     String USER_TOKEN = "userToken";
     String USER_NAME = "username";
-    String WAIT_MESSAGE = "username";
     String USER_LASTNAME = "userLastName";
     String USER_CODIGO = "UserCodigo";
     String URLUSERPHOTO = "urlImageUser";
@@ -34,10 +33,11 @@ public interface Constants {
     String REGISTER_TITLE_DIALOG_ACTIVITY = "Seleccione Actividad";
     String REGISTER_TITLE_DIALOG_DISCIPLINE = "Seleccione disciplina";
     String REGISTER_TITLE_DIALOG_FUNCTIONALITY = "Seleccione Funcionalidad";
+    String TRUE = "true";
+    String FALSE = "false";
 
 
 
-    String REGULAR_EXPRESSION_CORRECT_PASSWORD = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{3,20})";
     String REGULAR_EXPRESSION_CORRECT_EMAIL = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
             + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
             + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."

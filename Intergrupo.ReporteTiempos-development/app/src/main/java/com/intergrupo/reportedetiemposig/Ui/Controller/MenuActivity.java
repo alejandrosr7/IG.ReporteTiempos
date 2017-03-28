@@ -27,8 +27,6 @@ public class MenuActivity extends AppCompatActivity {
     @InjectView(R.id.Menu_Name_User)
     TextView nameUser;
 
-    Validation validation = new Validation();
-
     String manager;
 
     @InjectView(R.id.menu_photo)
@@ -51,11 +49,16 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.inject(this);
+
+        initializeVisualElements();
+    }
+
+    private void initializeVisualElements() {
         SecurePreferences settings = new SecurePreferences(this);
         String userName = settings.getString(Constants.USER_NAME);
         String userLastName = settings.getString(Constants.USER_LASTNAME);
         String urlImage = settings.getString(Constants.URLUSERPHOTO);
-        manager = settings.getString(Constants.IG_USER).toString();
+        manager = settings.getString(Constants.IG_USER);
         userCode = settings.getString(Constants.USER_CODIGO);
         validatePhoto(urlImage);
         validateManager(manager);
@@ -71,7 +74,7 @@ public class MenuActivity extends AppCompatActivity {
      * @param isManager  Permitr validar si es gerente
      */
     private void validateManager(String isManager) {
-        if(isManager.equals("true")){
+        if(isManager.equals(Constants.TRUE)){
             firstItemMenu.setText(R.string.first_item_menu_manager);
             secondItemMenu.setText(R.string.second_item_menu_manager);
         }
@@ -97,7 +100,7 @@ public class MenuActivity extends AppCompatActivity {
     @OnClick(R.id.Menu_RegisterTime)
     public void goToRegister() {
         if(iValidateInternet.isConnected()) {
-            if (manager.equals("false")) {
+            if (manager.equals(Constants.FALSE)) {
                 Intent intent = new Intent(MenuActivity.this, register.class);
                 startActivity(intent);
             } else {
@@ -119,7 +122,7 @@ public class MenuActivity extends AppCompatActivity {
     @OnClick(R.id.Menu_viewtimereport)
     public void goToViewTimes() {
         if(iValidateInternet.isConnected()) {
-            if (manager.equals("false")) {
+            if (manager.equals(Constants.FALSE)) {
                 Intent intent = new Intent(MenuActivity.this, ViewTimes.class);
                 intent.putExtra(Constants.USER_CODIGO, userCode);
                 startActivity(intent);
@@ -153,8 +156,8 @@ public class MenuActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.exit) {
                     SecurePreferences settings = new SecurePreferences(MenuActivity.this);
-                    settings.put("RememberAccess", null);
-                    settings.put("username", null);
+                    settings.put(Constants.REMEMBER_ACCESS, null);
+                    settings.put(Constants.USER_NAME, null);
                     finish();
                 }
                 return true;

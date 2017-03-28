@@ -60,7 +60,8 @@
                         android:fontFamily="sans-serif"
                         android:inputType="textEmailAddress"
                         android:hint="ID del usuario"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Lzuluagab"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -108,7 +109,8 @@
                         android:inputType="textPassword"
                         android:backgroundTint="@android:color/transparent"
                         android:hint="Contraseña"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Intergrupo2016."/>
                 </LinearLayout>
             </LinearLayout>
 

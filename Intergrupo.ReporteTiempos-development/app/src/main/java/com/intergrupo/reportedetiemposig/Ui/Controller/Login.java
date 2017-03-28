@@ -52,11 +52,16 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+
+        initializeVisualElemetsAndMethods();
+    }
+
+    private void initializeVisualElemetsAndMethods() {
         iValidateInternet = new ValidateInternet(Login.this);
 
 
         this.progressDialog = new ProgressDialog(this);
-        this.progressDialog.setMessage(Constants.WAIT_MESSAGE);
+        this.progressDialog.setMessage(Constants.USER_NAME);
         this.progressDialog.setCancelable(false);
     }
 
@@ -71,46 +76,54 @@ public class Login extends AppCompatActivity {
     public void ConsultUser() {
         Login_btnLogin.setEnabled(false);
         if (ValidateData()) {
-            RememberData();
-            IGLogin login = new IGLogin();
-            login.setUsuario(EdUser.getText().toString());
-            login.setContrasena(EdPassword.getText().toString());
-            Login(login);
+            rememberData();
+            loginUser(createAndSetUser());
         }
         Login_btnLogin.setEnabled(true);
     }
 
-    private void Login(final IGLogin igLogin) {
+    private IGLogin createAndSetUser() {
+        IGLogin login = new IGLogin();
+        login.setUsuario(EdUser.getText().toString());
+        login.setContrasena(EdPassword.getText().toString());
+        return login;
+    }
+
+    private void loginUser(final IGLogin igLogin) {
         progressDialog.show();
         Thread thread = new Thread() {
             @Override
             public void run() {
-                if (iValidateInternet.isConnected()) {
-                    User tiemposResponse = mApp.getInstance().SingInSincrono(igLogin);
-                    verificarLogin(tiemposResponse);
-                } else {
-                    progressDialog.dismiss();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, Login.this);
-                        }
-                    });
-                }
+                verifyInternetConnection(igLogin);
             }
         };
         thread.start();
 
     }
 
+    private void verifyInternetConnection(final IGLogin igLogin) {
+        if (iValidateInternet.isConnected()) {
+            User tiemposResponse = mApp.getInstance().SingInSincrono(igLogin);
+            verificarLogin(tiemposResponse);
+        } else {
+            progressDialog.dismiss();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, Login.this);
+                }
+            });
+        }
+    }
 
-    private void RememberData() {
+
+    private void rememberData() {
         SecurePreferences settings = new SecurePreferences(this);
         if (Login_chkRememberData.isChecked()) {
-            settings.put("RememberAccess", "true");
+            settings.put(Constants.REMEMBER_ACCESS, Constants.TRUE);
         }
         if (!Login_chkRememberData.isChecked()) {
-            settings.put("RememberAccess", null);
+            settings.put(Constants.REMEMBER_ACCESS, null);
         }
     }
 
@@ -128,7 +141,7 @@ public class Login extends AppCompatActivity {
                     settings.put(Constants.URLUSERPHOTO, tiemposResponse.getUrlphoto());
                     settings.put(Constants.USER_CODIGO, tiemposResponse.getCodeuser().toString());
                     settings.put(Constants.IG_USER, tiemposResponse.getManager().toString());
-                    Intent intent = new Intent(Login.this,MenuActivity.class);
+                    Intent intent = new Intent(Login.this, MenuActivity.class);
                     startActivity(intent);
                 } else {
                     if (tiemposResponse != null) {
@@ -148,20 +161,27 @@ public class Login extends AppCompatActivity {
      * @return
      */
     private Boolean ValidateData() {
+        return (validateUserField() && validatePasswordField());
+    }
 
+    private boolean validatePasswordField() {
+        if (TextUtils.isEmpty(EdPassword.getText().toString().trim())) {
+            showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_password_empty), EdPassword);
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean validateUserField() {
         if (TextUtils.isEmpty(EdUser.getText().toString().trim())) {
             showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_email_empty), EdUser);
             return false;
         }
-        if(EdUser.getText().toString().contains("@")){
-             if (validation.isNotCorrectEmail(EdUser.getText().toString().trim())) {
-                 showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_email_invalid), EdUser);
-                 return false;
-             }
-        }
-        if (TextUtils.isEmpty(EdPassword.getText().toString().trim())) {
-            showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_password_empty), EdPassword);
-            return false;
+        if (EdUser.getText().toString().contains("@")) {
+            if (validation.isNotCorrectEmail(EdUser.getText().toString().trim())) {
+                showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_email_invalid), EdUser);
+                return false;
+            }
         }
         return true;
     }
