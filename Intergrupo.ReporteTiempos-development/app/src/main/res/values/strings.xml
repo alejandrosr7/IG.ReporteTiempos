@@ -67,7 +67,11 @@
     <string name="administrativa">Administrativa</string>
     <string name="todos_los_gerentes">Todos los gerentes</string>
     <string name="faltan_campos_por_diligenciar">Faltan campos por diligenciar</string>
-
+    <string name="advertencia">Advertencia</string>
+    <string name="cuarenta_y_cinco">45</string>
+    <string name="cero">0</string>
+    <string name="ciento_ochenta">180</string>
+    <string name="error_eliminando_tiempo">Error eliminando tiempo</string>
 
 
 </resources>

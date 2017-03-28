@@ -7,7 +7,7 @@ public interface Constants {
 
     //Variables estaticas para los mensajes técnicos de la aplicación.
 
-    boolean DEBUG = false   ;
+    boolean DEBUG = false;
     String NETWORK_ERROR_CODE = "527";
     String NETWORK_ERROR_MESSAGE = "Por favor verifique que el dispositivo tenga acceso a internet e intente de nuevo.";
     String POR_FAVOR_ESPERE = "Por favor espere...";
@@ -36,7 +36,6 @@ public interface Constants {
     String REGISTER_TITLE_DIALOG_FUNCTIONALITY = "Seleccione Funcionalidad";
     String TRUE = "true";
     String FALSE = "false";
-
 
 
     String REGULAR_EXPRESSION_CORRECT_EMAIL = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
@@ -71,8 +70,8 @@ public interface Constants {
     String REPORT = "Reporte";
     String ADMINISTRATIVO = "Administrativo";
 
-    String DESCRIPCION_DE_LA_ACTIVIDAD= "Descripción de la actividad";
-    String ACEPTAR= "Aceptar";
+    String DESCRIPCION_DE_LA_ACTIVIDAD = "Descripción de la actividad";
+    String ACEPTAR = "Aceptar";
     String CANCELAR = "Cancelar";
     String DATE_PICKER = "DatePicker";
     String ADMINISTRATIVA = "Administrativa";
@@ -91,6 +90,10 @@ public interface Constants {
     String CODIGO_ESTADO_INTEGRACION = "codigoEstadoIntegracion";
     String HORAS = "Horas";
     String CODIGO_USUARIO = "codigoUsuario";
+    String ID = "id";
 
-
+    String TIME = "time";
+    String DATE_PICKER_DIALOG = "Datepickerdialog";
+    String CODIGO = "Codigo";
+    String CODIGOS = "Codigos";
 }
