@@ -14,11 +14,13 @@ import android.view.MenuItem;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.intergrupo.reportedetiemposig.Helper.ExpandableListAdapterM;
 import com.intergrupo.reportedetiemposig.Helper.IValidateInternet;
@@ -54,6 +56,7 @@ public class ViewTimesManager extends AppCompatActivity {
     LinearLayout linear_monthlyg;
     @InjectView(R.id.linear_byDate)
     LinearLayout linear_bydate;
+
     @Override
 
     /**
@@ -62,6 +65,11 @@ public class ViewTimesManager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activiy_view_times_manager);
+
+        initializeVisualElementsAndResources();
+    }
+
+    private void initializeVisualElementsAndResources() {
         expandableListView = (ExpandableListView) findViewById(R.id.elvProyectg);
         expandableListDetail = new HashMap<>();
         expandableListTitle = new ArrayList<>();
@@ -74,11 +82,11 @@ public class ViewTimesManager extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         iValidateInternet = new ValidateInternet(ViewTimesManager.this);
-         manager = new SecurePreferences(this);
-         usercode = manager.getString(Constants.USER_CODIGO);
-         week();
-
+        manager = new SecurePreferences(this);
+        usercode = manager.getString(Constants.USER_CODIGO);
+        week();
     }
+
     /**
      * Método que permite ir atrás
      */
@@ -90,13 +98,14 @@ public class ViewTimesManager extends AppCompatActivity {
     /**
      * Método que obtiene la lista de proyectos asociados a un gerente
      * y muestra el proyecto y el detalle son los colaboradores
+     *
      * @param idManager  código unico del gerente
-     * @param startDate fecha de inicio para el filtro
+     * @param startDate  fecha de inicio para el filtro
      * @param finishDate fecha fin para el filtro
-     * @param update boolean para actualizar la lista
+     * @param update     boolean para actualizar la lista
      */
     public void getlistManager(final String idManager, final Date startDate, final Date finishDate, final Boolean update) {
-        showProgressDialog("Por favor espere...");
+        showProgressDialog(Constants.POR_FAVOR_ESPERE);
         Thread thread = new Thread() {
             @Override
             public void run() {
@@ -123,12 +132,11 @@ public class ViewTimesManager extends AppCompatActivity {
 
                                 } else {
 
-                                    TimesForManagerParent tfgp = new TimesForManagerParent();
-                                    tfgp.setProyectM(collaborator.getProyectName());
-                                    tfgp.setTimesRed(collaborator.getRedTime());
-                                    tfgp.addTimesGreen(collaborator.getHourActivity());
-                                    proyectGMap.put(collaborator.getProyectName(), tfgp);
-
+                                    TimesForManagerParent timesForManagerParent = new TimesForManagerParent();
+                                    timesForManagerParent.setProyectM(collaborator.getProyectName());
+                                    timesForManagerParent.setTimesRed(collaborator.getRedTime());
+                                    timesForManagerParent.addTimesGreen(collaborator.getHourActivity());
+                                    proyectGMap.put(collaborator.getProyectName(), timesForManagerParent);
 
                                 }
 
@@ -175,7 +183,7 @@ public class ViewTimesManager extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, ViewTimesManager.this);
+                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, ViewTimesManager.this);
 
                         }
                     });
@@ -187,12 +195,14 @@ public class ViewTimesManager extends AppCompatActivity {
         thread.start();
 
     }
+
     /**
      * Método que actualiza el adapter de la lista para
      * mostrar los proyectos
-     * @param correct  boolean que permite mostrar la lista
-     * @param error mensaje para mostrar cuando ha ocurrido un error
-     * @param update boolean que permite actualizar la lista
+     *
+     * @param correct boolean que permite mostrar la lista
+     * @param error   mensaje para mostrar cuando ha ocurrido un error
+     * @param update  boolean que permite actualizar la lista
      */
     public void showSublistManager(final Boolean correct, final String error, final Boolean update) {
 
@@ -215,9 +225,9 @@ public class ViewTimesManager extends AppCompatActivity {
                             expandableListView.setAdapter(expandableListAdapterM);
                         }
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimesManager.this);
-                        alertDialogBuilder.setTitle("Advertencia");
+                        alertDialogBuilder.setTitle(R.string.advertencia);
                         alertDialogBuilder.setMessage(error);
-                        alertDialogBuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -226,7 +236,7 @@ public class ViewTimesManager extends AppCompatActivity {
                         alertDialogBuilder.show();
                     }
                 }
-                    });
+            });
 
 
         } catch (Exception e) {
@@ -236,7 +246,8 @@ public class ViewTimesManager extends AppCompatActivity {
 
     /**
      * Método que retorna un Calendar con la fechaa que le envían
-     * @param date  Date que contiene una fecha
+     *
+     * @param date Date que contiene una fecha
      * @return cal retorna fecha
      */
     public Calendar dateToCalendar(Date date) {
@@ -265,6 +276,7 @@ public class ViewTimesManager extends AppCompatActivity {
         getlistManager(usercode, startdate1, finishtdate1, true);
 
     }
+
     /**
      * Método que permite ejecutar el filtro mensual
      */
@@ -290,7 +302,7 @@ public class ViewTimesManager extends AppCompatActivity {
      * por rango de fechas
      */
     @OnClick(R.id.linear_byDate)
-    public void byDate(){
+    public void byDate() {
 
         linear_weekyg.setBackground(getResources().getDrawable(R.drawable.border));
         linear_monthlyg.setBackground(getResources().getDrawable(R.drawable.border));
@@ -300,8 +312,8 @@ public class ViewTimesManager extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-                    Date startDate = new Date (year - 1900,monthOfYear,dayOfMonth);
-                    Date finishDate = new Date (yearEnd - 1900,monthOfYearEnd,dayOfMonthEnd);
+                        Date startDate = new Date(year - 1900, monthOfYear, dayOfMonth);
+                        Date finishDate = new Date(yearEnd - 1900, monthOfYearEnd, dayOfMonthEnd);
                         getlistManager(usercode, startDate, finishDate, true);
 
                     }
@@ -311,11 +323,13 @@ public class ViewTimesManager extends AppCompatActivity {
                 now.get(Calendar.DAY_OF_MONTH)
         );
         dpd.setAccentColor(getResources().getColor(R.color.colorPrimary));
-        dpd.show(getFragmentManager(), "Datepickerdialog");
+        dpd.show(getFragmentManager(), Constants.DATE_PICKER_DIALOG);
     }
+
     /**
      * Método que permite inflar el toolbar para
      * ejecutar el filtro por palabra
+     *
      * @param menu Menu a inflar
      */
     @Override
@@ -334,14 +348,14 @@ public class ViewTimesManager extends AppCompatActivity {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    if(expandableListAdapterM != null)
+                    if (expandableListAdapterM != null)
                         expandableListAdapterM.filterSearch(query);
                     return false;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    if(expandableListAdapterM != null)
+                    if (expandableListAdapterM != null)
                         expandableListAdapterM.filterSearch(newText);
                     return false;
                 }
@@ -367,8 +381,9 @@ public class ViewTimesManager extends AppCompatActivity {
     /**
      * Método que permite mostrar un progress dialog
      * con un mensaje
+     *
      * @param message String que contiene el mensaje
-     * a mostrar
+     *                a mostrar
      */
     public void showProgressDialog(String message) {
         progressDialog = new ProgressDialog(this);
