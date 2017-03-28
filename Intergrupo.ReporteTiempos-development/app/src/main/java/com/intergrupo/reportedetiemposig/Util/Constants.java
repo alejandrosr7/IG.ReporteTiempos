@@ -10,6 +10,7 @@ public interface Constants {
     boolean DEBUG = false   ;
     String NETWORK_ERROR_CODE = "527";
     String NETWORK_ERROR_MESSAGE = "Por favor verifique que el dispositivo tenga acceso a internet e intente de nuevo.";
+    String POR_FAVOR_ESPERE = "Por favor espere...";
 
 
     String PREFS = "MyPrefs   File";
@@ -68,4 +69,28 @@ public interface Constants {
 
     String MESSAGE_HOURS_REPORTED = "Ha sobrepasado las horas permitidas semanalmente";
     String REPORT = "Reporte";
+    String ADMINISTRATIVO = "Administrativo";
+
+    String DESCRIPCION_DE_LA_ACTIVIDAD= "Descripción de la actividad";
+    String ACEPTAR= "Aceptar";
+    String CANCELAR = "Cancelar";
+    String DATE_PICKER = "DatePicker";
+    String ADMINISTRATIVA = "Administrativa";
+    String DD_MM_YYYY = "dd-MM-yyyy";
+    String YYYY_MM_DD = "yyyy-MM-dd";
+    String TIMES = "times";
+    String LAST_REPORT_TXT = "lastReport.txt";
+    String CASOS = "Casos";
+    String DISCIPLINE = "discipline";
+    String FUNCTIONALITY = "functionality";
+    String CLASSIFICATION_CONCEPT_HOUR = "classificationConceptHour";
+    String DESCRIPTION = "description";
+    String MANAGER = "manager";
+    String CONCEPT_HOUR = "conceptoHour";
+    String PROYECT = "proyect";
+    String CODIGO_ESTADO_INTEGRACION = "codigoEstadoIntegracion";
+    String HORAS = "Horas";
+    String CODIGO_USUARIO = "codigoUsuario";
+
+
 }

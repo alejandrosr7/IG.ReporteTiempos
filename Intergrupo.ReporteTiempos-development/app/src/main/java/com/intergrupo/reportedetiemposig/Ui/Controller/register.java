@@ -124,8 +124,8 @@ public class register extends AppCompatActivity {
     HashMap<Integer,Double> totalMonth = new HashMap<>() ;
 
 
-    /** 
-    * Método encargado de inicializar variables y de 
+    /**
+    * Método encargado de inicializar variables y de
     * añadir propiedades a las mismas una vez es iniciada
     * actividad por primera vez.
     */
@@ -159,18 +159,18 @@ public class register extends AppCompatActivity {
             public void onClick(View v) {
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(register.this);
-                alertDialogBuilder.setTitle("Descripción de la actividad");
+                alertDialogBuilder.setTitle(R.string.descripcion_de_la_actividad);
                 final EditText input = new EditText(register.this);
                 input.setText(edDescrptionActivity.getText());
                 alertDialogBuilder.setView(input);
-                alertDialogBuilder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         edDescrptionActivity.setText(input.getText());
                     }
                 });
 
-                alertDialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
                     }
@@ -186,10 +186,10 @@ public class register extends AppCompatActivity {
             public void onClick(View v) {
                 DateDialog dialog = new DateDialog(v);
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                dialog.show(ft, "DatePicker");
+                dialog.show(ft, Constants.DATE_PICKER);
             }
         });
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY);
         String fecha = formatter.format(new Date());
         edDate.setText(fecha);
 
@@ -197,7 +197,7 @@ public class register extends AppCompatActivity {
     }
     
     
-    /** 
+    /**
     * Método encargado de establecer informacion en los campos
     * del formulario ya sea por que se editara un reporte o por que
     * se mostrara la información del ultimo reporte
@@ -205,7 +205,7 @@ public class register extends AppCompatActivity {
     @Override protected void onResume() {
         super.onResume();
         try {
-            viewTimesEdit = getIntent().getExtras() != null ? (ViewTimesModel) getIntent().getExtras().getParcelable("times") : null;
+            viewTimesEdit = getIntent().getExtras() != null ? (ViewTimesModel) getIntent().getExtras().getParcelable(Constants.TIMES) : null;
             if(viewTimesEdit != null && viewTimesEdit.getCodigoActividad()!= null){
                 if(validateInternet.isConnected()){
                     CodigoActividad = viewTimesEdit.getCodigoActividad();
@@ -218,21 +218,21 @@ public class register extends AppCompatActivity {
                     editActivity.setText(viewTimesEdit.getNombreMaestroActividad());
                     checkBoxActivity.setChecked(viewTimesEdit.getActividadCompletada());
                     edDescrptionActivity.setText(viewTimesEdit.getDescripcion());
-                    DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    DateFormat formatter = new SimpleDateFormat(Constants.YYYY_MM_DD);
                     Date fecha = formatter.parse(viewTimesEdit.getFechaActividad());
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat(Constants.DD_MM_YYYY);
                     edDate.setText(sdf.format(fecha));
                     edHour.setText(viewTimesEdit.getHoras().toString());
                     edit = true;
                     isUpdate = true;
                     showPopup = false;
-                    if(!editConceptoHour.getText().toString().equals("Administrativa")) {
+                    if(!editConceptoHour.getText().toString().equals(Constants.ADMINISTRATIVA)) {
                         GetManager();
                     }else{
-                        editDiscipline.setText("Administrativo");
-                        editActivity.setText("Administrativo");
-                        editManager.setText("Todos los gerentes");
-                        editfunctionality.setText("Administrativo");
+                        editDiscipline.setText(R.string.administrativo);
+                        editActivity.setText(R.string.administrativo);
+                        editManager.setText(R.string.todos_los_gerentes);
+                        editfunctionality.setText(R.string.administrativo);
                         checkBoxActivity.setEnabled(false);
                     }
                     GetConceptHour();
@@ -240,7 +240,7 @@ public class register extends AppCompatActivity {
                     ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
                 }
             }else{
-                FileInputStream lastReport = openFileInput("lastReport.txt");
+                FileInputStream lastReport = openFileInput(Constants.LAST_REPORT_TXT);
                 InputStreamReader isr = new InputStreamReader(lastReport);
 
                 char[] inputBuffer = new char[100];
@@ -258,24 +258,24 @@ public class register extends AppCompatActivity {
 
                 if(reportJson  != null && !reportJson.equals("") ){
                     if(validateInternet.isConnected()){
-                        if(reportJson.get("codigoUsuario").toString().equals(codigoUsuario)){
-                            editManager.setText(reportJson.get("manager").toString());
-                            editConceptoHour.setText(reportJson.get("conceptoHour").toString());
-                            editClassificationConceptHour.setText(reportJson.get("classificationConceptHour").toString());
-                            editProyect.setText(reportJson.get("proyect").toString());
-                            editfunctionality.setText(reportJson.get("functionality").toString());
-                            editDiscipline.setText(reportJson.get("discipline").toString());
-                            edDescrptionActivity.setText(reportJson.get("description").toString());
+                        if(reportJson.get(Constants.CODIGO_USUARIO).toString().equals(codigoUsuario)){
+                            editManager.setText(reportJson.get(Constants.MANAGER).toString());
+                            editConceptoHour.setText(reportJson.get(Constants.CONCEPT_HOUR).toString());
+                            editClassificationConceptHour.setText(reportJson.get(Constants.CLASSIFICATION_CONCEPT_HOUR).toString());
+                            editProyect.setText(reportJson.get(Constants.PROYECT).toString());
+                            editfunctionality.setText(reportJson.get(Constants.FUNCTIONALITY).toString());
+                            editDiscipline.setText(reportJson.get(Constants.DISCIPLINE).toString());
+                            edDescrptionActivity.setText(reportJson.get(Constants.DESCRIPTION).toString());
                             showPopup = false;
                             isUpdate = true;
                             isr.close();
-                            if(!editConceptoHour.getText().toString().equals("Administrativa")) {
+                            if(!editConceptoHour.getText().toString().equals(Constants.ADMINISTRATIVA)) {
                                 GetManager();
                             }else{
-                                editDiscipline.setText("Administrativo");
-                                editActivity.setText("Administrativo");
-                                editManager.setText("Todos los gerentes");
-                                editfunctionality.setText("Administrativo");
+                                editDiscipline.setText(R.string.administrativo);
+                                editActivity.setText(R.string.administrativo);
+                                editManager.setText(R.string.todos_los_gerentes);
+                                editfunctionality.setText(R.string.administrativo);
                                 checkBoxActivity.setEnabled(false);
                             }
                             GetConceptHour();
@@ -296,11 +296,17 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.inject(this);
+
+
+        initializeVisualElements();
+    }
+
+    private void initializeVisualElements() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.progressDialog = new ProgressDialog(this);
-        this.progressDialog.setMessage("Por favor espere...");
+        this.progressDialog.setMessage(Constants.POR_FAVOR_ESPERE);
         this.progressDialog.setCancelable(false);
         SecurePreferences settings = new SecurePreferences(this);
         codigoUsuario = settings.getString(Constants.USER_CODIGO);
@@ -311,10 +317,8 @@ public class register extends AppCompatActivity {
     }
 
 
-
-
-    /** 
-    * Método que obtiene la lista de clasificaciones de los conceptos de hora 
+    /**
+    * Método que obtiene la lista de clasificaciones de los conceptos de hora
     * segun el concepto de hora seleccionado
     */
     @OnClick(R.id.register_edClassificationConceptHour)
@@ -355,9 +359,9 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     * Método que es llamado por "GetClassificationConceptHour" y este se encarga
-    * de establecer la lista de clasificaciones de concepto de hora a la 
+    * de establecer la lista de clasificaciones de concepto de hora a la
     * ventana emergente donde se mostraran, para seleccionar de esta la clasificacion
     * deseada la cual se establece en el campo
     */
@@ -402,8 +406,8 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
-    * Método que obtiene la lista de proyectos 
+    /**
+    * Método que obtiene la lista de proyectos
     * segun el gerente seleccionado.
     */
     @OnClick(R.id.register_edProyect)
@@ -437,11 +441,11 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     * Método que se encarga de establecer la lista de
-    * proyectos a la ventana emergente donde se mostraran, 
-    * para seleccionar de esta el proyecto deseado el cual 
-    * se establece en el campo 
+    * proyectos a la ventana emergente donde se mostraran,
+    * para seleccionar de esta el proyecto deseado el cual
+    * se establece en el campo
     */
     private void SetProyect() {
         try {
@@ -468,7 +472,7 @@ public class register extends AppCompatActivity {
                             //}
 
                         }else{
-                            if(!isAdministrative && ProyectList.get(0).getNombre().equals("Administrativo")){
+                            if(!isAdministrative && ProyectList.get(0).getNombre().equals(Constants.ADMINISTRATIVO)){
                                 showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants.MESSAGE_NO_FOUND_PROYECTS);
                             }else{
                                 DialogSearch dialogSearch = new DialogSearch(register.this, proy, Constants.REGISTER_TITLE_DIALOG_PROYECT, "", new DialogSearch.IDialogSelection() {
@@ -494,8 +498,8 @@ public class register extends AppCompatActivity {
         }
     }
 
-     /** 
-    * Método que obtiene la lista de funcionalidades 
+     /**
+    * Método que obtiene la lista de funcionalidades
     * segun el proyecto seleccionado.
     */
     @OnClick(R.id.register_edfunctionality)
@@ -531,11 +535,11 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     * Método que se encarga de establecer la lista de
-    * funcionalidades a la ventana emergente donde se mostraran, 
-    * para seleccionar de esta la funcionalidad deseada la cual 
-    * se establece en el campo. 
+    * funcionalidades a la ventana emergente donde se mostraran,
+    * para seleccionar de esta la funcionalidad deseada la cual
+    * se establece en el campo.
     */
     private void Setfunctionality() {
         try {
@@ -556,7 +560,7 @@ public class register extends AppCompatActivity {
                                 if (isAdministrative){
                                     isAdministrative = false;
                                     showPopup = true;
-                                    editfunctionality.setText("Administrativa");
+                                    editfunctionality.setText(R.string.administrativa);
                                     progressDialog.dismiss();
                                 }
                             //}
@@ -584,7 +588,7 @@ public class register extends AppCompatActivity {
         }
     }
     
-    /** 
+    /**
     * Método que obtiene la lista de conceptos de hora.
     */
     @OnClick(R.id.register_edConceptHour)
@@ -613,7 +617,7 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     * Método que obtiene la lista de gerentes
     */
     @OnClick(R.id.register_edManager)
@@ -640,7 +644,7 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     * Método que obtiene la lista de disciplinas segun el
     * proyecto seleccionado
     */
@@ -657,7 +661,7 @@ public class register extends AppCompatActivity {
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        if(!editProyect.getText().toString().equals("Administrativo") && proyect != null && !proyect.getDescripcionTipoEstimacion().equals("Casos")  ){
+                        if(!editProyect.getText().toString().equals(Constants.ADMINISTRATIVO) && proyect != null && !proyect.getDescripcionTipoEstimacion().equals(Constants.CASOS)  ){
                             DisciplineList = App.getInstance().getActivityDisciplineStimationForRegister(codeFuncionality);
                         }else{
                             DisciplineList = App.getInstance().GetDiscipline(proyect != null ? proyect.getCodigoMaestroMarcoTrabajo() : 0);
@@ -678,7 +682,7 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     * Método encargado de buscar un proyecto especifico en la lista de proyectos
     * @param nametoCompare Nombre del proyecto que se desea buscar
     * @return Retorna el proyecto que coincida con el parametro de entrada
@@ -697,11 +701,11 @@ public class register extends AppCompatActivity {
         return null;
     }
 
-    /** 
+    /**
     * Método que se encarga de establecer la lista de
-    * disciplinas a la ventana emergente donde se mostraran, 
-    * para seleccionar de esta la disciplina deseada la cual 
-    * se establece en el campo. 
+    * disciplinas a la ventana emergente donde se mostraran,
+    * para seleccionar de esta la disciplina deseada la cual
+    * se establece en el campo.
     */
     private void setDiscipline() {
 
@@ -723,7 +727,7 @@ public class register extends AppCompatActivity {
                                 if(!showPopup){
 
                                     if (isAdministrative){
-                                        editDiscipline.setText("Administrativo");
+                                        editDiscipline.setText(R.string.administrativo);
                                     }
                                    // if(isUpdate){
                                         getActivity();
@@ -754,7 +758,7 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     * Método que obtiene la lista de actividades segun la
     * disciplina y/o el codigo seleccionado por el usuario.
     */
@@ -775,7 +779,7 @@ public class register extends AppCompatActivity {
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        if(proyect != null && !proyect.getDescripcionTipoEstimacion().equals("Casos")){
+                        if(proyect != null && !proyect.getDescripcionTipoEstimacion().equals(Constants.CASOS)){
                             activityList = App.getInstance().getFuncionalityActivityStimateForRegister(codeDiscipline,codeFuncionality);
                         }else {
                             activityList = App.getInstance().getActivity(codeDiscipline);
@@ -795,7 +799,7 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     * Método encargado de buscar el codigo de una disciplina especifica
     * @param nametoCompare Nombre de la disciplina que se desea buscar
     * @return Retorna el codigo de la disciplina encontrada
@@ -815,11 +819,11 @@ public class register extends AppCompatActivity {
         return code;
     }
 
-    /** 
+    /**
     * Método que se encarga de establecer la lista de
-    * actividades a la ventana emergente donde se mostraran, 
-    * para seleccionar de esta la actividad deseada la cual 
-    * se establece en el campo. 
+    * actividades a la ventana emergente donde se mostraran,
+    * para seleccionar de esta la actividad deseada la cual
+    * se establece en el campo.
     */
     private void setActivity() {
 
@@ -841,7 +845,7 @@ public class register extends AppCompatActivity {
                         if(!showPopup){
                             progressDialog.dismiss();
                             if (isAdministrative){
-                                editActivity.setText("Administrativo");
+                                editActivity.setText(R.string.administrativo);
 
                             }
                             if(isUpdate){
@@ -879,11 +883,11 @@ public class register extends AppCompatActivity {
         }
     }
     
-    /** 
+    /**
     * Método que se encarga de establecer la lista de
-    * conoceptos de hora a la ventana emergente donde se mostraran, 
-    * para seleccionar de esta el concepto de hora deseada el cual 
-    * se establece en el campo. 
+    * conoceptos de hora a la ventana emergente donde se mostraran,
+    * para seleccionar de esta el concepto de hora deseada el cual
+    * se establece en el campo.
     * @param conceptHourList lista de conceptos de hora que se mostraran al
     * usuario
     */
@@ -940,7 +944,7 @@ public class register extends AppCompatActivity {
         }
     }
 
-    /** 
+    /**
     *Metodo orquestador que permite cargar todos los elementos aministrativos
     */
     private void CargarReporteAdministrativo()
@@ -948,11 +952,11 @@ public class register extends AppCompatActivity {
         checkbox = checkBoxActivity.isChecked();
         isAdministrative = true;
         showPopup = true;
-        editManager.setText("Todos los gerentes");
-        editProyect.setText("Administrativo");
-        editfunctionality.setText("Administrativo");
-        editDiscipline.setText("Administrativo");
-        editActivity.setText("Administrativo");
+        editManager.setText(R.string.todos_los_gerentes);
+        editProyect.setText(R.string.administrativo);
+        editfunctionality.setText(R.string.administrativo);
+        editDiscipline.setText(R.string.administrativo);
+        editActivity.setText(R.string.administrativo);
         checkBoxActivity.setEnabled(false);
         checkBoxActivity.setChecked(false);
         GetClassificationConceptHour();
@@ -960,11 +964,11 @@ public class register extends AppCompatActivity {
 
     }
 
-     /** 
+     /**
     * Método que se encarga de establecer la lista de
-    * gerentes a la ventana emergente donde se mostraran, 
-    * para seleccionar de esta el gerente deseado el cual 
-    * se establece en el campo. 
+    * gerentes a la ventana emergente donde se mostraran,
+    * para seleccionar de esta el gerente deseado el cual
+    * se establece en el campo.
     * @param ManagerList lista de gerentes que se mostraran al
     * usuario
     */
@@ -1014,7 +1018,7 @@ public class register extends AppCompatActivity {
         }
     }
     
-    /** 
+    /**
     * Método encargado de buscar el codigo de un proyecto especifico
     * @param nametoCompare Nombre del proyecto que se desea buscar
     * @return Retorna el codigo del proyecto encontrado
@@ -1032,7 +1036,7 @@ public class register extends AppCompatActivity {
         return code;
     }
 
-    /** 
+    /**
     * Método encargado de buscar el codigo de un gerente especifico
     * @param nametoCompare Nombre del gerente que se desea buscar
     * @return Retorna el codigo del gerente encontrado
@@ -1053,7 +1057,7 @@ public class register extends AppCompatActivity {
         return code;
     }
 
-    /** 
+    /**
     * Método encargado de buscar el codigo de una funcionalidad especifica
     * @param nametoCompare Nombre de la funcionalidad que se desea buscar
     * @return Retorna el codigo de la funcionalidad encontrada
@@ -1075,7 +1079,7 @@ public class register extends AppCompatActivity {
         return code;
     }
 
-    /** 
+    /**
     * Método encargado de buscar el codigo de un concepto de hora especifico
     * @param nametoCompare Nombre del concepto de hora que se desea buscar
     * @return Retorna el codigo del concepto de hora encontrado
@@ -1090,7 +1094,7 @@ public class register extends AppCompatActivity {
         return code;
     }
 
-    /** 
+    /**
     * Método encargado de buscar el codigo de una clasificacion especifica
     * @param nametoCompare Nombre de la clasificacion que se desea buscar
     * @return Retorna el codigo de la clasificacion encontrada
@@ -1106,7 +1110,7 @@ public class register extends AppCompatActivity {
         return code;
     }
 
-    /** 
+    /**
     * Método encargado de buscar el codigo de una disciplina especifica
     * @param nametoCompare Nombre de la disciplina que se desea buscar
     * @return Retorna el codigo de la disciplina encontrada
@@ -1124,7 +1128,7 @@ public class register extends AppCompatActivity {
         return code;
     }
 
-    /** 
+    /**
     * Método encargado de buscar el codigo de una actividad especifica
     * @param nametoCompare Nombre de la actividad que se desea buscar
     * @return Retorna el codigo de la actividad encontrada
@@ -1142,8 +1146,8 @@ public class register extends AppCompatActivity {
         }
 
 
-    /** 
-    * Método encargado organizar toda la informacion ingresada por el 
+    /**
+    * Método encargado organizar toda la informacion ingresada por el
     * usuario para finalmente llevare a cabo el reporte
     */
    @OnClick(R.id.btnReportar)
@@ -1164,7 +1168,7 @@ public class register extends AppCompatActivity {
                         codigoDisciplina = viewTimesEdit.getCodigoDisciplina();
                     }else{
                         codigoDisciplina = GetDisciplineCode(editDiscipline.getText().toString());
-                        repJson.put("discipline",editDiscipline.getText().toString());
+                        repJson.put(Constants.DISCIPLINE,editDiscipline.getText().toString());
                     }
                     int  codigoActividad;
                     if(edit && editActivity.getText().toString().equals(viewTimesEdit.getNombreMaestroActividad())  ){
@@ -1178,25 +1182,25 @@ public class register extends AppCompatActivity {
                         codigoFuncionalidad = viewTimesEdit.getCodigoFuncionalidad();
                     }else{
                         codigoFuncionalidad = GetFuncionalityCode(editfunctionality.getText().toString());
-                        repJson.put("functionality",editfunctionality.getText().toString());
+                        repJson.put(Constants.FUNCTIONALITY,editfunctionality.getText().toString());
                     }
                     int codigoMaestro;
                     if(ClassificationConceptHourList == null && edit){
                         codigoMaestro = viewTimesEdit.getCodigoMaestroTipoHora();
                     }else{
                         codigoMaestro = GetClassificationConceptHourCode(editClassificationConceptHour.getText().toString());
-                        repJson.put("classificationConceptHour",editClassificationConceptHour.getText().toString());
+                        repJson.put(Constants.CLASSIFICATION_CONCEPT_HOUR,editClassificationConceptHour.getText().toString());
                     }
                     String desripcion = edDescrptionActivity.getText().toString();
-                    repJson.put("description",desripcion);
-                    repJson.put("manager",editManager.getText().toString());
-                    repJson.put("conceptoHour",editConceptoHour.getText().toString());
-                    repJson.put("proyect",editProyect.getText().toString());
+                    repJson.put(Constants.DESCRIPTION,desripcion);
+                    repJson.put(Constants.MANAGER,editManager.getText().toString());
+                    repJson.put(Constants.CONCEPT_HOUR,editConceptoHour.getText().toString());
+                    repJson.put(Constants.PROYECT,editProyect.getText().toString());
 
                     double Horas = Double.valueOf(edHour.getText().toString());
                     String fecha =(edDate.getText().toString());
                     fecha = fecha.replace("-", "/");
-                    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY);
                     Date dateObject = formatter.parse(fecha );
 
 
@@ -1210,9 +1214,9 @@ public class register extends AppCompatActivity {
                     report.setFechaActividad(dateObject);
                     report.setActividadCompletada(checkBoxActivity.isChecked());
                     report.setCodigoMaestroActividad(codigoActividad);
-                    repJson.put("codigoEstadoIntegracion",1);
-                    repJson.put("Horas",Horas);
-                    repJson.put("codigoUsuario",codigoUsuario);
+                    repJson.put(Constants.CODIGO_ESTADO_INTEGRACION,1);
+                    repJson.put(Constants.HORAS,Horas);
+                    repJson.put(Constants.CODIGO_USUARIO,codigoUsuario);
 
                     Register(report,repJson);
 
@@ -1225,7 +1229,7 @@ public class register extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "Faltan campos por diligenciar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.faltan_campos_por_diligenciar, Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
             return;
         }
@@ -1233,7 +1237,7 @@ public class register extends AppCompatActivity {
 
     }
     
-    /** 
+    /**
     * Método encargado realizar el reporte o la actualizacion
     * de un reporte previamente cargado si es el caso, adicionalmente
     * guarda el ultimo reporte realizado con el fin de agilizar el proximo
@@ -1258,7 +1262,7 @@ public class register extends AppCompatActivity {
                         //save last time
                         try {
 
-                            FileOutputStream lastRep = openFileOutput("lastReport.txt", MODE_PRIVATE);
+                            FileOutputStream lastRep = openFileOutput(Constants.LAST_REPORT_TXT, MODE_PRIVATE);
                             OutputStreamWriter osw = new OutputStreamWriter(lastRep);
                             osw.write(repJson.toString());
                             osw.flush();
@@ -1283,7 +1287,7 @@ public class register extends AppCompatActivity {
 
     }
 
-    /** 
+    /**
     * Método que valida si el reporte realizado se ha llevado con exito para
     * limpiar los campos de la actividad, de lo contrario, muestra un mensaje
     * de error al usuario
@@ -1316,7 +1320,7 @@ public class register extends AppCompatActivity {
     }
 
 
-    /** 
+    /**
     * Método encargado de validar los campos obligatorios del reporte
     * @return Booleano que determina si los campos obligatorios se ingresaron
     * en su totalidad (true) o no (false).
@@ -1365,7 +1369,7 @@ public class register extends AppCompatActivity {
 
     }
 
-    /** 
+    /**
     * Método encargado de mostrar un mensaje generico
     * @param title titulo del mensaje
     * @param message contenido del mensaje
@@ -1381,7 +1385,7 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Metodo encargado de obtener una lista de proyectos que se 
+    * Metodo encargado de obtener una lista de proyectos que se
     * encuentran asociados a un codigo de gerente especifico
     */
     private void GetProyectsList() {
@@ -1429,7 +1433,7 @@ public class register extends AppCompatActivity {
         });
     }
 
-     /** 
+     /**
     * Método encargado de mostrar un mensaje generico en finalizacion de un hilo.
     * @param title titulo del mensaje
     * @param message contenido del mensaje

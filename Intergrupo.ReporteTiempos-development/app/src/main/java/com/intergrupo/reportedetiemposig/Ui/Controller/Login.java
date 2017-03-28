@@ -135,12 +135,12 @@ public class Login extends AppCompatActivity {
             public void run() {
                 progressDialog.dismiss();
                 if (tiemposResponse != null && tiemposResponse.getCode() == 9) {
-                    SecurePreferences settings = new SecurePreferences(Login.this);
-                    settings.put(Constants.USER_NAME, tiemposResponse.getName());
-                    settings.put(Constants.USER_LASTNAME, tiemposResponse.getLastname());
-                    settings.put(Constants.URLUSERPHOTO, tiemposResponse.getUrlphoto());
-                    settings.put(Constants.USER_CODIGO, tiemposResponse.getCodeuser().toString());
-                    settings.put(Constants.IG_USER, tiemposResponse.getManager().toString());
+                    SecurePreferences sharedPreferencesUserData = new SecurePreferences(Login.this);
+                    sharedPreferencesUserData.put(Constants.USER_NAME, tiemposResponse.getName());
+                    sharedPreferencesUserData.put(Constants.USER_LASTNAME, tiemposResponse.getLastname());
+                    sharedPreferencesUserData.put(Constants.URLUSERPHOTO, tiemposResponse.getUrlphoto());
+                    sharedPreferencesUserData.put(Constants.USER_CODIGO, tiemposResponse.getCodeuser().toString());
+                    sharedPreferencesUserData.put(Constants.IG_USER, tiemposResponse.getManager().toString());
                     Intent intent = new Intent(Login.this, MenuActivity.class);
                     startActivity(intent);
                 } else {
@@ -198,7 +198,7 @@ public class Login extends AppCompatActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(title);
         alert.setMessage(message);
-        alert.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

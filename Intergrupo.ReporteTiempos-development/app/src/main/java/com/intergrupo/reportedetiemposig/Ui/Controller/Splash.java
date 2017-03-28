@@ -36,8 +36,8 @@ public class Splash extends AppCompatActivity {
         }
     }
 
-    /*Esta opción se presenta cuando el usuario recordó los datos de ingreso,
-      por lo que al iniciar la aplicación si este tiene datos guardados entrará por éste netidi*/
+    /*Esta opción se presenta cuando el usuario guardó los datos de ingreso,
+      por lo que al iniciar la aplicación si este tiene datos guardados entrará por éste netid*/
     private void goToMenu() {
         new Handler().postDelayed(new Runnable() {
             @Override

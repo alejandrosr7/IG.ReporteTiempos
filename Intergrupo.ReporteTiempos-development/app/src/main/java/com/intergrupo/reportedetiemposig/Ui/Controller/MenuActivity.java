@@ -1,17 +1,19 @@
 package com.intergrupo.reportedetiemposig.Ui.Controller;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.Rating;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.intergrupo.reportedetiemposig.Helper.IValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.SecurePreferences;
 import com.intergrupo.reportedetiemposig.Helper.ShowAlertDialogValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.ValidateInternet;
-import com.intergrupo.reportedetiemposig.Helper.Validation;
 import com.intergrupo.reportedetiemposig.R;
 import com.intergrupo.reportedetiemposig.Util.Constants;
 import com.squareup.picasso.Picasso;;
@@ -37,7 +39,7 @@ public class MenuActivity extends AppCompatActivity {
     String userCode;
 
     @InjectView(R.id.first_item_menu)
-    TextView  firstItemMenu;
+    TextView firstItemMenu;
 
     @InjectView(R.id.second_item_menu)
     TextView secondItemMenu;
@@ -50,10 +52,10 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         ButterKnife.inject(this);
 
-        initializeVisualElements();
+        initializeVisualElementsAndResources();
     }
 
-    private void initializeVisualElements() {
+    private void initializeVisualElementsAndResources() {
         SecurePreferences settings = new SecurePreferences(this);
         String userName = settings.getString(Constants.USER_NAME);
         String userLastName = settings.getString(Constants.USER_LASTNAME);
@@ -71,21 +73,23 @@ public class MenuActivity extends AppCompatActivity {
     /**
      * Metodo que valida si ingresa un gerente al menú
      * para mostrar las opciones del gerente
-     * @param isManager  Permitr validar si es gerente
+     *
+     * @param isManager Permitr validar si es gerente
      */
     private void validateManager(String isManager) {
-        if(isManager.equals(Constants.TRUE)){
+        if (isManager.equals(Constants.TRUE)) {
             firstItemMenu.setText(R.string.first_item_menu_manager);
             secondItemMenu.setText(R.string.second_item_menu_manager);
         }
     }
 
     /**
-    * Metodo que valida si el usuario tiene foto
-    * @param photo  Permitr validar si tiene foto
-    */
+     * Metodo que valida si el usuario tiene foto
+     *
+     * @param photo Permitr validar si tiene foto
+     */
     public void validatePhoto(String photo) {
-        if(photo != null){
+        if (photo != null) {
             Picasso.with(this).load(photo).into(menu_photo);
         } else {
             Picasso.with(this).load(R.mipmap.photo).into(menu_photo);
@@ -94,22 +98,22 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     /**
-     * Metodo que valida quien ingresó al menú
+     * Metodo que valida quién ingresó al menú
      * para redireccionar a los módulos correspondientes
      */
     @OnClick(R.id.Menu_RegisterTime)
     public void goToRegister() {
-        if(iValidateInternet.isConnected()) {
+        if (iValidateInternet.isConnected()) {
             if (manager.equals(Constants.FALSE)) {
-                Intent intent = new Intent(MenuActivity.this, register.class);
+                Intent intent = new Intent(this, register.class);
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(this, ViewTimesManagerDetailActivity.class);
                 intent.putExtra(Constants.USER_CODIGO, userCode);
                 startActivity(intent);
             }
-        }else{
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, MenuActivity.this);
+        } else {
+            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, MenuActivity.this);
 
         }
 
@@ -121,9 +125,9 @@ public class MenuActivity extends AppCompatActivity {
      */
     @OnClick(R.id.Menu_viewtimereport)
     public void goToViewTimes() {
-        if(iValidateInternet.isConnected()) {
+        if (iValidateInternet.isConnected()) {
             if (manager.equals(Constants.FALSE)) {
-                Intent intent = new Intent(MenuActivity.this, ViewTimes.class);
+                Intent intent = new Intent(this, ViewTimes.class);
                 intent.putExtra(Constants.USER_CODIGO, userCode);
                 startActivity(intent);
             } else {
@@ -131,8 +135,8 @@ public class MenuActivity extends AppCompatActivity {
                 intent.putExtra(Constants.USER_CODIGO, userCode);
                 startActivity(intent);
             }
-        }else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, MenuActivity.this);
+        } else {
+            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, MenuActivity.this);
         }
 
     }
@@ -155,15 +159,19 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.exit) {
-                    SecurePreferences settings = new SecurePreferences(MenuActivity.this);
-                    settings.put(Constants.REMEMBER_ACCESS, null);
-                    settings.put(Constants.USER_NAME, null);
-                    finish();
+                    deleteSharedPreferences();
                 }
                 return true;
             }
         });
         popupMenup.show();
+    }
+
+    private void deleteSharedPreferences() {
+        SecurePreferences settings = new SecurePreferences(MenuActivity.this);
+        settings.put(Constants.REMEMBER_ACCESS, null);
+        settings.put(Constants.USER_NAME, null);
+        finish();
     }
 
 }

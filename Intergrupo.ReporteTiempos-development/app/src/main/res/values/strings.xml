@@ -8,8 +8,8 @@
 
     <!-- Textos generales-->
     <string name="continuar">Continuar</string>
-    <string name="accept">Aceptar</string>
-    <string name="cancel">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
     <string name="NameManager">¿Quién es tu gerente?</string>
     <string name="NameConceptHour">¿Cuál es tu concepto de hora?</string>
     <string name="NameClassificationConceptHour">Clasificación de concepto de hora</string>
@@ -59,5 +59,16 @@
     <string name="text_interntet">Por favor valide su conexión a internet</string>
     <string name="first_item_menu_manager">Por colaborador</string>
     <string name="second_item_menu_manager">Por proyecto</string>
+
+    <string name="por_favor_espere">Por favor espere</string>
+    <string name="descripcion_de_la_actividad">Descripción de la actividad</string>
+    <string name="date_picker">DatePicker</string>
+    <string name="administrativo">Administrativo</string>
+    <string name="administrativa">Administrativa</string>
+    <string name="todos_los_gerentes">Todos los gerentes</string>
+    <string name="faltan_campos_por_diligenciar">Faltan campos por diligenciar</string>
+
+
+
 </resources>
 
