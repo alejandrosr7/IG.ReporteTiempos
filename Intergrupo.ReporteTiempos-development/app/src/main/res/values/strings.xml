@@ -24,15 +24,15 @@
     <string name="hour">Horas</string>
     <string name="description">Descripción</string>
     <string name="requiriments">Requerimiento/Oc</string>
-    <string name="register">REPORTAR</string>
+    <string name="reportar">REPORTAR</string>
 
 
     <!-- Mensaje de validación en registro y actualziar datos-->
-    <string name="title_incomplete_fields">Campos incompletos</string>
+    <string name="campos_incompletos">Campos incompletos</string>
     <string name="title_invalid_fields">Campos no válidos</string>
-    <string name="message_email_empty">Debes ingresar tu correo electrónico.</string>
+    <string name="debes_ingresar_tu_correo_electronico">Debes ingresar tu correo electrónico.</string>
     <string name="message_email_invalid">Correo electrónico no válido, por favor verifiquelo.</string>
-    <string name="message_password_empty">Debes ingresar una contraseña.</string>
+    <string name="debes_ingresar_una_contrasenia">Debes ingresar una contraseña.</string>
 
     <!-- Hint para la actividad registro de tiempos-->
     <string name="hintSelectManager">Selecciona tu gerente</string>
@@ -55,8 +55,8 @@
     <string name="search">Buscar</string>
     <string name="mdtp_from">DESDE</string>
     <string name="mdtp_to">HASTA</string>
-    <string name="title_internet">Apreciado usuario</string>
-    <string name="text_interntet">Por favor valide su conexión a internet</string>
+    <string name="apreciado_usuario">Apreciado usuario</string>
+    <string name="por_favor_valide_su_conexion_a_internet">Por favor valide su conexión a internet</string>
     <string name="first_item_menu_manager">Por colaborador</string>
     <string name="second_item_menu_manager">Por proyecto</string>
 
@@ -73,6 +73,16 @@
     <string name="ciento_ochenta">180</string>
     <string name="error_eliminando_tiempo">Error eliminando tiempo</string>
     <string name="time">time</string>
+    <string name="administrativas">Administrativas</string>
+    <string name="novedades">Novedades</string>
+    <string name="productivas">Productivas</string>
+    <string name="que_quieres_hacer_hoy">¿Qué quieres hacer hoy?</string>
+    <string name="reportar_tiempos">Reportar tiempos</string>
+    <string name="ver_reportes">Ver reportes</string>
+    <string name="ingresar">INGRESAR</string>
+    <string name="id_del_usuario">ID del usuario</string>
+    <string name="contrasenia">Contraseña</string>
+    <string name="recordar_datos_de_acceso">Recordar datos de acceso</string>
 
 
 </resources>

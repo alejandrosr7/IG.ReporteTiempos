@@ -110,7 +110,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, ViewTimesManagerDetailActivity.this);
+                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, ViewTimesManagerDetailActivity.this);
 
                         }
                     });

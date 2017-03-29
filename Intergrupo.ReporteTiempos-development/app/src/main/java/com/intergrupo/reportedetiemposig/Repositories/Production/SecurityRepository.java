@@ -25,10 +25,6 @@ import retrofit.client.Response;
 
 public class SecurityRepository implements ISecurityRepository {
 
-    public void SignIn(String user, String password, Callback<Boolean> callback) {
-
-    }
-
     @Override
     public void SignIn(IGLogin login, Callback<Boolean> callback) {
 

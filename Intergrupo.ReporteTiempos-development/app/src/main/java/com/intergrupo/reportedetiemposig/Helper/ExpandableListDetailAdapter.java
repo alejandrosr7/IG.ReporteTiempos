@@ -55,15 +55,15 @@ public class ExpandableListDetailAdapter extends BaseExpandableListAdapter {
         TextView numbergreen = (TextView) convertView.findViewById(R.id.tvgreenDetail);
         switch (expandedListPosition) {
             case 0:
-                expandedListTextView.setText("Administrativas");
+                expandedListTextView.setText(R.string.administrativas);
                 numbergreen.setText(viewTimesManagerDetail.getAdministrativeHour()+"");
                 break;
             case 1:
-                expandedListTextView.setText("Novedades");
+                expandedListTextView.setText(R.string.novedades);
                 numbergreen.setText(viewTimesManagerDetail.getNewnessHour()+"");
                 break;
             case 2:
-                expandedListTextView.setText("Productivas");
+                expandedListTextView.setText(R.string.productivas);
                 numbergreen.setText(viewTimesManagerDetail.getProductiveHour()+"");
                 break;
         }

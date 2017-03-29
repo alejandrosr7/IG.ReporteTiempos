@@ -23,7 +23,7 @@ public class ViewTimesRepository  implements IViewTimesRepository {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
 
         try {
-            List<ViewTimesModel> timesForCollaborator = new ArrayList<>();
+            List<ViewTimesModel> timesForCollaborator;
             if(codeUser != null){
                 timesForCollaborator = client.GetTimesForCollaborator(codeUser);
             } else {
@@ -42,7 +42,7 @@ public class ViewTimesRepository  implements IViewTimesRepository {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
 
         try {
-            List<ResumTimesForCollaborator> resumTimesForCollaborator = new ArrayList<>();
+            List<ResumTimesForCollaborator> resumTimesForCollaborator;
             if(codeUser != null){
                 resumTimesForCollaborator = client.GetResumTimesForCollaborator(codeUser);
             } else {
@@ -60,8 +60,7 @@ public class ViewTimesRepository  implements IViewTimesRepository {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
 
         try {
-            Boolean delete = client.DeleteTimes(codigos);
-            return delete;
+            return client.DeleteTimes(codigos);
         } catch (RetrofitError retrofitError) {
             retrofitError.printStackTrace();
             return false;

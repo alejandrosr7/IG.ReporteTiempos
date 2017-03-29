@@ -3,6 +3,7 @@ package com.intergrupo.reportedetiemposig.Repositories.Production;
 
 import com.intergrupo.reportedetiemposig.Model.ViewTimesManagerDetail;
 import com.intergrupo.reportedetiemposig.Repositories.Interfaces.IViewTimesManagerDetail;
+import com.intergrupo.reportedetiemposig.Util.Constants;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,7 +32,7 @@ public class ViewTimesManagerDetailRepository implements IViewTimesManagerDetail
         List<ViewTimesManagerDetail> timesManagerDetails = new ArrayList<>();
         try {
             if(idManagerCode != null){
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat df = new SimpleDateFormat(Constants.YYYY_MM_DD);
                 String startDate1 = df.format(startDate);
                 String finishDate1 = df.format(finishDate);
                 timesManagerDetails = client.GetTimesManagerDetail(idManagerCode, startDate1, finishDate1);

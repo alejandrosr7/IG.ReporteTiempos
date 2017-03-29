@@ -98,4 +98,9 @@ public interface Constants {
     String CODIGOS = "Codigos";
     String CONFIRMATION_DELETE_TIME = "ConfirmationDeleteTime";
     String EDIT_TIME = "EditTime";
+
+    //ActivityDiscipline
+    String CODIGO_ACTIVIDAD = "CodigoActividad";
+
+    String CODIGO_DISCIPLINA = "CodigoDisciplina";
 }

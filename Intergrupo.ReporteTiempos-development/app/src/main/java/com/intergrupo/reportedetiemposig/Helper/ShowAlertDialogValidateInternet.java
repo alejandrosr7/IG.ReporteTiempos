@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.intergrupo.reportedetiemposig.Util.Constants;
+
 /**
  * Created by USUARIO on 16/10/2016.
  */
@@ -23,7 +25,7 @@ public class ShowAlertDialogValidateInternet {
             alertDialog = new AlertDialog.Builder(context);
             alertDialog.setTitle(title);
             alertDialog.setMessage(message);
-            alertDialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            alertDialog.setPositiveButton(Constants.ACEPTAR, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();

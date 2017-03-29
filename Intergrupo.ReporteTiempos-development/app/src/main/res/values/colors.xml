@@ -8,4 +8,7 @@
     <color name="mdtp_accent_color_dark">#00796b</color>
     <color name="gray">#DDE0E3</color>
     <color name="tranparent">#00FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="blue">#014BA0</color>
+    <color name="blue_title">#034CA1</color>
 </resources>

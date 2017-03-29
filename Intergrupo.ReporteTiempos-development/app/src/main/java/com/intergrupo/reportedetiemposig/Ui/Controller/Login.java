@@ -59,7 +59,6 @@ public class Login extends AppCompatActivity {
     private void initializeVisualElemetsAndMethods() {
         iValidateInternet = new ValidateInternet(Login.this);
 
-
         this.progressDialog = new ProgressDialog(this);
         this.progressDialog.setMessage(Constants.USER_NAME);
         this.progressDialog.setCancelable(false);
@@ -110,7 +109,7 @@ public class Login extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, Login.this);
+                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, Login.this);
                 }
             });
         }
@@ -135,14 +134,10 @@ public class Login extends AppCompatActivity {
             public void run() {
                 progressDialog.dismiss();
                 if (tiemposResponse != null && tiemposResponse.getCode() == 9) {
-                    SecurePreferences sharedPreferencesUserData = new SecurePreferences(Login.this);
-                    sharedPreferencesUserData.put(Constants.USER_NAME, tiemposResponse.getName());
-                    sharedPreferencesUserData.put(Constants.USER_LASTNAME, tiemposResponse.getLastname());
-                    sharedPreferencesUserData.put(Constants.URLUSERPHOTO, tiemposResponse.getUrlphoto());
-                    sharedPreferencesUserData.put(Constants.USER_CODIGO, tiemposResponse.getCodeuser().toString());
-                    sharedPreferencesUserData.put(Constants.IG_USER, tiemposResponse.getManager().toString());
+                    createSecuredPreferences(tiemposResponse);
                     Intent intent = new Intent(Login.this, MenuActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     if (tiemposResponse != null) {
                         Toast.makeText(Login.this, tiemposResponse.getTexto(), Toast.LENGTH_LONG).show();
@@ -152,6 +147,15 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void createSecuredPreferences(final User tiemposResponse) {
+        SecurePreferences sharedPreferencesUserData = new SecurePreferences(Login.this);
+        sharedPreferencesUserData.put(Constants.USER_NAME, tiemposResponse.getName());
+        sharedPreferencesUserData.put(Constants.USER_LASTNAME, tiemposResponse.getLastname());
+        sharedPreferencesUserData.put(Constants.URLUSERPHOTO, tiemposResponse.getUrlphoto());
+        sharedPreferencesUserData.put(Constants.USER_CODIGO, tiemposResponse.getCodeuser().toString());
+        sharedPreferencesUserData.put(Constants.IG_USER, tiemposResponse.getManager().toString());
     }
 
 
@@ -166,7 +170,7 @@ public class Login extends AppCompatActivity {
 
     private boolean validatePasswordField() {
         if (TextUtils.isEmpty(EdPassword.getText().toString().trim())) {
-            showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_password_empty), EdPassword);
+            showPopup(getResources().getString(R.string.campos_incompletos), getResources().getString(R.string.debes_ingresar_una_contrasenia), EdPassword);
             return false;
         }
         return true;
@@ -174,12 +178,12 @@ public class Login extends AppCompatActivity {
 
     private Boolean validateUserField() {
         if (TextUtils.isEmpty(EdUser.getText().toString().trim())) {
-            showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_email_empty), EdUser);
+            showPopup(getResources().getString(R.string.campos_incompletos), getResources().getString(R.string.debes_ingresar_tu_correo_electronico), EdUser);
             return false;
         }
         if (EdUser.getText().toString().contains("@")) {
             if (validation.isNotCorrectEmail(EdUser.getText().toString().trim())) {
-                showPopup(getResources().getString(R.string.title_incomplete_fields), getResources().getString(R.string.message_email_invalid), EdUser);
+                showPopup(getResources().getString(R.string.campos_incompletos), getResources().getString(R.string.message_email_invalid), EdUser);
                 return false;
             }
         }

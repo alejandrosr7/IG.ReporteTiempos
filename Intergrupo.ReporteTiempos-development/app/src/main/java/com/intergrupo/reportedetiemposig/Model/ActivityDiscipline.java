@@ -2,6 +2,7 @@ package com.intergrupo.reportedetiemposig.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.intergrupo.reportedetiemposig.Util.Constants;
 
 /**
  * Created by leidy on 12/11/2016.
@@ -12,14 +13,14 @@ public class ActivityDiscipline {
     /**
      * Permite obtener o establecer  el código de la actividad
      */
-    @SerializedName("CodigoActividad")
+    @SerializedName(Constants.CODIGO_ACTIVIDAD)
     @Expose
     private Integer codigoActividad;
 
     /**
      * Permite obtener o establecer  el codigo de la disciplina
      */
-    @SerializedName("CodigoDisciplina")
+    @SerializedName(Constants.CODIGO_DISCIPLINA)
     @Expose
     private Integer CodigoDisciplina;
 

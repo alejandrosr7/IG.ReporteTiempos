@@ -237,7 +237,7 @@ public class register extends AppCompatActivity {
                     }
                     GetConceptHour();
                 }else{
-                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                 }
             }else{
                 FileInputStream lastReport = openFileInput(Constants.LAST_REPORT_TXT);
@@ -281,7 +281,7 @@ public class register extends AppCompatActivity {
                             GetConceptHour();
                         }
                     }else{
-                        ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                        ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                     }
                 }
 
@@ -349,7 +349,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                 progressDialog.dismiss();
             }
 
@@ -431,7 +431,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                 progressDialog.dismiss();
             }
 
@@ -524,7 +524,7 @@ public class register extends AppCompatActivity {
                     };
                     thread.start();
                 }else{
-                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                     progressDialog.dismiss();
                 }
 
@@ -607,7 +607,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                 progressDialog.dismiss();
             }
 
@@ -635,7 +635,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                 progressDialog.dismiss();
             }
 
@@ -673,7 +673,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                 progressDialog.dismiss();
             }
 
@@ -790,7 +790,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                 progressDialog.dismiss();
             }
 
@@ -1224,7 +1224,7 @@ public class register extends AppCompatActivity {
                     progressDialog.dismiss();
                 }
             }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
             }
 
         } catch (Exception e) {
@@ -1363,7 +1363,7 @@ public class register extends AppCompatActivity {
         if(error.equals("")){
             return true;
         }else{
-            showPopup(getResources().getString(R.string.title_incomplete_fields), error);
+            showPopup(getResources().getString(R.string.campos_incompletos), error);
             return false;
         }
 
@@ -1410,7 +1410,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet,R.string.text_interntet, register.this);
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
                 progressDialog.dismiss();
             }
         } catch (Exception e) {

@@ -2,7 +2,6 @@ package com.intergrupo.reportedetiemposig.Ui.Controller;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -124,7 +123,7 @@ public class ViewTimes extends AppCompatActivity {
             getProyectsList(userCode, true);
 
         } else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, ViewTimes.this);
+            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, ViewTimes.this);
         }
 
     }

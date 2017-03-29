@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/back_login"
-    android:orientation="vertical"
-    tools:context="com.intergrupo.reportedetiemposig.Ui.Controller.Login">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@mipmap/back_login"
+              android:orientation="vertical"
+              tools:context="com.intergrupo.reportedetiemposig.Ui.Controller.Login">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:src="@mipmap/user" />
+                        android:src="@mipmap/user"/>
 
                 </LinearLayout>
 
@@ -58,19 +58,19 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:fontFamily="sans-serif"
+                        android:hint="@string/id_del_usuario"
                         android:inputType="textEmailAddress"
-                        android:hint="ID del usuario"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Lzuluagab"/>
+                        android:text="Lzuluagab"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/Login_lnSeparatedUser"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
                 android:layout_height="0.5dp"
                 android:layout_below="@+id/Login_lnForUSer"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/darker_gray"></TextView>
 
             <LinearLayout
@@ -90,7 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:src="@mipmap/pass" />
+                        android:src="@mipmap/pass"/>
 
                 </LinearLayout>
 
@@ -103,23 +103,23 @@
                         android:id="@+id/Login_edPassword"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@null"
+                        android:backgroundTint="@android:color/transparent"
                         android:ems="10"
                         android:fontFamily="sans-serif"
-                        android:background="@null"
+                        android:hint="@string/contrasenia"
                         android:inputType="textPassword"
-                        android:backgroundTint="@android:color/transparent"
-                        android:hint="Contraseña"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Intergrupo2016."/>
+                        android:text="Intergrupo2016."
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/Login_lnSeparatedPass"
                 android:layout_width="match_parent"
-                android:layout_marginTop="5dp"
                 android:layout_height="0.5dp"
                 android:layout_below="@+id/Login_lnForPass"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/darker_gray"></TextView>
 
             <LinearLayout
@@ -133,27 +133,29 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
-                    android:layout_weight=".01" />
+                    android:layout_weight=".01"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight=".9"
-                    android:text="Recordar datos de acceso"
+                    android:text="@string/recordar_datos_de_acceso"
                     android:textColor="@android:color/secondary_text_light"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".1">
 
-                    |<CheckBox
+                    |
+
+                    <CheckBox
                         android:id="@+id/Login_chkRememberData"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
@@ -180,9 +182,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#034CA1"
-                android:text="INGRESAR"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:text="@string/ingresar"
+                android:textColor="@color/white"
+                android:textSize="30sp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

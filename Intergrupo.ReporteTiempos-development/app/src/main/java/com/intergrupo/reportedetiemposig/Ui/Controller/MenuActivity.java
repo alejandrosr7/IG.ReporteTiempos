@@ -1,8 +1,6 @@
 package com.intergrupo.reportedetiemposig.Ui.Controller;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.Rating;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -113,7 +111,7 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, MenuActivity.this);
+            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, MenuActivity.this);
 
         }
 
@@ -136,7 +134,7 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.title_internet, R.string.text_interntet, MenuActivity.this);
+            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, MenuActivity.this);
         }
 
     }
@@ -172,6 +170,12 @@ public class MenuActivity extends AppCompatActivity {
         settings.put(Constants.REMEMBER_ACCESS, null);
         settings.put(Constants.USER_NAME, null);
         finish();
+        startLoginActivity();
+    }
+
+    private void startLoginActivity() {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 
 }

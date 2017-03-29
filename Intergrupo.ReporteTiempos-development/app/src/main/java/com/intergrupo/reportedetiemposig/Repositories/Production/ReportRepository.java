@@ -37,8 +37,7 @@ public class ReportRepository implements IReportRepository{
     public Boolean Register(ReportTime register) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            boolean respuesta = client.Register(register);
-            return respuesta;
+            return client.Register(register);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
             return false;
@@ -49,8 +48,7 @@ public class ReportRepository implements IReportRepository{
     public List<Manager> GetManager() {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            List<Manager> managerList = client.getManager();
-            return managerList;
+            return client.getManager();
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -61,8 +59,7 @@ public class ReportRepository implements IReportRepository{
     public List<ConceptHour> GetConceptHour() {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            List<ConceptHour> conceptHourList = client.GetConceptHour();
-            return conceptHourList;
+            return client.GetConceptHour();
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -73,8 +70,7 @@ public class ReportRepository implements IReportRepository{
     public List<ClassificationConceptHour> GetClassificationConceptHour(int codeTypeHour) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            List<ClassificationConceptHour> ClassificationConceptHourList = client.GetClassificationConceptHour(codeTypeHour);
-            return ClassificationConceptHourList;
+            return client.GetClassificationConceptHour(codeTypeHour);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -85,8 +81,7 @@ public class ReportRepository implements IReportRepository{
     public List<Proyect> GetProyect(int codeManager) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            List<Proyect> ProyectList = client.GetProyect(codeManager);
-            return ProyectList;
+            return client.GetProyect(codeManager);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -99,8 +94,7 @@ public class ReportRepository implements IReportRepository{
         try {
             int soloActivos = 1;
             int IdFuncionalidadActual = -1;
-            List<functionality> functionalityList = client.Getfunctionality(codeProyect, soloActivos, IdFuncionalidadActual );
-            return functionalityList;
+            return client.Getfunctionality(codeProyect, soloActivos, IdFuncionalidadActual );
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -111,8 +105,7 @@ public class ReportRepository implements IReportRepository{
     public List<Discipline> GetDiscipline(int codeMaster) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            List<Discipline> DisciplinelityList = client.GetDiscipline(codeMaster);
-            return DisciplinelityList;
+            return client.GetDiscipline(codeMaster);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -123,8 +116,7 @@ public class ReportRepository implements IReportRepository{
     public List<Discipline> getActivityDisciplineStimationForRegister(int codeFuncionality) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            List<Discipline> DisciplinelityList = client.getActivityDisciplineStimationForRegister(codeFuncionality);
-            return DisciplinelityList;
+            return client.getActivityDisciplineStimationForRegister(codeFuncionality);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -136,8 +128,7 @@ public class ReportRepository implements IReportRepository{
     public List<ActivityDiscipline> getActivity(int codeDiscipline) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            List<ActivityDiscipline> activityList = client.getActivity(codeDiscipline);
-            return activityList;
+            return client.getActivity(codeDiscipline);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -148,8 +139,7 @@ public class ReportRepository implements IReportRepository{
     public List<ActivityDiscipline> getFuncionalityActivityStimateForRegister(int codeDiscipline, int codeFuncionality) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            List<ActivityDiscipline> activityList = client.getFuncionalityActivityStimateForRegister(codeDiscipline,codeFuncionality);
-            return activityList;
+            return client.getFuncionalityActivityStimateForRegister(codeDiscipline,codeFuncionality);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -163,8 +153,7 @@ public class ReportRepository implements IReportRepository{
     public Boolean EditReport(ReportTime register) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            Boolean edit = client.EditTimes(register);
-            return edit;
+            return client.EditTimes(register);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
             return false;
