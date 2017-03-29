@@ -96,4 +96,6 @@ public interface Constants {
     String DATE_PICKER_DIALOG = "Datepickerdialog";
     String CODIGO = "Codigo";
     String CODIGOS = "Codigos";
+    String CONFIRMATION_DELETE_TIME = "ConfirmationDeleteTime";
+    String EDIT_TIME = "EditTime";
 }

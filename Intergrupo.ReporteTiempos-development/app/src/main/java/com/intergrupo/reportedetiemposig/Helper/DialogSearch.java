@@ -32,7 +32,6 @@ public class DialogSearch extends Dialog {
     private ArrayList<String> itemsCopy;
     private IDialogSelection alertSelection;
     private String searchText;
-    private int item;
 
     @InjectView(R.id.txt_alert_selection_search)
     EditText txtAlertSelectionSearch;
@@ -57,18 +56,6 @@ public class DialogSearch extends Dialog {
         itemsOriginal = items;
         itemsCopy = (ArrayList<String>) items.clone();
         this.alertSelection = alertSelection;
-        this.searchText = searchText;
-    }
-
-    public void setAlertSelection(IDialogSelection alertSelection) {
-        this.alertSelection = alertSelection;
-    }
-
-    public String getSearchText() {
-        return searchText;
-    }
-
-    public void setSearchText(String searchText) {
         this.searchText = searchText;
     }
 

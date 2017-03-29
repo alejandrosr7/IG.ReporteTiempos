@@ -53,7 +53,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition).get("id").toString()).get(childPosititon);
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition).get(Constants.ID).toString()).get(childPosititon);
     }
 
     @Override
@@ -75,15 +75,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView tvTimeItem = (TextView) convertView
                 .findViewById(R.id.tvTimeItem);
 
-        tvTimeItem.setText(childText.getDescripcion().toString());
+        tvTimeItem.setText(childText.getDescripcion());
         tvTimeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog;
                 alertDialog = new AlertDialog.Builder(_context);
                 alertDialog.setTitle(Constants.REPORT);
-                alertDialog.setMessage(childText.getDescripcion().toString());
-                alertDialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                alertDialog.setMessage(childText.getDescripcion());
+                alertDialog.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -102,7 +102,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 Class[] listClass = new Class[1];
                 listClass[0] = ViewTimesModel.class;
                 try {
-                    Method MethodPrueba = ViewTimes.class.getMethod("EditTime", listClass );
+                    Method MethodPrueba = ViewTimes.class.getMethod(Constants.EDIT_TIME, listClass );
                     MethodPrueba.invoke(v.getContext(), childText);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -118,7 +118,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 Class[] listClass = new Class[1];
                 listClass[0] = ViewTimesModel.class;
                 try {
-                    Method MethodPrueba = ViewTimes.class.getMethod("ConfirmationDeleteTime", listClass );
+                    Method MethodPrueba = ViewTimes.class.getMethod(Constants.CONFIRMATION_DELETE_TIME, listClass );
                     MethodPrueba.invoke(v.getContext(), childText);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -133,8 +133,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        System.out.println(this._listDataChild.get(this._listDataHeader.get(groupPosition).get("id").toString()).size());
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition).get("id").toString()).size();
+        System.out.println(this._listDataChild.get(this._listDataHeader.get(groupPosition).get(Constants.ID).toString()).size());
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition).get(Constants.ID).toString()).size();
     }
 
     @Override
@@ -162,9 +162,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView proyectName = (TextView) convertView.findViewById(R.id.tvNameProyectItem);
-        proyectName.setText(headerTitle.get("proyect").toString());
+        proyectName.setText(headerTitle.get(Constants.PROYECT).toString());
         TextView proyectTimes = (TextView) convertView.findViewById(R.id.tvHoursItem);
-        proyectTimes.setText(headerTitle.get("time").toString());
+        proyectTimes.setText(headerTitle.get(Constants.TIME).toString());
 
         return convertView;
     }
@@ -204,27 +204,26 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             calendarioActual.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
             calendarioActual.add(Calendar.DAY_OF_YEAR, 1);
             toDate = calendarioActual.getTime();
-        }else{
-            if(monthly){
+        }else if(monthly){
                 calendarioActual.set(Calendar.HOUR_OF_DAY, 0);
                 calendarioActual.set(Calendar.DAY_OF_MONTH, calendarioActual.getActualMinimum(Calendar.DAY_OF_MONTH));
                 fromDate = calendarioActual.getTime();
                 calendarioActual.set(Calendar.DAY_OF_MONTH, calendarioActual.getActualMaximum(Calendar.DAY_OF_MONTH));
                 toDate = calendarioActual.getTime();
             }
-        }
 
 
-        if(query.isEmpty() && fecha == null && weekly == false && monthly == false ){
+
+        if(query.isEmpty() && fecha == null && !weekly && !monthly){
             this._listDataHeader = (ArrayList<HashMap>) this._listDataHeaderOriginal.clone();
             this._listDataChild = (HashMap<String, ArrayList<ViewTimesModel>>) this._listDataChildOriginal.clone();
         }
         else {
 
             for(HashMap proyect: this._listDataHeaderOriginal){
-                ArrayList<ViewTimesModel> activityList = this._listDataChildOriginal.get(proyect.get("id").toString());
+                ArrayList<ViewTimesModel> activityList = this._listDataChildOriginal.get(proyect.get(Constants.ID).toString());
 
-                DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat formatter = new SimpleDateFormat(Constants.YYYY_MM_DD);
                 Date fechaList;
                 String dateString;
 
@@ -247,13 +246,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                     newList.add(activity);
                                 }
 
-                            }else{
-                                if(weekly){
+                            }else if(weekly){
                                     if(fechaList.getTime() >= fromDate.getTime() && fechaList.getTime() <= toDate.getTime()){
                                         newList.add(activity);
                                     }
-                                }else{
-                                    if(monthly){
+                                }else if(monthly){
                                         if(fechaList.getTime() >= fromDate.getTime() && fechaList.getTime() <= toDate.getTime()){
                                             newList.add(activity);
                                         }
@@ -269,15 +266,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                                         }
                                     }
                                 }
-                            }
-                        }
+
+
                     }catch (Exception e ){
                         e.printStackTrace();
                     }
 
 
                 }
-                _listDataChild.put(proyect.get("id").toString(),newList);
+                _listDataChild.put(proyect.get(Constants.ID).toString(),newList);
                 if(newList.size() > 0){
                     _listDataHeader.add(proyect);
                 }
