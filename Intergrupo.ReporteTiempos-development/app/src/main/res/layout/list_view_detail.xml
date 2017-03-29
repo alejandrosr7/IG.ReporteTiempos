@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="?android:attr/listPreferredItemHeight"
+              android:orientation="horizontal"
     >
 
     <LinearLayout
@@ -12,57 +12,55 @@
 
         <TextView
             android:id="@+id/listTitleDetail"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="55dp"
-            android:layout_weight="0.5"
             android:layout_alignParentTop="true"
-            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
-            android:textColor="@android:color/black"
-            android:textIsSelectable="false"
+            android:layout_weight="0.5"
             android:gravity="left|top"
+            android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
             android:text="Leidy Carolina Zulaga Bastidas"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
             />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvGreenDetail"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_weight="1.2"
+            android:gravity="bottom|center"
+            android:singleLine="true"
+            android:text="@string/ciento_treinta"
+            android:textColor="@color/green"
+            android:textIsSelectable="false"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="13dp"
+            android:gravity="center|top"
+            android:text="@string/reportado"
+            android:textSize="10dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_height="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/green"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvGreenDetail"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_weight="1.2"
-                android:singleLine="true"
-                android:textIsSelectable="false"
-                android:gravity="bottom|center"
-                android:textSize="25dp"
-                android:text="130"
-                android:textColor="#46A724"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="13dp"
-                android:textSize="10dp"
-                android:text="Reportado"
-                android:gravity="center|top"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="3dp"
-                android:background="#46A724"
-                android:orientation="vertical">
-            </LinearLayout>
-
-
-
-
-
         </LinearLayout>
 
+
+    </LinearLayout>
 
 
 </LinearLayout>

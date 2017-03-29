@@ -83,6 +83,14 @@
     <string name="id_del_usuario">ID del usuario</string>
     <string name="contrasenia">Contraseña</string>
     <string name="recordar_datos_de_acceso">Recordar datos de acceso</string>
+    <string name="por_reportar">Por reportar</string>
+    <string name="reportado">Reportado</string>
+    <string name="por_proyecto">Por proyecto</string>
+    <string name="buscar">Buscar</string>
+    <string name="no_hay_registros_seleccionados">No hay registros relacionados</string>
+    <string name="limpiar">Limpiar</string>
+    <string name="ciento_treinta">130</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
 
 
 </resources>

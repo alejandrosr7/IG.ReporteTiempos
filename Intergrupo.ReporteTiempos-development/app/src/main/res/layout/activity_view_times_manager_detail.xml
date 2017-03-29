@@ -18,7 +18,7 @@
             android:id="@+id/toolbarDetail"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#014BA0"
+            android:background="@color/blue"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="Por colaborador" />
 
@@ -101,7 +101,6 @@
             android:id="@+id/elvCollaborator"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:childIndicatorRight="@dimen/activity_vertical_margin">
 
         </ExpandableListView>

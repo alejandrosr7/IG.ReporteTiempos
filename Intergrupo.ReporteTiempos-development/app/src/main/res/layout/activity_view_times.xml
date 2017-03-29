@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="com.intergrupo.reportedetiemposig.Ui.Controller.ViewTimes">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical"
+              tools:context="com.intergrupo.reportedetiemposig.Ui.Controller.ViewTimes">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,9 +17,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#014BA0"
+            android:background="@color/blue"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/view_report_times" />
+            app:title="@string/view_report_times"/>
 
 
     </android.support.design.widget.AppBarLayout>
@@ -36,15 +36,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:gravity="center|top"
-            android:orientation="horizontal"
-            android:background="@drawable/border">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/weekly"
                 android:gravity="center"
+                android:text="@string/weekly"
                 />
         </LinearLayout>
 
@@ -53,14 +53,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:gravity="center|top"
-            android:orientation="horizontal"
-            android:background="@drawable/border">
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/monthly"
                 android:gravity="center"
+                android:text="@string/monthly"
                 />
         </LinearLayout>
 
@@ -69,14 +70,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:gravity="center|top"
-            android:orientation="horizontal"
-            android:background="@drawable/border">
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/byDate"
                 android:gravity="center"
+                android:text="@string/byDate"
                 />
         </LinearLayout>
 
@@ -95,50 +97,49 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:gravity="center|top"
-            android:orientation="vertical"
-            android:background="@drawable/border">
+            android:orientation="vertical">
 
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/tvByReport"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="match_parent"
+                    android:gravity="top|center"
+                    android:text="@string/cero"
+                    android:textColor="@color/red"
+                    android:textSize="45sp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvByReport"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="0"
-                        android:gravity="top|center"
-                        android:textSize="45dp"
-                        android:textColor="#B71400"
-                        android:textStyle="bold"
-                        />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="16dp">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="16dp">
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:text="@string/por_reportar"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="por reportar"
-                        android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:gravity="center_horizontal"
-                        />
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/red"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_marginTop="3dp"
-                    android:background="#B71400"
-                    android:orientation="vertical">
-
-                </LinearLayout>
-
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -149,48 +150,48 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/border"
             android:gravity="center|top"
-            android:orientation="vertical"
-            android:background="@drawable/border">
+            android:orientation="vertical">
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/tvReported"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp">
+                    android:layout_height="match_parent"
+                    android:gravity="top|center"
+                    android:text="@string/cero"
+                    android:textColor="@color/green"
+                    android:textSize="45sp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvReported"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="0"
-                        android:gravity="top|center"
-                        android:textSize="45dp"
-                        android:textColor="#46A724"
-                        android:textStyle="bold"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="16dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="reportado"
-                        android:textSize="12dp"
-                        android:gravity="center_horizontal"
-                        android:textStyle="bold"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_marginTop="3dp"
-                    android:background="#46A724"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:text="@string/reportado"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
 
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/green"
+                android:orientation="vertical">
+
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -212,19 +213,11 @@
 
         <ExpandableListView
             android:id="@+id/elvProyects"
-            android:layout_marginRight="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:childIndicatorRight="@dimen/activity_vertical_margin">
-
         </ExpandableListView>
-
-
     </RelativeLayout>
-
-
-
-
-
 </LinearLayout>
