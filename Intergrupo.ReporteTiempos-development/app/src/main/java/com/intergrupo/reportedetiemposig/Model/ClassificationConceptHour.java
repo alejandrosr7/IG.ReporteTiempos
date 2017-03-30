@@ -17,21 +17,9 @@ public class ClassificationConceptHour {
     @SerializedName("CodigoMaestroTipoHora")
     @Expose
     private Integer codeMasterTypeHour;
-
-    @SerializedName("CodigoTipoHora")
-    @Expose
-    private Integer codeTypeHour;
-
+    
     public Integer getCodeMasterTypeHour() {
         return codeMasterTypeHour;
-    }
-
-    public void setCodeMasterTypeHour(Integer codeMasterTypeHour) {
-        this.codeMasterTypeHour = codeMasterTypeHour;
-    }
-
-    public Integer getCodeTypeHour() {
-        return codeTypeHour;
     }
 
     public String getName() {
@@ -40,9 +28,5 @@ public class ClassificationConceptHour {
 
     public void setName(String name) {
         Name = name;
-    }
-
-    public void setCodeTypeHour(Integer codeTypeHour) {
-        this.codeTypeHour = codeTypeHour;
     }
 }

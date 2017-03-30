@@ -29,8 +29,6 @@ import retrofit.converter.GsonConverter;
  */
 public class ReporteDeTiemposApiClient {
 
-    private static boolean state = false;
-
     //Url de VPN
     private static final String API_BASE_PATH = "https://reportetiempos.intergrupo.com:444/api/";
 
@@ -44,16 +42,6 @@ public class ReporteDeTiemposApiClient {
 
     public IRestClient getClient() {
         return apiClient;
-    }
-
-    private String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     private Context context;

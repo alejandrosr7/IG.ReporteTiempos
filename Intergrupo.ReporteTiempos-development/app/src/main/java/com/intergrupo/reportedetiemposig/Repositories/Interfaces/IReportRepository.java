@@ -18,10 +18,6 @@ import java.util.List;
  */
 public interface IReportRepository {
 
-    TiemposResponse<List<Manager>> ListProyects();
-
-    TiemposResponse<List<String>> ListActivities();
-
     Boolean Register(ReportTime register);
 
     List<Manager> GetManager();

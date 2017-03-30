@@ -15,40 +15,16 @@ public class TimesForManager {
         return ProyectName;
     }
 
-    public void setProyectName(String proyectName) {
-        ProyectName = proyectName;
-    }
-
-    public String getIdGerent() {
-        return IdManager;
-    }
-
-    public void setIdGerent(String idGerent) {
-        IdManager = idGerent;
-    }
-
     public String getIdCollaboratorName() {
         return IdCollaboratorName;
-    }
-
-    public void setIdCollaboratorName(String idCollaboratorName) {
-        IdCollaboratorName = idCollaboratorName;
     }
 
     public String getIdCollaboratorLast() {
         return IdCollaboratorLast;
     }
 
-    public void setIdCollaboratorLast(String idCollaboratorLast) {
-        IdCollaboratorLast = idCollaboratorLast;
-    }
-
     public Double getRedTime() {
         return RedTime;
-    }
-
-    public void setRedTime(Double redTime) {
-        RedTime = redTime;
     }
 
     public Double getHourActivity() {
@@ -79,13 +55,6 @@ public class TimesForManager {
     @SerializedName("ApellidosColaborador")
     @Expose
     private String IdCollaboratorLast;
-
-    /**
-     * Permite obtener o establecer  el nombre del gerente
-     */
-    @SerializedName("NombreGerente")
-    @Expose
-    private String IdManager;
 
     /**
      * Permite obtener o establecer  las horas de la actividad

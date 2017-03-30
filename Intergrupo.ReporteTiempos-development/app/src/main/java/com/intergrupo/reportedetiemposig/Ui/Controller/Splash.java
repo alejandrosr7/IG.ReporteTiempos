@@ -22,7 +22,6 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.inject(this);
         loadConfigurations();
-
     }
 
     /*Metodo para validar preferencias en el dispositvo para determinar el inicio de sesión del

@@ -21,18 +21,8 @@ import retrofit.RetrofitError;
  * Created by yo on 28/11/15.
  */
 public class ReportRepository implements IReportRepository {
-
-
-    @Override
-    public TiemposResponse<List<Manager>> ListProyects() {
-        return null;
-    }
-
-    @Override
-    public TiemposResponse<List<String>> ListActivities() {
-        return null;
-    }
-
+    
+    
     @Override
     public Boolean Register(ReportTime register) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -43,7 +33,7 @@ public class ReportRepository implements IReportRepository {
             return false;
         }
     }
-
+    
     @Override
     public List<Manager> GetManager() {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -54,7 +44,7 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
+    
     @Override
     public List<ConceptHour> GetConceptHour() {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -65,7 +55,7 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
+    
     @Override
     public List<ClassificationConceptHour> GetClassificationConceptHour(int codeTypeHour) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -76,7 +66,7 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
+    
     @Override
     public List<Proyect> GetProyect(int codeManager) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -87,7 +77,7 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
+    
     @Override
     public List<functionality> Getfunctionality(int codeProyect) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -100,7 +90,7 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
+    
     @Override
     public List<Discipline> GetDiscipline(int codeMaster) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -111,7 +101,7 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
+    
     @Override
     public List<Discipline> getActivityDisciplineStimationForRegister(int codeFuncionality) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -122,8 +112,8 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
-
+    
+    
     @Override
     public List<ActivityDiscipline> getActivity(int codeDiscipline) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -134,7 +124,7 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
+    
     @Override
     public List<ActivityDiscipline> getFuncionalityActivityStimateForRegister(int codeDiscipline,
                                                                               int codeFuncionality) {
@@ -147,8 +137,8 @@ public class ReportRepository implements IReportRepository {
         }
         return null;
     }
-
-
+    
+    
     @Override
     public Boolean EditReport(ReportTime register) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
@@ -159,5 +149,5 @@ public class ReportRepository implements IReportRepository {
             return false;
         }
     }
-
+    
 }

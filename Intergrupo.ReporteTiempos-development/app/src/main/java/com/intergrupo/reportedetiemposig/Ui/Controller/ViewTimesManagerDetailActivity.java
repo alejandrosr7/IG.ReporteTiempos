@@ -27,6 +27,7 @@ import com.intergrupo.reportedetiemposig.Util.Constants;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -95,16 +96,14 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                     listDetail = (ArrayList<ViewTimesManagerDetail>) App.getInstance()
                             .GetTimesManagerDetail(idManager, startDate, finishDate);
                     if (listDetail == null) {
-                        showsublistgerent(false, Constants.MESSAGE_ERROR_GET_TIMES, update);
-
-
+                        showsublistManager(false, Constants.MESSAGE_ERROR_GET_TIMES, update);
                     } else {
 
                         if (listDetail.size() > 0) {
-                            showsublistgerent(true, "", update);
+                            showsublistManager(true, "", update);
                         } else {
                             listDetail = null;
-                            showsublistgerent(false, Constants.MESSAGE_MANAGER_WITHOUT_TIMES,
+                            showsublistManager(false, Constants.MESSAGE_MANAGER_WITHOUT_TIMES,
                                     update);
                         }
                     }
@@ -137,7 +136,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
      * @param error   mensaje para mostrar cuando ha ocurrido un error
      * @param update  boolean que permite actualizar la lista
      */
-    public void showsublistgerent(final Boolean correct, final String error, final Boolean update) {
+    public void showsublistManager(final Boolean correct, final String error, final Boolean update) {
 
         try {
             this.runOnUiThread(new Runnable() {
@@ -161,18 +160,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                                             ArrayList<ViewTimesManagerDetail>());
                             expandableListView.setAdapter(expandableListDetailAdapter);
                         }
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder
-                                (ViewTimesManagerDetailActivity.this);
-                        alertDialogBuilder.setTitle(R.string.advertencia);
-                        alertDialogBuilder.setMessage(error);
-                        alertDialogBuilder.setPositiveButton(R.string.aceptar, new
-                                DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        alertDialogBuilder.show();
+                        displayAlertDialog(error);                        
                     }
                 }
             });
@@ -180,7 +168,22 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    
+    private void displayAlertDialog(String error) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder
+                (ViewTimesManagerDetailActivity.this);
+        alertDialogBuilder.setTitle(R.string.advertencia);
+        alertDialogBuilder.setMessage(error);
+        alertDialogBuilder.setPositiveButton(R.string.aceptar, new
+                DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialogBuilder.show();
+    }
+    
     /**
      * Método que retorna un Calendar con la fechaa que le envían
      *

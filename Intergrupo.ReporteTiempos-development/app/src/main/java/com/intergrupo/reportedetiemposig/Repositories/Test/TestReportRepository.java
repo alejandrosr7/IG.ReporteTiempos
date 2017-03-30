@@ -21,45 +21,8 @@ import java.util.List;
  */
 public class TestReportRepository implements IReportRepository {
 
-
-    @Override
-    public TiemposResponse<List<Manager>> ListProyects() {
-        return null;
-    }
-
-    @Override
-    public TiemposResponse<List<String>> ListActivities() {
-        return null;
-    }
-
     @Override
     public Boolean Register(ReportTime register) {
-      /*  TiemposResponse<Boolean> response = new TiemposResponse<Boolean>();
-        if (register.getProyect() == null || register.getProyect().equals("")) {
-            response.setData(false);
-            return response;
-        }
-        if (register.getActivity() == null || register.getActivity().equals("")) {
-            response.setData(false);
-            return response;
-        }
-        if (register.getDate() == null || register.getDate().equals("")) {
-            response.setData(false);
-            return response;
-        }
-        if (register.getHour() == 0) {
-            response.setData(false);
-            return response;
-        }
-        if (register.getActivityDescription() == null || register.getActivityDescription().equals("")) {
-            response.setData(false);
-            return response;
-        }
-        if (register.getRequirements() == null || register.getRequirements().equals("")) {
-            response.setData(false);
-            return response;
-        }
-        response.setData(true);*/
         return null;
     }
 

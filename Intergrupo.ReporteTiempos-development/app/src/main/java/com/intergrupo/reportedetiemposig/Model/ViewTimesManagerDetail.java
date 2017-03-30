@@ -49,40 +49,20 @@ public class ViewTimesManagerDetail {
         return CollaboratorName;
     }
 
-    public void setCollaboratorName(String collaboratorName) {
-        CollaboratorName = collaboratorName;
-    }
-
     public Double getAdministrativeHour() {
         return AdministrativeHour;
-    }
-
-    public void setAdministrativeHour(Double administrativeHour) {
-        AdministrativeHour = administrativeHour;
     }
 
     public Double getNewnessHour() {
         return newnessHour;
     }
 
-    public void setNewnessHour(Double newnessHour) {
-        this.newnessHour = newnessHour;
-    }
-
     public Double getProductiveHour() {
         return ProductiveHour;
     }
 
-    public void setProductiveHour(Double productiveHour) {
-        ProductiveHour = productiveHour;
-    }
-
     public Double getTotalTime() {
         return TotalTime;
-    }
-
-    public void setTotalTime(Double totalTime) {
-        TotalTime = totalTime;
     }
 
 }

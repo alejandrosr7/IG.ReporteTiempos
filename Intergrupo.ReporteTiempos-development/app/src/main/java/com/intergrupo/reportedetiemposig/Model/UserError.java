@@ -29,15 +29,7 @@ public class UserError {
         return Codigo;
     }
 
-    public void setCodigo(int codigo) {
-        Codigo = codigo;
-    }
-
     public String getTexto() {
         return Texto;
-    }
-
-    public void setTexto(String texto) {
-        Texto = texto;
     }
 }

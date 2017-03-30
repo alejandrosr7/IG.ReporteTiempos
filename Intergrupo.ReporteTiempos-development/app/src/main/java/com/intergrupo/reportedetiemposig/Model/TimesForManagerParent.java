@@ -37,10 +37,6 @@ public class TimesForManagerParent {
         return timesGreen;
     }
 
-    public void setTimesGreen(Double timesGreen) {
-        this.timesGreen = timesGreen;
-    }
-
     public String getProyectM() {
         return proyectM;
     }

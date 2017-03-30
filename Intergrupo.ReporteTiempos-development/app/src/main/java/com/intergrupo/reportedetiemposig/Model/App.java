@@ -15,10 +15,7 @@ public class App {
 
     private static App instance;
     private static RepositoryLocator locator;
-
-    //Contexto de la aplicaciòn para poder ser usada en contenedor
-    private Context ApplicationContext;
-
+    
     private App() {
         locator = RepositoryLocator.getInstance();
     }
@@ -28,15 +25,6 @@ public class App {
         if (instance == null)
             instance = new App();
         return instance;
-    }
-
-
-    public Context getApplicationContext() {
-        return ApplicationContext;
-    }
-
-    public void setApplicationContext(Context applicationContext) {
-        ApplicationContext = applicationContext;
     }
 
     /**
@@ -60,19 +48,7 @@ public class App {
         });
 
     }
-
-
-    public User SingInSincrono(IGLogin igLogin) {
-        return locator.getSecurityRepository().SignInSincrono(igLogin);
-    }
-
-    public TiemposResponse<List<Manager>> ListProyects() {
-        return locator.getReportRepository().ListProyects();
-    }
-
-    public TiemposResponse<List<String>> ListActivities() {
-        return locator.getReportRepository().ListActivities();
-    }
+    
 
     public Boolean Register(ReportTime register) {
         return locator.getReportRepository().Register(register);

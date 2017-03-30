@@ -90,10 +90,6 @@ public class User {
         this.codeuser = codeuser;
     }
 
-    public Integer getCedula() {
-        return cedula;
-    }
-
     public void setCedula(Integer cedula) {
         this.cedula = cedula;
     }
@@ -144,10 +140,6 @@ public class User {
 
     public void setUrlphoto(String urlphoto) {
         this.urlphoto = urlphoto;
-    }
-
-    public String getMail() {
-        return mail;
     }
 
     public void setMail(String mail) {

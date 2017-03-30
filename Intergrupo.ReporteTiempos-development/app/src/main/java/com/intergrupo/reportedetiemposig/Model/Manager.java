@@ -14,14 +14,7 @@ public class Manager {
     @SerializedName("CodigoEmpleado")
     @Expose
     private Integer codeUser;
-
-    /**
-     * Permite obtener o establecer  el documento del empleado
-     */
-    @SerializedName("Documento")
-    @Expose
-    private Integer cedula;
-
+    
     /**
      * Permite obtener o establecer el nombre del empleado
      */
@@ -55,31 +48,11 @@ public class Manager {
         return codeUser;
     }
 
-    public void setCodeUser(Integer codeUser) {
-        this.codeUser = codeUser;
-    }
-
-    public Integer getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(Integer cedula) {
-        this.cedula = cedula;
-    }
-
     public String getFirtNames() {
         return firtNames;
     }
-
-    public void setFirtNames(String firtNames) {
-        this.firtNames = firtNames;
-    }
-
+    
     public String getLastNames() {
         return lastNames;
-    }
-
-    public void setLastNames(String lastNames) {
-        this.lastNames = lastNames;
     }
 }
