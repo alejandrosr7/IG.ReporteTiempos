@@ -85,13 +85,15 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
      * @param finishDate fecha fin para el filtro
      * @param update     boolean para actualizar la lista
      */
-    public void getListDetail(final String idManager, final Date startDate, final Date finishDate, final Boolean update) {
+    public void getListDetail(final String idManager, final Date startDate, final Date
+            finishDate, final Boolean update) {
         showProgressDialog(Constants.POR_FAVOR_ESPERE);
         Thread thread = new Thread() {
             @Override
             public void run() {
                 if (iValidateInternet.isConnected()) {
-                    listDetail = (ArrayList<ViewTimesManagerDetail>) App.getInstance().GetTimesManagerDetail(idManager, startDate, finishDate);
+                    listDetail = (ArrayList<ViewTimesManagerDetail>) App.getInstance()
+                            .GetTimesManagerDetail(idManager, startDate, finishDate);
                     if (listDetail == null) {
                         showsublistgerent(false, Constants.MESSAGE_ERROR_GET_TIMES, update);
 
@@ -102,7 +104,8 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                             showsublistgerent(true, "", update);
                         } else {
                             listDetail = null;
-                            showsublistgerent(false, Constants.MESSAGE_MANAGER_WITHOUT_TIMES, update);
+                            showsublistgerent(false, Constants.MESSAGE_MANAGER_WITHOUT_TIMES,
+                                    update);
                         }
                     }
                 } else {
@@ -110,7 +113,10 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, ViewTimesManagerDetailActivity.this);
+                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R
+                                    .string.apreciado_usuario, R.string
+                                    .por_favor_valide_su_conexion_a_internet,
+                                    ViewTimesManagerDetailActivity.this);
 
                         }
                     });
@@ -140,20 +146,27 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                     progressDialog.cancel();
                     progressDialog.dismiss();
                     if (correct) {
-                        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.elvCollaborator);
-                        expandableListDetailAdapter = new ExpandableListDetailAdapter(ViewTimesManagerDetailActivity.this, listDetail);
+                        ExpandableListView expandableListView = (ExpandableListView) findViewById
+                                (R.id.elvCollaborator);
+                        expandableListDetailAdapter = new ExpandableListDetailAdapter
+                                (ViewTimesManagerDetailActivity.this, listDetail);
                         expandableListView.setAdapter(expandableListDetailAdapter);
 
                     } else {
                         if (update) {
-                            ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.elvCollaborator);
-                            expandableListDetailAdapter = new ExpandableListDetailAdapter(ViewTimesManagerDetailActivity.this, new ArrayList<ViewTimesManagerDetail>());
+                            ExpandableListView expandableListView = (ExpandableListView)
+                                    findViewById(R.id.elvCollaborator);
+                            expandableListDetailAdapter = new ExpandableListDetailAdapter
+                                    (ViewTimesManagerDetailActivity.this, new
+                                            ArrayList<ViewTimesManagerDetail>());
                             expandableListView.setAdapter(expandableListDetailAdapter);
                         }
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimesManagerDetailActivity.this);
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder
+                                (ViewTimesManagerDetailActivity.this);
                         alertDialogBuilder.setTitle(R.string.advertencia);
                         alertDialogBuilder.setMessage(error);
-                        alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                        alertDialogBuilder.setPositiveButton(R.string.aceptar, new
+                                DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -235,7 +248,8 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
         DatePickerDialog dpd = DatePickerDialog.newInstance(
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int
+                            dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
                         Date startDate = new Date(year - 1900, monthOfYear, dayOfMonth);
                         Date finishDate = new Date(yearEnd - 1900, monthOfYearEnd, dayOfMonthEnd);
                         getListDetail(usercode, startDate, finishDate, true);
@@ -288,7 +302,8 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
         }
 
         // LISTENER PARA LA APERTURA Y CIERRE DEL WIDGET
-        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat
+                .OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 return false;

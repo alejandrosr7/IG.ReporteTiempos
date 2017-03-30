@@ -18,30 +18,31 @@ public class ViewTimesManagerRepository implements IViewTimesMRepository {
     /**
      * Método que consume el serviico para obtener la
      * lista de los proyectos asociados al gerente
-     * @param idManagerCode  código unico del gerente
-     * @param startDate fecha de inicio para el filtro
-     * @param finishDate fecha fin para el filtro
+     *
+     * @param idManagerCode código unico del gerente
+     * @param startDate     fecha de inicio para el filtro
+     * @param finishDate    fecha fin para el filtro
      * @return resumTimesForManager lista de los proyectos
      * asociados al gerente
      */
     @Override
-    public List<TimesForManager> GetTimesForManager(String idManagerCode, Date startDate, Date finishDate) {
+    public List<TimesForManager> GetTimesForManager(String idManagerCode, Date startDate, Date
+            finishDate) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         List<TimesForManager> resumTimesForManager = new ArrayList<>();
         try {
-            if(idManagerCode != null){
+            if (idManagerCode != null) {
                 DateFormat df = new SimpleDateFormat(Constants.YYYY_MM_DD);
                 String startDate1 = df.format(startDate);
                 String finishDate1 = df.format(finishDate);
-                resumTimesForManager = client.GetTimesForManager(idManagerCode, startDate1, finishDate1);
+                resumTimesForManager = client.GetTimesForManager(idManagerCode, startDate1,
+                        finishDate1);
                 return resumTimesForManager;
             } else {
                 return resumTimesForManager;
             }
-
-        } catch (Exception error ) {
+        } catch (Exception error) {
             error.printStackTrace();
-
         }
         return resumTimesForManager;
     }

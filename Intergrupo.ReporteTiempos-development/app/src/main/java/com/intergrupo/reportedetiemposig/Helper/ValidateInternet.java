@@ -19,12 +19,15 @@ public class ValidateInternet implements IValidateInternet {
     /**
      * Método que valida la conexión
      * a internet
+     *
      * @return networkInfo
      */
     @Override
     public boolean isConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService
+                (Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo.isAvailable() && networkInfo.isConnected();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting() && networkInfo
+                .isAvailable() && networkInfo.isConnected();
     }
 }

@@ -28,19 +28,24 @@ public class ExpandableListAdapterM extends BaseExpandableListAdapter {
     private HashMap<String, ArrayList<TimesForManager>> expandableListDetailOriginal;
     private HashMap<String, ArrayList<TimesForManager>> expandableListDetailCopy;
 
-    public ExpandableListAdapterM(Context context, ArrayList<TimesForManagerParent> expandableListTitleOriginal, HashMap<String, ArrayList<TimesForManager>> expandableListDetailOriginal) {
+    public ExpandableListAdapterM(Context context, ArrayList<TimesForManagerParent>
+            expandableListTitleOriginal, HashMap<String, ArrayList<TimesForManager>>
+            expandableListDetailOriginal) {
 
         this.context = context;
         this.expandableListTitleOriginal = expandableListTitleOriginal;
         this.expandableListDetailOriginal = expandableListDetailOriginal;
-        this.expandableListDetailCopy = (HashMap<String, ArrayList<TimesForManager>>) this.expandableListDetailOriginal.clone();
-        this.expandableListTitleCopy = (ArrayList<TimesForManagerParent>) expandableListTitleOriginal.clone();
+        this.expandableListDetailCopy = (HashMap<String, ArrayList<TimesForManager>>) this
+                .expandableListDetailOriginal.clone();
+        this.expandableListTitleCopy = (ArrayList<TimesForManagerParent>)
+                expandableListTitleOriginal.clone();
 
     }
 
     @Override
     public Object getChild(int listPosition, int expandedListPosition) {
-        return this.expandableListDetailCopy.get(this.expandableListTitleCopy.get(listPosition).getProyectM()).get(expandedListPosition);
+        return this.expandableListDetailCopy.get(this.expandableListTitleCopy.get(listPosition)
+                .getProyectM()).get(expandedListPosition);
 
     }
 
@@ -53,22 +58,26 @@ public class ExpandableListAdapterM extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int listPosition, int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        final TimesForManager timesForManager = (TimesForManager) getChild(listPosition, expandedListPosition);
+        final TimesForManager timesForManager = (TimesForManager) getChild(listPosition,
+                expandedListPosition);
         if (convertView == null) {
-            LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService
+                    (Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.list_itemg, null);
         }
         TextView expandedListTextView = (TextView) convertView
                 .findViewById(R.id.expandedListItemg);
         TextView numbergreen = (TextView) convertView.findViewById(R.id.tvgreen);
         numbergreen.setText(timesForManager.getHourActivity().toString());
-        expandedListTextView.setText(timesForManager.getIdCollaboratorName() + " " + timesForManager.getIdCollaboratorLast());
+        expandedListTextView.setText(timesForManager.getIdCollaboratorName() + " " +
+                timesForManager.getIdCollaboratorLast());
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int listPosition) {
-        return this.expandableListDetailCopy.get(this.expandableListTitleCopy.get(listPosition).getProyectM())
+        return this.expandableListDetailCopy.get(this.expandableListTitleCopy.get(listPosition)
+                .getProyectM())
                 .size();
     }
 
@@ -121,19 +130,22 @@ public class ExpandableListAdapterM extends BaseExpandableListAdapter {
 
         query = query.toLowerCase();
 
-          this.expandableListTitleCopy.clear();
-          this.expandableListDetailCopy.clear();
+        this.expandableListTitleCopy.clear();
+        this.expandableListDetailCopy.clear();
 
 
         if (query.isEmpty()) {
 
-            this.expandableListTitleCopy = (ArrayList<TimesForManagerParent>) expandableListTitleOriginal.clone();
-            this.expandableListDetailCopy = (HashMap<String, ArrayList<TimesForManager>>) this.expandableListDetailOriginal.clone();
+            this.expandableListTitleCopy = (ArrayList<TimesForManagerParent>)
+                    expandableListTitleOriginal.clone();
+            this.expandableListDetailCopy = (HashMap<String, ArrayList<TimesForManager>>) this
+                    .expandableListDetailOriginal.clone();
         } else {
 
             for (TimesForManagerParent parent : this.expandableListTitleOriginal) {
                 ArrayList<TimesForManager> newList = new ArrayList<>();
-                ArrayList<TimesForManager> alllist = this.expandableListDetailOriginal.get(parent.getProyectM());
+                ArrayList<TimesForManager> alllist = this.expandableListDetailOriginal.get(parent
+                        .getProyectM());
 
                 for (TimesForManager activity : alllist) {
                     if (activity.getProyectName().toLowerCase().contains(query) ||
@@ -146,7 +158,7 @@ public class ExpandableListAdapterM extends BaseExpandableListAdapter {
 
                 }
                 expandableListDetailCopy.put(parent.getProyectM(), newList);
-                if(newList.size() > 0) {
+                if (newList.size() > 0) {
                     expandableListTitleCopy.add(parent);
 
                 }
@@ -155,6 +167,5 @@ public class ExpandableListAdapterM extends BaseExpandableListAdapter {
         }
 
         notifyDataSetChanged();
-
     }
 }

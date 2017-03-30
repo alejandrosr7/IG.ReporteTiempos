@@ -25,7 +25,8 @@ public class Splash extends AppCompatActivity {
 
     }
 
-    /*Metodo para validar preferencias en el dispositvo para determinar el inicio de sesión del usuario*/
+    /*Metodo para validar preferencias en el dispositvo para determinar el inicio de sesión del
+    usuario*/
     public void loadConfigurations() {
         SecurePreferences settings = new SecurePreferences(this);
         String firstTime = settings.getString(Constants.REMEMBER_ACCESS);
@@ -51,7 +52,7 @@ public class Splash extends AppCompatActivity {
 
     /*Esta opción se presenta si el usuario no recordó datos de ingresos,
       así que ingresará nuevamente al menú*/
-    private void goToLogin(){
+    private void goToLogin() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

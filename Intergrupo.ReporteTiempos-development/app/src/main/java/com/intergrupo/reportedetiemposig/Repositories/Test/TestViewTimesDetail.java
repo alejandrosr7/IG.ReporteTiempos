@@ -11,7 +11,8 @@ import java.util.List;
  */
 public class TestViewTimesDetail implements IViewTimesManagerDetail {
     @Override
-    public List<ViewTimesManagerDetail> GetTimesManagerDetail(String idGerentCode, Date fechaInicio, Date fechaFin) {
+    public List<ViewTimesManagerDetail> GetTimesManagerDetail(String idGerentCode, Date
+            fechaInicio, Date fechaFin) {
         return null;
     }
 }

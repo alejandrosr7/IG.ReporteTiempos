@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface IViewTimesMRepository {
 
-    List<TimesForManager> GetTimesForManager (String idGerentCode, Date fechaInicio, Date fechaFin);
+    List<TimesForManager> GetTimesForManager(String idGerentCode, Date fechaInicio, Date fechaFin);
 }

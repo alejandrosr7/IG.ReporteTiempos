@@ -10,6 +10,7 @@ import java.util.List;
  * Created by USUARIO on 13/08/2016.
  */
 public interface IViewTimesManagerDetail {
-    List<ViewTimesManagerDetail> GetTimesManagerDetail (String idGerentCode, Date fechaInicio, Date fechaFin);
+    List<ViewTimesManagerDetail> GetTimesManagerDetail(String idGerentCode, Date fechaInicio,
+                                                       Date fechaFin);
 
 }

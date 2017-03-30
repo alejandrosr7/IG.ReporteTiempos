@@ -73,7 +73,8 @@ public class ViewTimesManager extends AppCompatActivity {
         expandableListView = (ExpandableListView) findViewById(R.id.elvProyectg);
         expandableListDetail = new HashMap<>();
         expandableListTitle = new ArrayList<>();
-        expandableListAdapter = new ExpandableListAdapterM(this, expandableListTitle, expandableListDetail);
+        expandableListAdapter = new ExpandableListAdapterM(this, expandableListTitle,
+                expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
         ButterKnife.inject(this);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -104,13 +105,15 @@ public class ViewTimesManager extends AppCompatActivity {
      * @param finishDate fecha fin para el filtro
      * @param update     boolean para actualizar la lista
      */
-    public void getlistManager(final String idManager, final Date startDate, final Date finishDate, final Boolean update) {
+    public void getlistManager(final String idManager, final Date startDate, final Date
+            finishDate, final Boolean update) {
         showProgressDialog(Constants.POR_FAVOR_ESPERE);
         Thread thread = new Thread() {
             @Override
             public void run() {
                 if (iValidateInternet.isConnected()) {
-                    listTimesGerent = (ArrayList<TimesForManager>) App.getInstance().GetTimesForManager(idManager, startDate, finishDate);
+                    listTimesGerent = (ArrayList<TimesForManager>) App.getInstance()
+                            .GetTimesForManager(idManager, startDate, finishDate);
 
                     if (listTimesGerent == null) {
                         showSublistManager(false, Constants.MESSAGE_ERROR_GET_TIMES, update);
@@ -125,30 +128,42 @@ public class ViewTimesManager extends AppCompatActivity {
                             for (TimesForManager collaborator : listTimesGerent) {
                                 if (proyectGMap.containsKey(collaborator.getProyectName())) {
 
-                                    TimesForManagerParent tfgp = proyectGMap.get(collaborator.getProyectName());
+                                    TimesForManagerParent tfgp = proyectGMap.get(collaborator
+                                            .getProyectName());
 
                                     tfgp.addTimesGreen(collaborator.getHourActivity());
 
 
                                 } else {
 
-                                    TimesForManagerParent timesForManagerParent = new TimesForManagerParent();
-                                    timesForManagerParent.setProyectM(collaborator.getProyectName());
+                                    TimesForManagerParent timesForManagerParent = new
+                                            TimesForManagerParent();
+                                    timesForManagerParent.setProyectM(collaborator.getProyectName
+                                            ());
                                     timesForManagerParent.setTimesRed(collaborator.getRedTime());
-                                    timesForManagerParent.addTimesGreen(collaborator.getHourActivity());
-                                    proyectGMap.put(collaborator.getProyectName(), timesForManagerParent);
+                                    timesForManagerParent.addTimesGreen(collaborator
+                                            .getHourActivity());
+                                    proyectGMap.put(collaborator.getProyectName(),
+                                            timesForManagerParent);
 
                                 }
 
                                 if (list.containsKey(collaborator.getProyectName())) {
 
-                                    List<TimesForManager> list1 = list.get(collaborator.getProyectName());
+                                    List<TimesForManager> list1 = list.get(collaborator
+                                            .getProyectName());
                                     boolean found = false;
                                     for (TimesForManager collaboratoritem : list1) {
-                                        String collaboratorname = collaboratoritem.getIdCollaboratorName() + "" + collaboratoritem.getIdCollaboratorLast();
-                                        String collaboratorcopy = collaborator.getIdCollaboratorName() + "" + collaborator.getIdCollaboratorLast();
+                                        String collaboratorname = collaboratoritem
+                                                .getIdCollaboratorName() + "" + collaboratoritem
+                                                .getIdCollaboratorLast();
+                                        String collaboratorcopy = collaborator
+                                                .getIdCollaboratorName() + "" + collaborator
+                                                .getIdCollaboratorLast();
                                         if (collaboratorname.equals(collaboratorcopy)) {
-                                            collaboratoritem.setHourActivity(collaboratoritem.getHourActivity() + collaborator.getHourActivity());
+                                            collaboratoritem.setHourActivity(collaboratoritem
+                                                    .getHourActivity() + collaborator
+                                                    .getHourActivity());
                                             found = true;
                                             break;
                                         }
@@ -174,7 +189,8 @@ public class ViewTimesManager extends AppCompatActivity {
 
                         } else {
                             listTimesGerent = null;
-                            showSublistManager(false, Constants.MESSAGE_MANAGER_WITHOUT_TIMES, update);
+                            showSublistManager(false, Constants.MESSAGE_MANAGER_WITHOUT_TIMES,
+                                    update);
                         }
                     }
 
@@ -183,7 +199,10 @@ public class ViewTimesManager extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, ViewTimesManager.this);
+                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R
+                                    .string.apreciado_usuario, R.string
+                                    .por_favor_valide_su_conexion_a_internet, ViewTimesManager
+                                    .this);
 
                         }
                     });
@@ -204,7 +223,8 @@ public class ViewTimesManager extends AppCompatActivity {
      * @param error   mensaje para mostrar cuando ha ocurrido un error
      * @param update  boolean que permite actualizar la lista
      */
-    public void showSublistManager(final Boolean correct, final String error, final Boolean update) {
+    public void showSublistManager(final Boolean correct, final String error, final Boolean
+            update) {
 
         try {
             this.runOnUiThread(new Runnable() {
@@ -214,25 +234,32 @@ public class ViewTimesManager extends AppCompatActivity {
                     progressDialog.cancel();
                     progressDialog.dismiss();
                     if (correct) {
-                        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.elvProyectg);
-                        expandableListAdapterM = new ExpandableListAdapterM(ViewTimesManager.this, expandableListTitle, expandableListDetail);
+                        ExpandableListView expandableListView = (ExpandableListView) findViewById
+                                (R.id.elvProyectg);
+                        expandableListAdapterM = new ExpandableListAdapterM(ViewTimesManager
+                                .this, expandableListTitle, expandableListDetail);
                         expandableListView.setAdapter(expandableListAdapterM);
 
                     } else {
                         if (update) {
-                            ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.elvProyectg);
-                            expandableListAdapterM = new ExpandableListAdapterM(ViewTimesManager.this, new ArrayList<TimesForManagerParent>(), new HashMap<String, ArrayList<TimesForManager>>());
+                            ExpandableListView expandableListView = (ExpandableListView)
+                                    findViewById(R.id.elvProyectg);
+                            expandableListAdapterM = new ExpandableListAdapterM(ViewTimesManager
+                                    .this, new ArrayList<TimesForManagerParent>(), new
+                                    HashMap<String, ArrayList<TimesForManager>>());
                             expandableListView.setAdapter(expandableListAdapterM);
                         }
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimesManager.this);
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder
+                                (ViewTimesManager.this);
                         alertDialogBuilder.setTitle(R.string.advertencia);
                         alertDialogBuilder.setMessage(error);
-                        alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
+                        alertDialogBuilder.setPositiveButton(R.string.aceptar, new
+                                DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
                         alertDialogBuilder.show();
                     }
                 }
@@ -311,7 +338,8 @@ public class ViewTimesManager extends AppCompatActivity {
         DatePickerDialog dpd = DatePickerDialog.newInstance(
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int
+                            dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
                         Date startDate = new Date(year - 1900, monthOfYear, dayOfMonth);
                         Date finishDate = new Date(yearEnd - 1900, monthOfYearEnd, dayOfMonthEnd);
                         getlistManager(usercode, startDate, finishDate, true);
@@ -363,7 +391,8 @@ public class ViewTimesManager extends AppCompatActivity {
         }
 
         // LISTENER PARA LA APERTURA Y CIERRE DEL WIDGET
-        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat
+                .OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 return false;

@@ -13,7 +13,9 @@ import java.util.Objects;
 public interface IViewTimesRepository {
 
     List<ViewTimesModel> GetListTimesForCollaborator(String codeUser);
+
     List<ResumTimesForCollaborator> GetResumTimesForCollaborator(String codeUser);
+
     Boolean DeleteTime(Object codigos);
 
 

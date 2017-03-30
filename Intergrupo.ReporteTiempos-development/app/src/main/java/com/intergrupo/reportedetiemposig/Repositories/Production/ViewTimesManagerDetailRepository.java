@@ -20,28 +20,31 @@ public class ViewTimesManagerDetailRepository implements IViewTimesManagerDetail
      * Método que consume el servicio para obtener
      * la lista de los colaboradores
      * y las horas según el tipo de hora
-     * @param idManagerCode  código unico del gerente
-     * @param startDate fecha de inicio para el filtro
-     * @param finishDate fecha fin para el filtro
+     *
+     * @param idManagerCode código unico del gerente
+     * @param startDate     fecha de inicio para el filtro
+     * @param finishDate    fecha fin para el filtro
      * @return timesManagerDetails lista de los colaboradores
      * y las horas según el tipo de hora
      */
     @Override
-    public List<ViewTimesManagerDetail> GetTimesManagerDetail(String idManagerCode, Date startDate, Date finishDate) {
+    public List<ViewTimesManagerDetail> GetTimesManagerDetail(String idManagerCode, Date
+            startDate, Date finishDate) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         List<ViewTimesManagerDetail> timesManagerDetails = new ArrayList<>();
         try {
-            if(idManagerCode != null){
+            if (idManagerCode != null) {
                 DateFormat df = new SimpleDateFormat(Constants.YYYY_MM_DD);
                 String startDate1 = df.format(startDate);
                 String finishDate1 = df.format(finishDate);
-                timesManagerDetails = client.GetTimesManagerDetail(idManagerCode, startDate1, finishDate1);
+                timesManagerDetails = client.GetTimesManagerDetail(idManagerCode, startDate1,
+                        finishDate1);
                 return timesManagerDetails;
             } else {
                 return timesManagerDetails;
             }
 
-        } catch (Exception error ) {
+        } catch (Exception error) {
             error.printStackTrace();
 
         }

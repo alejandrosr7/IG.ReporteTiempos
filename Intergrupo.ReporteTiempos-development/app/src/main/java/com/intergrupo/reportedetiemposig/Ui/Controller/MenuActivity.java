@@ -111,7 +111,9 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, MenuActivity.this);
+            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                    .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
+                    MenuActivity.this);
 
         }
 
@@ -134,7 +136,9 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, MenuActivity.this);
+            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                    .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
+                    MenuActivity.this);
         }
 
     }

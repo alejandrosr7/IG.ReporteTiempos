@@ -93,7 +93,6 @@ public class register extends AppCompatActivity {
     CheckBox checkBoxActivity;
 
 
-
     ProgressDialog progressDialog;
     List<Manager> ManagerList;
     List<ConceptHour> ConceptHourList;
@@ -115,20 +114,21 @@ public class register extends AppCompatActivity {
     Boolean checkbox = false;
 //    Boolean showManagerPopUp = true;
 
-    //Elementos para validar el maximo de horas reportados en una semana, esto luego se eliminara o se mejorara.
+    //Elementos para validar el maximo de horas reportados en una semana, esto luego se eliminara
+    // o se mejorara.
     List<ResumTimesForCollaborator> listResumTimesCollaborator = new ArrayList<>();
 
-    Integer currentWeek = null ;
-    Integer currentMonth = null ;
-    HashMap<Integer,Double> totalWeek = new HashMap<>() ;
-    HashMap<Integer,Double> totalMonth = new HashMap<>() ;
+    Integer currentWeek = null;
+    Integer currentMonth = null;
+    HashMap<Integer, Double> totalWeek = new HashMap<>();
+    HashMap<Integer, Double> totalMonth = new HashMap<>();
 
 
     /**
-    * Método encargado de inicializar variables y de
-    * añadir propiedades a las mismas una vez es iniciada
-    * actividad por primera vez.
-    */
+     * Método encargado de inicializar variables y de
+     * añadir propiedades a las mismas una vez es iniciada
+     * actividad por primera vez.
+     */
     public void onStart() {
         super.onStart();
         editManager.setFocusable(false);
@@ -163,14 +163,16 @@ public class register extends AppCompatActivity {
                 final EditText input = new EditText(register.this);
                 input.setText(edDescrptionActivity.getText());
                 alertDialogBuilder.setView(input);
-                alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface
+                        .OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         edDescrptionActivity.setText(input.getText());
                     }
                 });
 
-                alertDialogBuilder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton(R.string.cancelar, new DialogInterface
+                        .OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // Canceled.
                     }
@@ -198,23 +200,27 @@ public class register extends AppCompatActivity {
     
     
     /**
-    * Método encargado de establecer informacion en los campos
-    * del formulario ya sea por que se editara un reporte o por que
-    * se mostrara la información del ultimo reporte
-    */
-    @Override protected void onResume() {
+     * Método encargado de establecer informacion en los campos
+     * del formulario ya sea por que se editara un reporte o por que
+     * se mostrara la información del ultimo reporte
+     */
+    @Override
+    protected void onResume() {
         super.onResume();
         try {
-            viewTimesEdit = getIntent().getExtras() != null ? (ViewTimesModel) getIntent().getExtras().getParcelable(Constants.TIMES) : null;
-            if(viewTimesEdit != null && viewTimesEdit.getCodigoActividad()!= null){
-                if(validateInternet.isConnected()){
+            viewTimesEdit = getIntent().getExtras() != null ? (ViewTimesModel) getIntent()
+                    .getExtras().getParcelable(Constants.TIMES) : null;
+            if (viewTimesEdit != null && viewTimesEdit.getCodigoActividad() != null) {
+                if (validateInternet.isConnected()) {
                     CodigoActividad = viewTimesEdit.getCodigoActividad();
-                    editManager.setText((viewTimesEdit.getNombreGerente()+" "+viewTimesEdit.getApellidosGerente()).toUpperCase());
+                    editManager.setText((viewTimesEdit.getNombreGerente() + " " + viewTimesEdit
+                            .getApellidosGerente()).toUpperCase());
                     editConceptoHour.setText(viewTimesEdit.getNombreTipoHora());
                     editClassificationConceptHour.setText(viewTimesEdit.getNombreMaestroTipoHora());
                     editProyect.setText(viewTimesEdit.getNombreProyecto());
                     editfunctionality.setText(viewTimesEdit.getNombreFuncionalidad());
-                    editDiscipline.setText(viewTimesEdit.getNombreMaestroProceso()+" - "+viewTimesEdit.getNombreDisciplina());
+                    editDiscipline.setText(viewTimesEdit.getNombreMaestroProceso() + " - " +
+                            viewTimesEdit.getNombreDisciplina());
                     editActivity.setText(viewTimesEdit.getNombreMaestroActividad());
                     checkBoxActivity.setChecked(viewTimesEdit.getActividadCompletada());
                     edDescrptionActivity.setText(viewTimesEdit.getDescripcion());
@@ -226,9 +232,9 @@ public class register extends AppCompatActivity {
                     edit = true;
                     isUpdate = true;
                     showPopup = false;
-                    if(!editConceptoHour.getText().toString().equals(Constants.ADMINISTRATIVA)) {
+                    if (!editConceptoHour.getText().toString().equals(Constants.ADMINISTRATIVA)) {
                         GetManager();
-                    }else{
+                    } else {
                         editDiscipline.setText(R.string.administrativo);
                         editActivity.setText(R.string.administrativo);
                         editManager.setText(R.string.todos_los_gerentes);
@@ -236,10 +242,13 @@ public class register extends AppCompatActivity {
                         checkBoxActivity.setEnabled(false);
                     }
                     GetConceptHour();
-                }else{
-                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+                } else {
+                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                    .apreciado_usuario, R.string
+                            .por_favor_valide_su_conexion_a_internet,
+                            register.this);
                 }
-            }else{
+            } else {
                 FileInputStream lastReport = openFileInput(Constants.LAST_REPORT_TXT);
                 InputStreamReader isr = new InputStreamReader(lastReport);
 
@@ -247,7 +256,7 @@ public class register extends AppCompatActivity {
                 String s = "";
 
                 int charRead;
-                while((charRead = isr.read(inputBuffer)) > 0){
+                while ((charRead = isr.read(inputBuffer)) > 0) {
                     // Convertimos los char a String
                     String readString = String.copyValueOf(inputBuffer, 0, charRead);
                     s += readString;
@@ -256,22 +265,28 @@ public class register extends AppCompatActivity {
                 }
                 JSONObject reportJson = new JSONObject(s);
 
-                if(reportJson  != null && !reportJson.equals("") ){
-                    if(validateInternet.isConnected()){
-                        if(reportJson.get(Constants.CODIGO_USUARIO).toString().equals(codigoUsuario)){
+                if (reportJson != null && !reportJson.equals("")) {
+                    if (validateInternet.isConnected()) {
+                        if (reportJson.get(Constants.CODIGO_USUARIO).toString().equals
+                                (codigoUsuario)) {
                             editManager.setText(reportJson.get(Constants.MANAGER).toString());
-                            editConceptoHour.setText(reportJson.get(Constants.CONCEPT_HOUR).toString());
-                            editClassificationConceptHour.setText(reportJson.get(Constants.CLASSIFICATION_CONCEPT_HOUR).toString());
+                            editConceptoHour.setText(reportJson.get(Constants.CONCEPT_HOUR)
+                                    .toString());
+                            editClassificationConceptHour.setText(reportJson.get(Constants
+                                    .CLASSIFICATION_CONCEPT_HOUR).toString());
                             editProyect.setText(reportJson.get(Constants.PROYECT).toString());
-                            editfunctionality.setText(reportJson.get(Constants.FUNCTIONALITY).toString());
+                            editfunctionality.setText(reportJson.get(Constants.FUNCTIONALITY)
+                                    .toString());
                             editDiscipline.setText(reportJson.get(Constants.DISCIPLINE).toString());
-                            edDescrptionActivity.setText(reportJson.get(Constants.DESCRIPTION).toString());
+                            edDescrptionActivity.setText(reportJson.get(Constants.DESCRIPTION)
+                                    .toString());
                             showPopup = false;
                             isUpdate = true;
                             isr.close();
-                            if(!editConceptoHour.getText().toString().equals(Constants.ADMINISTRATIVA)) {
+                            if (!editConceptoHour.getText().toString().equals(Constants
+                                    .ADMINISTRATIVA)) {
                                 GetManager();
-                            }else{
+                            } else {
                                 editDiscipline.setText(R.string.administrativo);
                                 editActivity.setText(R.string.administrativo);
                                 editManager.setText(R.string.todos_los_gerentes);
@@ -280,13 +295,15 @@ public class register extends AppCompatActivity {
                             }
                             GetConceptHour();
                         }
-                    }else{
-                        ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+                    } else {
+                        ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                .apreciado_usuario, R.string
+                                .por_favor_valide_su_conexion_a_internet, register.this);
                     }
                 }
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -318,17 +335,17 @@ public class register extends AppCompatActivity {
 
 
     /**
-    * Método que obtiene la lista de clasificaciones de los conceptos de hora
-    * segun el concepto de hora seleccionado
-    */
+     * Método que obtiene la lista de clasificaciones de los conceptos de hora
+     * segun el concepto de hora seleccionado
+     */
     @OnClick(R.id.register_edClassificationConceptHour)
     public void GetClassificationConceptHour() {
-        if(showPopup)
-        progressDialog.show();
+        if (showPopup)
+            progressDialog.show();
         int code = 0;
         final int codeTypeHour;
         String conceptHour = editConceptoHour.getText().toString();
-        if(ConceptHourList != null){
+        if (ConceptHourList != null) {
             for (Integer i = 0; i < ConceptHourList.size(); i++) {
                 if (ConceptHourList.get(i).getName().equals(conceptHour)) {
                     code = ConceptHourList.get(i).getCodeTypeHour();
@@ -337,19 +354,23 @@ public class register extends AppCompatActivity {
         }
 
         try {
-            if(validateInternet.isConnected()){
+            if (validateInternet.isConnected()) {
                 codeTypeHour = code;
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        ClassificationConceptHourList = App.getInstance().GetClassificationConceptHour(codeTypeHour);
+                        ClassificationConceptHourList = App.getInstance()
+                                .GetClassificationConceptHour(codeTypeHour);
                         SetClassificationConceptHour();
                         return;
                     }
                 };
                 thread.start();
-            }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+            } else {
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                .apreciado_usuario, R.string
+                        .por_favor_valide_su_conexion_a_internet,
+                        register.this);
                 progressDialog.dismiss();
             }
 
@@ -360,31 +381,33 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que es llamado por "GetClassificationConceptHour" y este se encarga
-    * de establecer la lista de clasificaciones de concepto de hora a la
-    * ventana emergente donde se mostraran, para seleccionar de esta la clasificacion
-    * deseada la cual se establece en el campo
-    */
+     * Método que es llamado por "GetClassificationConceptHour" y este se encarga
+     * de establecer la lista de clasificaciones de concepto de hora a la
+     * ventana emergente donde se mostraran, para seleccionar de esta la clasificacion
+     * deseada la cual se establece en el campo
+     */
     private void SetClassificationConceptHour() {
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                if(showPopup)
-                    progressDialog.dismiss();
+                    if (showPopup)
+                        progressDialog.dismiss();
 
-                    if(ClassificationConceptHourList != null && ClassificationConceptHourList.size() >0){
+                    if (ClassificationConceptHourList != null && ClassificationConceptHourList
+                            .size() > 0) {
                         final String[] proy = new String[ClassificationConceptHourList.size()];
 
                         for (Integer i = 0; i < ClassificationConceptHourList.size(); i++) {
                             proy[i] = ClassificationConceptHourList.get(i).getName();
                         }
-                        if(!showPopup){
-                           // if(isUpdate)
-                               // GetDiscipline();
-                        }else{
+                        if (!showPopup) {
+                            // if(isUpdate)
+                            // GetDiscipline();
+                        } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
-                            builder.setTitle(Constants.REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR);
+                            builder.setTitle(Constants
+                                    .REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR);
                             builder.setItems(proy, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -394,8 +417,9 @@ public class register extends AppCompatActivity {
                             builder.show();
                         }
 
-                    }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR, Constants.MESSAGE_NO_FOUND_CLASIFICATION_CONCEPT_HOURS);
+                    } else {
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR,
+                                Constants.MESSAGE_NO_FOUND_CLASIFICATION_CONCEPT_HOURS);
                     }
 
 
@@ -407,9 +431,9 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que obtiene la lista de proyectos
-    * segun el gerente seleccionado.
-    */
+     * Método que obtiene la lista de proyectos
+     * segun el gerente seleccionado.
+     */
     @OnClick(R.id.register_edProyect)
     public void GetProyect() {
         progressDialog.show();
@@ -418,7 +442,7 @@ public class register extends AppCompatActivity {
         int code = GetManagerCode(nametoCompare);
 
         try {
-            if(validateInternet.isConnected()){
+            if (validateInternet.isConnected()) {
                 codeManager = code;
                 Thread thread = new Thread() {
                     @Override
@@ -430,8 +454,11 @@ public class register extends AppCompatActivity {
                     }
                 };
                 thread.start();
-            }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+            } else {
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                .apreciado_usuario, R.string
+                        .por_favor_valide_su_conexion_a_internet,
+                        register.this);
                 progressDialog.dismiss();
             }
 
@@ -442,54 +469,60 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que se encarga de establecer la lista de
-    * proyectos a la ventana emergente donde se mostraran,
-    * para seleccionar de esta el proyecto deseado el cual
-    * se establece en el campo
-    */
+     * Método que se encarga de establecer la lista de
+     * proyectos a la ventana emergente donde se mostraran,
+     * para seleccionar de esta el proyecto deseado el cual
+     * se establece en el campo
+     */
     private void SetProyect() {
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(showPopup)
+                    if (showPopup)
                         progressDialog.dismiss();
-                    if(ProyectList != null && ProyectList.size() > 0){
-                        final ArrayList<String> proy  = new ArrayList<String>();
+                    if (ProyectList != null && ProyectList.size() > 0) {
+                        final ArrayList<String> proy = new ArrayList<String>();
 
                         for (Integer i = 0; i < ProyectList.size(); i++) {
                             proy.add(ProyectList.get(i).getNombre());
                         }
-                        if(!showPopup){
-                            if(isAdministrative){
-                                if(ProyectList != null && ProyectList.size()>0){
+                        if (!showPopup) {
+                            if (isAdministrative) {
+                                if (ProyectList != null && ProyectList.size() > 0) {
                                     editProyect.setText(ProyectList.get(0).getNombre());
                                 }
                                 //GetDiscipline();
                             }
-                           // if(isUpdate){
-                                Getfunctionality();
+                            // if(isUpdate){
+                            Getfunctionality();
                             //}
 
-                        }else{
-                            if(!isAdministrative && ProyectList.get(0).getNombre().equals(Constants.ADMINISTRATIVO)){
-                                showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants.MESSAGE_NO_FOUND_PROYECTS);
-                            }else{
-                                DialogSearch dialogSearch = new DialogSearch(register.this, proy, Constants.REGISTER_TITLE_DIALOG_PROYECT, "", new DialogSearch.IDialogSelection() {
-                                    @Override
-                                    public void onResult(ArrayList<String> itemsCopy, int position) {
-                                        editProyect.setText(itemsCopy.get(position));
-                                        editfunctionality.setText("");
-                                        editDiscipline.setText("");
-                                        editActivity.setText("");
-                                    }
-                                });
+                        } else {
+                            if (!isAdministrative && ProyectList.get(0).getNombre().equals
+                                    (Constants.ADMINISTRATIVO)) {
+                                showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants
+                                        .MESSAGE_NO_FOUND_PROYECTS);
+                            } else {
+                                DialogSearch dialogSearch = new DialogSearch(register.this, proy,
+                                        Constants.REGISTER_TITLE_DIALOG_PROYECT, "", new
+                                        DialogSearch.IDialogSelection() {
+                                            @Override
+                                            public void onResult(ArrayList<String> itemsCopy, int
+                                                    position) {
+                                                editProyect.setText(itemsCopy.get(position));
+                                                editfunctionality.setText("");
+                                                editDiscipline.setText("");
+                                                editActivity.setText("");
+                                            }
+                                        });
                                 dialogSearch.show();
 
                             }
                         }
-                    }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants.MESSAGE_NO_FOUND_PROYECTS);
+                    } else {
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_PROYECT, Constants
+                                .MESSAGE_NO_FOUND_PROYECTS);
                     }
                 }
             });
@@ -498,21 +531,21 @@ public class register extends AppCompatActivity {
         }
     }
 
-     /**
-    * Método que obtiene la lista de funcionalidades
-    * segun el proyecto seleccionado.
-    */
+    /**
+     * Método que obtiene la lista de funcionalidades
+     * segun el proyecto seleccionado.
+     */
     @OnClick(R.id.register_edfunctionality)
     public void Getfunctionality() {
         progressDialog.show();
         final int codeProyect;
         String nametoCompare = editProyect.getText().toString();
-        if(ProyectList == null){
+        if (ProyectList == null) {
             GetProyectsList();
-        }else{
+        } else {
             int code = GetProyectCode(nametoCompare);
             try {
-                if(validateInternet.isConnected()){
+                if (validateInternet.isConnected()) {
                     codeProyect = code;
                     Thread thread = new Thread() {
                         @Override
@@ -523,8 +556,11 @@ public class register extends AppCompatActivity {
                         }
                     };
                     thread.start();
-                }else{
-                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+                } else {
+                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                    .apreciado_usuario, R.string
+                            .por_favor_valide_su_conexion_a_internet,
+                            register.this);
                     progressDialog.dismiss();
                 }
 
@@ -536,35 +572,35 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que se encarga de establecer la lista de
-    * funcionalidades a la ventana emergente donde se mostraran,
-    * para seleccionar de esta la funcionalidad deseada la cual
-    * se establece en el campo.
-    */
+     * Método que se encarga de establecer la lista de
+     * funcionalidades a la ventana emergente donde se mostraran,
+     * para seleccionar de esta la funcionalidad deseada la cual
+     * se establece en el campo.
+     */
     private void Setfunctionality() {
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(showPopup)
+                    if (showPopup)
                         progressDialog.dismiss();
-                    if(functionalityList != null && functionalityList.size() > 0){
+                    if (functionalityList != null && functionalityList.size() > 0) {
                         final String[] proy = new String[functionalityList.size()];
                         for (Integer i = 0; i < functionalityList.size(); i++) {
                             proy[i] = functionalityList.get(i).getNombreFuncionalidad();
                         }
-                        if(!showPopup){
+                        if (!showPopup) {
                             //if(isUpdate){
-                                GetDiscipline();
+                            GetDiscipline();
                             //}else{
-                                if (isAdministrative){
-                                    isAdministrative = false;
-                                    showPopup = true;
-                                    editfunctionality.setText(R.string.administrativa);
-                                    progressDialog.dismiss();
-                                }
+                            if (isAdministrative) {
+                                isAdministrative = false;
+                                showPopup = true;
+                                editfunctionality.setText(R.string.administrativa);
+                                progressDialog.dismiss();
+                            }
                             //}
-                        }else{
+                        } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
                             builder.setTitle(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY);
                             builder.setItems(proy, new DialogInterface.OnClickListener() {
@@ -577,8 +613,9 @@ public class register extends AppCompatActivity {
                             });
                             builder.show();
                         }
-                    }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY, Constants.MESSAGE_NO_FOUND_FUNCTIONALITIES);
+                    } else {
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY, Constants
+                                .MESSAGE_NO_FOUND_FUNCTIONALITIES);
                     }
 
                 }
@@ -589,14 +626,14 @@ public class register extends AppCompatActivity {
     }
     
     /**
-    * Método que obtiene la lista de conceptos de hora.
-    */
+     * Método que obtiene la lista de conceptos de hora.
+     */
     @OnClick(R.id.register_edConceptHour)
     public void GetConceptHour() {
-        if(showPopup)
-        progressDialog.show();
+        if (showPopup)
+            progressDialog.show();
         try {
-            if(validateInternet.isConnected()){
+            if (validateInternet.isConnected()) {
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
@@ -606,8 +643,11 @@ public class register extends AppCompatActivity {
                     }
                 };
                 thread.start();
-            }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+            } else {
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                .apreciado_usuario, R.string
+                        .por_favor_valide_su_conexion_a_internet,
+                        register.this);
                 progressDialog.dismiss();
             }
 
@@ -618,13 +658,13 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que obtiene la lista de gerentes
-    */
+     * Método que obtiene la lista de gerentes
+     */
     @OnClick(R.id.register_edManager)
     public void GetManager() {
         progressDialog.show();
         try {
-            if(validateInternet.isConnected()){
+            if (validateInternet.isConnected()) {
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
@@ -634,8 +674,11 @@ public class register extends AppCompatActivity {
                     }
                 };
                 thread.start();
-            }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+            } else {
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                .apreciado_usuario, R.string
+                        .por_favor_valide_su_conexion_a_internet,
+                        register.this);
                 progressDialog.dismiss();
             }
 
@@ -645,26 +688,31 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que obtiene la lista de disciplinas segun el
-    * proyecto seleccionado
-    */
+     * Método que obtiene la lista de disciplinas segun el
+     * proyecto seleccionado
+     */
     @OnClick(R.id.register_edDiscipline)
     public void GetDiscipline() {
         progressDialog.show();
         final Proyect proyect;
         String nametoCompare = editProyect.getText().toString();
-         proyect = getProyectByName(nametoCompare);
-        final Integer codeFuncionality = GetFuncionalityCode(editfunctionality.getText().toString());
+        proyect = getProyectByName(nametoCompare);
+        final Integer codeFuncionality = GetFuncionalityCode(editfunctionality.getText().toString
+                ());
         try {
-            if(validateInternet.isConnected()){
+            if (validateInternet.isConnected()) {
 
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        if(!editProyect.getText().toString().equals(Constants.ADMINISTRATIVO) && proyect != null && !proyect.getDescripcionTipoEstimacion().equals(Constants.CASOS)  ){
-                            DisciplineList = App.getInstance().getActivityDisciplineStimationForRegister(codeFuncionality);
-                        }else{
-                            DisciplineList = App.getInstance().GetDiscipline(proyect != null ? proyect.getCodigoMaestroMarcoTrabajo() : 0);
+                        if (!editProyect.getText().toString().equals(Constants.ADMINISTRATIVO) &&
+                                proyect != null && !proyect.getDescripcionTipoEstimacion().equals
+                                (Constants.CASOS)) {
+                            DisciplineList = App.getInstance()
+                                    .getActivityDisciplineStimationForRegister(codeFuncionality);
+                        } else {
+                            DisciplineList = App.getInstance().GetDiscipline(proyect != null ?
+                                    proyect.getCodigoMaestroMarcoTrabajo() : 0);
                         }
 
                         setDiscipline();
@@ -672,8 +720,11 @@ public class register extends AppCompatActivity {
                     }
                 };
                 thread.start();
-            }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+            } else {
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                .apreciado_usuario, R.string
+                        .por_favor_valide_su_conexion_a_internet,
+                        register.this);
                 progressDialog.dismiss();
             }
 
@@ -683,14 +734,15 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de buscar un proyecto especifico en la lista de proyectos
-    * @param nametoCompare Nombre del proyecto que se desea buscar
-    * @return Retorna el proyecto que coincida con el parametro de entrada
-    */
+     * Método encargado de buscar un proyecto especifico en la lista de proyectos
+     *
+     * @param nametoCompare Nombre del proyecto que se desea buscar
+     * @return Retorna el proyecto que coincida con el parametro de entrada
+     */
     private Proyect getProyectByName(String nametoCompare) {
-        if(ProyectList == null){
+        if (ProyectList == null) {
             return null;
-        }else{
+        } else {
             for (Integer i = 0; i < ProyectList.size(); i++) {
                 String fullName = ProyectList.get(i).getNombre();
                 if (fullName.equalsIgnoreCase(nametoCompare)) {
@@ -702,53 +754,54 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que se encarga de establecer la lista de
-    * disciplinas a la ventana emergente donde se mostraran,
-    * para seleccionar de esta la disciplina deseada la cual
-    * se establece en el campo.
-    */
+     * Método que se encarga de establecer la lista de
+     * disciplinas a la ventana emergente donde se mostraran,
+     * para seleccionar de esta la disciplina deseada la cual
+     * se establece en el campo.
+     */
     private void setDiscipline() {
 
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(showPopup)
+                    if (showPopup)
                         progressDialog.dismiss();
 
-                    if(DisciplineList != null && DisciplineList.size() > 0 ){
+                    if (DisciplineList != null && DisciplineList.size() > 0) {
                         editDiscipline.setFocusable(false);
                         editDiscipline.setInputType(InputType.TYPE_NULL);
-                                final String[] proy = new String[DisciplineList.size()];
+                        final String[] proy = new String[DisciplineList.size()];
 
-                                for (Integer i = 0; i < DisciplineList.size(); i++) {
-                                    proy[i] = DisciplineList.get(i).getNombreMaestroProcesoDisciplina();
+                        for (Integer i = 0; i < DisciplineList.size(); i++) {
+                            proy[i] = DisciplineList.get(i).getNombreMaestroProcesoDisciplina();
+                        }
+                        if (!showPopup) {
+
+                            if (isAdministrative) {
+                                editDiscipline.setText(R.string.administrativo);
+                            }
+                            // if(isUpdate){
+                            getActivity();
+
+                            //}
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
+                            builder.setTitle(Constants.REGISTER_TITLE_DIALOG_DISCIPLINE);
+                            builder.setItems(proy, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    editDiscipline.setText(proy[which]);
+                                    editActivity.setText("");
                                 }
-                                if(!showPopup){
-
-                                    if (isAdministrative){
-                                        editDiscipline.setText(R.string.administrativo);
-                                    }
-                                   // if(isUpdate){
-                                        getActivity();
-
-                                    //}
-                                }else{
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
-                                    builder.setTitle(Constants.REGISTER_TITLE_DIALOG_DISCIPLINE);
-                                    builder.setItems(proy, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            editDiscipline.setText(proy[which]);
-                                            editActivity.setText("");
-                                        }
-                                    });
-                                    builder.show();
-                                }
+                            });
+                            builder.show();
+                        }
 //                            }
 //                        });
-                    }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_DISCIPLINE, Constants.MESSAGE_NO_FOUND_DISCIPLINE);
+                    } else {
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_DISCIPLINE, Constants
+                                .MESSAGE_NO_FOUND_DISCIPLINE);
                     }
 
                 }
@@ -759,9 +812,9 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que obtiene la lista de actividades segun la
-    * disciplina y/o el codigo seleccionado por el usuario.
-    */
+     * Método que obtiene la lista de actividades segun la
+     * disciplina y/o el codigo seleccionado por el usuario.
+     */
     @OnClick(R.id.register_edActivity)
     public void getActivity() {
         progressDialog.show();
@@ -774,14 +827,17 @@ public class register extends AppCompatActivity {
         String nameToCompareFuncionality = editfunctionality.getText().toString();
         final int codeFuncionality = GetFuncionalityCode(nameToCompareFuncionality);
         try {
-            if(validateInternet.isConnected()){
+            if (validateInternet.isConnected()) {
 
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        if(proyect != null && !proyect.getDescripcionTipoEstimacion().equals(Constants.CASOS)){
-                            activityList = App.getInstance().getFuncionalityActivityStimateForRegister(codeDiscipline,codeFuncionality);
-                        }else {
+                        if (proyect != null && !proyect.getDescripcionTipoEstimacion().equals
+                                (Constants.CASOS)) {
+                            activityList = App.getInstance()
+                                    .getFuncionalityActivityStimateForRegister(codeDiscipline,
+                                            codeFuncionality);
+                        } else {
                             activityList = App.getInstance().getActivity(codeDiscipline);
                         }
                         setActivity();
@@ -789,8 +845,11 @@ public class register extends AppCompatActivity {
                     }
                 };
                 thread.start();
-            }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+            } else {
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                .apreciado_usuario, R.string
+                        .por_favor_valide_su_conexion_a_internet,
+                        register.this);
                 progressDialog.dismiss();
             }
 
@@ -800,15 +859,16 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de buscar el codigo de una disciplina especifica
-    * @param nametoCompare Nombre de la disciplina que se desea buscar
-    * @return Retorna el codigo de la disciplina encontrada
-    */
+     * Método encargado de buscar el codigo de una disciplina especifica
+     *
+     * @param nametoCompare Nombre de la disciplina que se desea buscar
+     * @return Retorna el codigo de la disciplina encontrada
+     */
     private int getCodeDiscipline(String nametoCompare) {
         int code = 0;
-        if(DisciplineList == null){
+        if (DisciplineList == null) {
             return 0;
-        }else{
+        } else {
             for (Integer i = 0; i < DisciplineList.size(); i++) {
                 String fullName = DisciplineList.get(i).getNombreMaestroProcesoDisciplina();
                 if (fullName.equalsIgnoreCase(nametoCompare)) {
@@ -820,20 +880,20 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que se encarga de establecer la lista de
-    * actividades a la ventana emergente donde se mostraran,
-    * para seleccionar de esta la actividad deseada la cual
-    * se establece en el campo.
-    */
+     * Método que se encarga de establecer la lista de
+     * actividades a la ventana emergente donde se mostraran,
+     * para seleccionar de esta la actividad deseada la cual
+     * se establece en el campo.
+     */
     private void setActivity() {
 
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                        progressDialog.dismiss();
+                    progressDialog.dismiss();
 
-                    if(activityList != null && activityList.size() > 0 ){
+                    if (activityList != null && activityList.size() > 0) {
                         editActivity.setFocusable(false);
                         editActivity.setInputType(InputType.TYPE_NULL);
 
@@ -842,18 +902,18 @@ public class register extends AppCompatActivity {
                         for (Integer i = 0; i < activityList.size(); i++) {
                             activity[i] = activityList.get(i).getNombre();
                         }
-                        if(!showPopup){
+                        if (!showPopup) {
                             progressDialog.dismiss();
-                            if (isAdministrative){
+                            if (isAdministrative) {
                                 editActivity.setText(R.string.administrativo);
 
                             }
-                            if(isUpdate){
+                            if (isUpdate) {
                                 showPopup = true;
                                 isUpdate = false;
                                 progressDialog.dismiss();
                             }
-                        }else{
+                        } else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
                             builder.setTitle(Constants.REGISTER_TITLE_DIALOG_ACTIVITY);
                             builder.setItems(activity, new DialogInterface.OnClickListener() {
@@ -866,10 +926,11 @@ public class register extends AppCompatActivity {
                         }
 //                            }
 //                        });
-                    }else{
-                        if(showPopup)
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_ACTIVITY, Constants.MESSAGE_NO_FOUND_ACTIVITY);
-                        if(isUpdate){
+                    } else {
+                        if (showPopup)
+                            showPopup(Constants.REGISTER_TITLE_DIALOG_ACTIVITY, Constants
+                                    .MESSAGE_NO_FOUND_ACTIVITY);
+                        if (isUpdate) {
                             showPopup = true;
                             isUpdate = false;
                             progressDialog.dismiss();
@@ -884,58 +945,60 @@ public class register extends AppCompatActivity {
     }
     
     /**
-    * Método que se encarga de establecer la lista de
-    * conoceptos de hora a la ventana emergente donde se mostraran,
-    * para seleccionar de esta el concepto de hora deseada el cual
-    * se establece en el campo.
-    * @param conceptHourList lista de conceptos de hora que se mostraran al
-    * usuario
-    */
+     * Método que se encarga de establecer la lista de
+     * conoceptos de hora a la ventana emergente donde se mostraran,
+     * para seleccionar de esta el concepto de hora deseada el cual
+     * se establece en el campo.
+     *
+     * @param conceptHourList lista de conceptos de hora que se mostraran al
+     *                        usuario
+     */
     private void SetConceptHour(final List<ConceptHour> conceptHourList) {
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(showPopup)
+                    if (showPopup)
                         progressDialog.dismiss();
 
-                        if(conceptHourList!= null && conceptHourList.size() > 0){
-                            editConceptoHour.setFocusable(false);
-                            editConceptoHour.setInputType(InputType.TYPE_NULL);
-                                    final String[] proy = new String[conceptHourList.size()];
+                    if (conceptHourList != null && conceptHourList.size() > 0) {
+                        editConceptoHour.setFocusable(false);
+                        editConceptoHour.setInputType(InputType.TYPE_NULL);
+                        final String[] proy = new String[conceptHourList.size()];
 
-                                    for (Integer i = 0; i < conceptHourList.size(); i++) {
-                                        proy[i] = conceptHourList.get(i).getName();
+                        for (Integer i = 0; i < conceptHourList.size(); i++) {
+                            proy[i] = conceptHourList.get(i).getName();
+                        }
+                        if (!showPopup) {
+                            //  if(isUpdate)
+                            GetClassificationConceptHour();
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
+                            builder.setTitle(Constants.REGISTER_TITLE_DIALOG_CONCEPT_HOUR);
+                            builder.setItems(proy, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //                                  Se realiza la validación
+                                    // para saber si el concepto de hora es administrativa
+                                    editConceptoHour.setText(proy[which]);
+                                    editClassificationConceptHour.setText("");
+                                    if (which == 0) {
+                                        CargarReporteAdministrativo();
+                                    } else {
+                                        checkBoxActivity.setEnabled(true);
+                                        checkBoxActivity.setChecked(checkbox);
                                     }
-                                    if(!showPopup){
-                                      //  if(isUpdate)
-                                            GetClassificationConceptHour();
-                                    }
-                                    else{
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
-                                        builder.setTitle(Constants.REGISTER_TITLE_DIALOG_CONCEPT_HOUR);
-                                        builder.setItems(proy, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-    //                                  Se realiza la validación para saber si el concepto de hora es administrativa
-                                                editConceptoHour.setText(proy[which]);
-                                                editClassificationConceptHour.setText("");
-                                                if (which == 0) {
-                                                    CargarReporteAdministrativo();
-                                                }else{
-                                                    checkBoxActivity.setEnabled(true);
-                                                    checkBoxActivity.setChecked(checkbox);
-                                                }
-                                            }
-                                        });
-                                        builder.show();
+                                }
+                            });
+                            builder.show();
 
-                                    }
+                        }
 //                                }
 //                            });
-                        }else{
-                            showPopup(Constants.REGISTER_TITLE_DIALOG_CONCEPT_HOUR, Constants.MESSAGE_NO_FOUND_CONCEPT_HOURS);
-                        }
+                    } else {
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_CONCEPT_HOUR, Constants
+                                .MESSAGE_NO_FOUND_CONCEPT_HOURS);
+                    }
 
                 }
             });
@@ -945,10 +1008,9 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    *Metodo orquestador que permite cargar todos los elementos aministrativos
-    */
-    private void CargarReporteAdministrativo()
-    {
+     * Metodo orquestador que permite cargar todos los elementos aministrativos
+     */
+    private void CargarReporteAdministrativo() {
         checkbox = checkBoxActivity.isChecked();
         isAdministrative = true;
         showPopup = true;
@@ -964,51 +1026,54 @@ public class register extends AppCompatActivity {
 
     }
 
-     /**
-    * Método que se encarga de establecer la lista de
-    * gerentes a la ventana emergente donde se mostraran,
-    * para seleccionar de esta el gerente deseado el cual
-    * se establece en el campo.
-    * @param ManagerList lista de gerentes que se mostraran al
-    * usuario
-    */
+    /**
+     * Método que se encarga de establecer la lista de
+     * gerentes a la ventana emergente donde se mostraran,
+     * para seleccionar de esta el gerente deseado el cual
+     * se establece en el campo.
+     *
+     * @param ManagerList lista de gerentes que se mostraran al
+     *                    usuario
+     */
     public void setManager(final List<Manager> ManagerList) {
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(showPopup)
+                    if (showPopup)
                         progressDialog.dismiss();
-                    if(ManagerList != null && ManagerList.size() > 0){
-                                final String[] proy = new String[ManagerList.size()];
+                    if (ManagerList != null && ManagerList.size() > 0) {
+                        final String[] proy = new String[ManagerList.size()];
 
-                                for (Integer i = 0; i < ManagerList.size(); i++) {
-                                    String FullName = (ManagerList.get(i).getFirtNames() + " " + ManagerList.get(i).getLastNames()).toUpperCase();
-                                    proy[i] = FullName;
+                        for (Integer i = 0; i < ManagerList.size(); i++) {
+                            String FullName = (ManagerList.get(i).getFirtNames() + " " +
+                                    ManagerList.get(i).getLastNames()).toUpperCase();
+                            proy[i] = FullName;
+                        }
+                        if (!showPopup) {
+                            GetProyect();
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
+                            builder.setTitle(Constants.REGISTER_TITLE_DIALOG_DIRECTOR);
+                            builder.setItems(proy, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    editManager.setText(proy[which]);
+                                    editProyect.setText("");
+                                    editfunctionality.setText("");
+                                    editDiscipline.setText("");
+                                    editActivity.setText("");
                                 }
-                                if(!showPopup){
-                                    GetProyect();
-                                }else{
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(register.this);
-                                    builder.setTitle(Constants.REGISTER_TITLE_DIALOG_DIRECTOR);
-                                    builder.setItems(proy, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            editManager.setText(proy[which]);
-                                            editProyect.setText("");
-                                            editfunctionality.setText("");
-                                            editDiscipline.setText("");
-                                            editActivity.setText("");
-                                        }
-                                    });
-                                    builder.show();
+                            });
+                            builder.show();
 
-                                }
+                        }
 //                            }
 //                        });
 
-                    }else{
-                        showPopup(Constants.REGISTER_TITLE_DIALOG_DIRECTOR, Constants.MESSAGE_NO_FOUND_MANAGERS);
+                    } else {
+                        showPopup(Constants.REGISTER_TITLE_DIALOG_DIRECTOR, Constants
+                                .MESSAGE_NO_FOUND_MANAGERS);
                     }
 
                 }
@@ -1019,14 +1084,15 @@ public class register extends AppCompatActivity {
     }
     
     /**
-    * Método encargado de buscar el codigo de un proyecto especifico
-    * @param nametoCompare Nombre del proyecto que se desea buscar
-    * @return Retorna el codigo del proyecto encontrado
-    */
+     * Método encargado de buscar el codigo de un proyecto especifico
+     *
+     * @param nametoCompare Nombre del proyecto que se desea buscar
+     * @return Retorna el codigo del proyecto encontrado
+     */
     public int GetProyectCode(String nametoCompare) {
         int code = 0;
 
-        if(ProyectList != null){
+        if (ProyectList != null) {
             for (Integer i = 0; i < ProyectList.size(); i++) {
                 if (ProyectList.get(i).getNombre().equals(nametoCompare)) {
                     code = ProyectList.get(i).getCodigoProyecto();
@@ -1037,17 +1103,19 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de buscar el codigo de un gerente especifico
-    * @param nametoCompare Nombre del gerente que se desea buscar
-    * @return Retorna el codigo del gerente encontrado
-    */
+     * Método encargado de buscar el codigo de un gerente especifico
+     *
+     * @param nametoCompare Nombre del gerente que se desea buscar
+     * @return Retorna el codigo del gerente encontrado
+     */
     public int GetManagerCode(String nametoCompare) {
         int code = 0;
-        if(ManagerList == null){
+        if (ManagerList == null) {
             return 0;
-        }else{
+        } else {
             for (Integer i = 0; i < ManagerList.size(); i++) {
-                String fullName = ManagerList.get(i).getFirtNames() + " " + ManagerList.get(i).getLastNames();
+                String fullName = ManagerList.get(i).getFirtNames() + " " + ManagerList.get(i)
+                        .getLastNames();
                 if (fullName.equalsIgnoreCase(nametoCompare)) {
                     code = ManagerList.get(i).getCodeUser();
                 }
@@ -1058,20 +1126,22 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de buscar el codigo de una funcionalidad especifica
-    * @param nametoCompare Nombre de la funcionalidad que se desea buscar
-    * @return Retorna el codigo de la funcionalidad encontrada
-    */
+     * Método encargado de buscar el codigo de una funcionalidad especifica
+     *
+     * @param nametoCompare Nombre de la funcionalidad que se desea buscar
+     * @return Retorna el codigo de la funcionalidad encontrada
+     */
     public int GetFuncionalityCode(String nametoCompare) {
         int code = 0;
-        if(isAdministrative){
+        if (isAdministrative) {
             return 1;
         }
-        if(functionalityList == null){
+        if (functionalityList == null) {
             return 0;
-        }else {
+        } else {
             for (Integer i = 0; i < functionalityList.size(); i++) {
-                if (functionalityList.get(i).getNombreFuncionalidad().equalsIgnoreCase(nametoCompare)) {
+                if (functionalityList.get(i).getNombreFuncionalidad().equalsIgnoreCase
+                        (nametoCompare)) {
                     code = functionalityList.get(i).getCodigoFuncionalidad();
                 }
             }
@@ -1080,10 +1150,11 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de buscar el codigo de un concepto de hora especifico
-    * @param nametoCompare Nombre del concepto de hora que se desea buscar
-    * @return Retorna el codigo del concepto de hora encontrado
-    */
+     * Método encargado de buscar el codigo de un concepto de hora especifico
+     *
+     * @param nametoCompare Nombre del concepto de hora que se desea buscar
+     * @return Retorna el codigo del concepto de hora encontrado
+     */
     public int GetConceptHourCode(String nametoCompare) {
         int code = 0;
         for (Integer i = 0; i < ConceptHourList.size(); i++) {
@@ -1095,10 +1166,11 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de buscar el codigo de una clasificacion especifica
-    * @param nametoCompare Nombre de la clasificacion que se desea buscar
-    * @return Retorna el codigo de la clasificacion encontrada
-    */
+     * Método encargado de buscar el codigo de una clasificacion especifica
+     *
+     * @param nametoCompare Nombre de la clasificacion que se desea buscar
+     * @return Retorna el codigo de la clasificacion encontrada
+     */
     public int GetClassificationConceptHourCode(String nametoCompare) {
         int code = 0;
 
@@ -1111,13 +1183,14 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de buscar el codigo de una disciplina especifica
-    * @param nametoCompare Nombre de la disciplina que se desea buscar
-    * @return Retorna el codigo de la disciplina encontrada
-    */
-    public int GetDisciplineCode (String nametoCompare) {
+     * Método encargado de buscar el codigo de una disciplina especifica
+     *
+     * @param nametoCompare Nombre de la disciplina que se desea buscar
+     * @return Retorna el codigo de la disciplina encontrada
+     */
+    public int GetDisciplineCode(String nametoCompare) {
         int code = 0;
-        if(isAdministrative){
+        if (isAdministrative) {
             return 1;
         }
         for (Integer i = 0; i < DisciplineList.size(); i++) {
@@ -1129,10 +1202,11 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de buscar el codigo de una actividad especifica
-    * @param nametoCompare Nombre de la actividad que se desea buscar
-    * @return Retorna el codigo de la actividad encontrada
-    */
+     * Método encargado de buscar el codigo de una actividad especifica
+     *
+     * @param nametoCompare Nombre de la actividad que se desea buscar
+     * @return Retorna el codigo de la actividad encontrada
+     */
     public int getActivityMasterCode(String nametoCompare) {
         int code = 0;
         if (activityList != null) {
@@ -1142,66 +1216,71 @@ public class register extends AppCompatActivity {
                 }
             }
         }
-            return code;
-        }
+        return code;
+    }
 
 
     /**
-    * Método encargado organizar toda la informacion ingresada por el
-    * usuario para finalmente llevare a cabo el reporte
-    */
-   @OnClick(R.id.btnReportar)
+     * Método encargado organizar toda la informacion ingresada por el
+     * usuario para finalmente llevare a cabo el reporte
+     */
+    @OnClick(R.id.btnReportar)
     public void goToRegisterTime() {
         try {
-            if(validateInternet.isConnected()){
+            if (validateInternet.isConnected()) {
                 progressDialog.show();
 
-                if(ValidateData()){
+                if (ValidateData()) {
 
                     ReportTime report = new ReportTime();
 
                     JSONObject repJson = new JSONObject();
 
 
-                    int  codigoDisciplina;
-                    if(DisciplineList == null && edit){
+                    int codigoDisciplina;
+                    if (DisciplineList == null && edit) {
                         codigoDisciplina = viewTimesEdit.getCodigoDisciplina();
-                    }else{
+                    } else {
                         codigoDisciplina = GetDisciplineCode(editDiscipline.getText().toString());
-                        repJson.put(Constants.DISCIPLINE,editDiscipline.getText().toString());
+                        repJson.put(Constants.DISCIPLINE, editDiscipline.getText().toString());
                     }
-                    int  codigoActividad;
-                    if(edit && editActivity.getText().toString().equals(viewTimesEdit.getNombreMaestroActividad())  ){
+                    int codigoActividad;
+                    if (edit && editActivity.getText().toString().equals(viewTimesEdit
+                            .getNombreMaestroActividad())) {
                         codigoActividad = viewTimesEdit.getCodigoMaestroActividad();
-                    }else{
+                    } else {
                         codigoActividad = getActivityMasterCode(editActivity.getText().toString());
                         //repJson.put("activity",editActivity.getText().toString());
                     }
                     int codigoFuncionalidad;
-                    if(functionalityList == null && edit){
+                    if (functionalityList == null && edit) {
                         codigoFuncionalidad = viewTimesEdit.getCodigoFuncionalidad();
-                    }else{
-                        codigoFuncionalidad = GetFuncionalityCode(editfunctionality.getText().toString());
-                        repJson.put(Constants.FUNCTIONALITY,editfunctionality.getText().toString());
+                    } else {
+                        codigoFuncionalidad = GetFuncionalityCode(editfunctionality.getText()
+                                .toString());
+                        repJson.put(Constants.FUNCTIONALITY, editfunctionality.getText().toString
+                                ());
                     }
                     int codigoMaestro;
-                    if(ClassificationConceptHourList == null && edit){
+                    if (ClassificationConceptHourList == null && edit) {
                         codigoMaestro = viewTimesEdit.getCodigoMaestroTipoHora();
-                    }else{
-                        codigoMaestro = GetClassificationConceptHourCode(editClassificationConceptHour.getText().toString());
-                        repJson.put(Constants.CLASSIFICATION_CONCEPT_HOUR,editClassificationConceptHour.getText().toString());
+                    } else {
+                        codigoMaestro = GetClassificationConceptHourCode
+                                (editClassificationConceptHour.getText().toString());
+                        repJson.put(Constants.CLASSIFICATION_CONCEPT_HOUR,
+                                editClassificationConceptHour.getText().toString());
                     }
                     String desripcion = edDescrptionActivity.getText().toString();
-                    repJson.put(Constants.DESCRIPTION,desripcion);
-                    repJson.put(Constants.MANAGER,editManager.getText().toString());
-                    repJson.put(Constants.CONCEPT_HOUR,editConceptoHour.getText().toString());
-                    repJson.put(Constants.PROYECT,editProyect.getText().toString());
+                    repJson.put(Constants.DESCRIPTION, desripcion);
+                    repJson.put(Constants.MANAGER, editManager.getText().toString());
+                    repJson.put(Constants.CONCEPT_HOUR, editConceptoHour.getText().toString());
+                    repJson.put(Constants.PROYECT, editProyect.getText().toString());
 
                     double Horas = Double.valueOf(edHour.getText().toString());
-                    String fecha =(edDate.getText().toString());
+                    String fecha = (edDate.getText().toString());
                     fecha = fecha.replace("-", "/");
                     DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY);
-                    Date dateObject = formatter.parse(fecha );
+                    Date dateObject = formatter.parse(fecha);
 
 
                     report.setCodigoDisciplina(codigoDisciplina);
@@ -1214,35 +1293,39 @@ public class register extends AppCompatActivity {
                     report.setFechaActividad(dateObject);
                     report.setActividadCompletada(checkBoxActivity.isChecked());
                     report.setCodigoMaestroActividad(codigoActividad);
-                    repJson.put(Constants.CODIGO_ESTADO_INTEGRACION,1);
-                    repJson.put(Constants.HORAS,Horas);
-                    repJson.put(Constants.CODIGO_USUARIO,codigoUsuario);
+                    repJson.put(Constants.CODIGO_ESTADO_INTEGRACION, 1);
+                    repJson.put(Constants.HORAS, Horas);
+                    repJson.put(Constants.CODIGO_USUARIO, codigoUsuario);
 
-                    Register(report,repJson);
+                    Register(report, repJson);
 
-                }else{
+                } else {
                     progressDialog.dismiss();
                 }
-            }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+            } else {
+                //TODO:implementar esconder progress
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                .apreciado_usuario, R.string
+                        .por_favor_valide_su_conexion_a_internet,
+                        register.this);
+                progressDialog.dismiss();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, R.string.faltan_campos_por_diligenciar, Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
-            return;
         }
 
 
     }
     
     /**
-    * Método encargado realizar el reporte o la actualizacion
-    * de un reporte previamente cargado si es el caso, adicionalmente
-    * guarda el ultimo reporte realizado con el fin de agilizar el proximo
-    * reporte del usuario
-    */
+     * Método encargado realizar el reporte o la actualizacion
+     * de un reporte previamente cargado si es el caso, adicionalmente
+     * guarda el ultimo reporte realizado con el fin de agilizar el proximo
+     * reporte del usuario
+     */
     private void Register(final ReportTime register, final JSONObject repJson) {
         try {
             final IGLogin igLogin = new IGLogin();
@@ -1250,7 +1333,7 @@ public class register extends AppCompatActivity {
                 @Override
                 public void run() {
                     Boolean tiemposResponse;
-                    if(edit){
+                    if (edit) {
                         register.setCodigoActividad(CodigoActividad);
                         tiemposResponse = App.getInstance().EditTimes(register);
                         CodigoActividad = null;
@@ -1258,11 +1341,12 @@ public class register extends AppCompatActivity {
                         intent.putExtra(Constants.USER_CODIGO, codigoUsuario);
                         edit = false;
                         startActivity(intent);
-                    }else{
+                    } else {
                         //save last time
                         try {
 
-                            FileOutputStream lastRep = openFileOutput(Constants.LAST_REPORT_TXT, MODE_PRIVATE);
+                            FileOutputStream lastRep = openFileOutput(Constants.LAST_REPORT_TXT,
+                                    MODE_PRIVATE);
                             OutputStreamWriter osw = new OutputStreamWriter(lastRep);
                             osw.write(repJson.toString());
                             osw.flush();
@@ -1288,11 +1372,12 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método que valida si el reporte realizado se ha llevado con exito para
-    * limpiar los campos de la actividad, de lo contrario, muestra un mensaje
-    * de error al usuario
-    * @param reg Booleano que determina si el reporte fue llevado a cabo con exito o no
-    */
+     * Método que valida si el reporte realizado se ha llevado con exito para
+     * limpiar los campos de la actividad, de lo contrario, muestra un mensaje
+     * de error al usuario
+     *
+     * @param reg Booleano que determina si el reporte fue llevado a cabo con exito o no
+     */
     public void validateRegiter(final Boolean reg) {
         this.runOnUiThread(new Runnable() {
             @Override
@@ -1310,9 +1395,11 @@ public class register extends AppCompatActivity {
                     edDescrptionActivity.setText("");
                     editActivity.setText("");
                     checkBoxActivity.setChecked(false);
-                    Toast.makeText(register.this, Constants.REGISTER_SUCCESS, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(register.this, Constants.REGISTER_SUCCESS, Toast.LENGTH_SHORT)
+                            .show();
                 } else {
-                    Toast.makeText(register.this, Constants.REGISTE_ERROR, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(register.this, Constants.REGISTE_ERROR, Toast.LENGTH_SHORT)
+                            .show();
                 }
             }
 
@@ -1321,48 +1408,50 @@ public class register extends AppCompatActivity {
 
 
     /**
-    * Método encargado de validar los campos obligatorios del reporte
-    * @return Booleano que determina si los campos obligatorios se ingresaron
-    * en su totalidad (true) o no (false).
-    */
+     * Método encargado de validar los campos obligatorios del reporte
+     *
+     * @return Booleano que determina si los campos obligatorios se ingresaron
+     * en su totalidad (true) o no (false).
+     */
     private Boolean ValidateData() {
 
         Validation validator = new Validation();
         String error = "";
         double horas = 0;
 
-        if(TextUtils.isEmpty(editDiscipline.getText().toString().trim())){
-            error += "- "+Constants.REGISTER_TITLE_DIALOG_DISCIPLINE+"\n";
+        if (TextUtils.isEmpty(editDiscipline.getText().toString().trim())) {
+            error += "- " + Constants.REGISTER_TITLE_DIALOG_DISCIPLINE + "\n";
         }
-        if(!TextUtils.isEmpty(editActivity.getText().toString().trim())){
-            error += "- "+Constants.REGISTER_TITLE_DIALOG_ACTIVITY+"\n";
+        if (!TextUtils.isEmpty(editActivity.getText().toString().trim())) {
+            error += "- " + Constants.REGISTER_TITLE_DIALOG_ACTIVITY + "\n";
         }
-        if(TextUtils.isEmpty(editfunctionality.getText().toString().trim())){
-            error += "- "+Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY+"\n";
+        if (TextUtils.isEmpty(editfunctionality.getText().toString().trim())) {
+            error += "- " + Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY + "\n";
         }
-        if(TextUtils.isEmpty(editClassificationConceptHour.getText().toString().trim())){
-            error += "- "+Constants.REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR+"\n";
+        if (TextUtils.isEmpty(editClassificationConceptHour.getText().toString().trim())) {
+            error += "- " + Constants.REGISTER_TITLE_DIALOG_CLASIFICATION_CONCEPT_HOUR + "\n";
         }
-        if(TextUtils.isEmpty(edHour.getText().toString().trim())){
-            error += "- "+Constants.ERROR_SELECT_HOUR+"\n";
-        }else{
+        if (TextUtils.isEmpty(edHour.getText().toString().trim())) {
+            error += "- " + Constants.ERROR_SELECT_HOUR + "\n";
+        } else {
             horas = Double.valueOf(edHour.getText().toString());
-            if(!validator.validateHoursReport(horas)){
-                error += Constants.ERROR_HOUR+"\n";
+            if (!validator.validateHoursReport(horas)) {
+                error += Constants.ERROR_HOUR + "\n";
             }
         }
 
-        if(TextUtils.isEmpty(edDate.getText().toString().trim())){
-            error += Constants.ERROR_SELECT_DATE+"\n";
+        if (TextUtils.isEmpty(edDate.getText().toString().trim())) {
+            error += Constants.ERROR_SELECT_DATE + "\n";
         }
 
-        if(totalWeek != null && totalWeek.size()>0 && currentWeek != null&& totalWeek.get(currentWeek)!= null &&totalWeek.get(currentWeek)+horas > 55){
-            error += Constants.MESSAGE_HOURS_REPORTED +"\n";
+        if (totalWeek != null && totalWeek.size() > 0 && currentWeek != null && totalWeek.get
+                (currentWeek) != null && totalWeek.get(currentWeek) + horas > 55) {
+            error += Constants.MESSAGE_HOURS_REPORTED + "\n";
         }
 
-        if(error.equals("")){
+        if (error.equals("")) {
             return true;
-        }else{
+        } else {
             showPopup(getResources().getString(R.string.campos_incompletos), error);
             return false;
         }
@@ -1370,10 +1459,11 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Método encargado de mostrar un mensaje generico
-    * @param title titulo del mensaje
-    * @param message contenido del mensaje
-    */
+     * Método encargado de mostrar un mensaje generico
+     *
+     * @param title   titulo del mensaje
+     * @param message contenido del mensaje
+     */
     private void showPopup(String title, String message) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(register.this);
@@ -1385,32 +1475,35 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Metodo encargado de obtener una lista de proyectos que se
-    * encuentran asociados a un codigo de gerente especifico
-    */
+     * Metodo encargado de obtener una lista de proyectos que se
+     * encuentran asociados a un codigo de gerente especifico
+     */
     private void GetProyectsList() {
 
         final int codeManager;
         String nametoCompare = editManager.getText().toString();
         int code = GetManagerCode(nametoCompare);
         try {
-            if(validateInternet.isConnected()){
+            if (validateInternet.isConnected()) {
                 codeManager = code;
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
                         List<Proyect> proyects = App.getInstance().GetProyect(codeManager);
-                        if(proyects == null){
+                        if (proyects == null) {
                             progressDialog.dismiss();
-                            showPopUpThread(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY,Constants.MESSAGE_ERROR_GET_FUNCTIONALITY);
-                        }else{
+                            showPopUpThread(Constants.REGISTER_TITLE_DIALOG_FUNCTIONALITY,
+                                    Constants.MESSAGE_ERROR_GET_FUNCTIONALITY);
+                        } else {
                             SetProyectsList(proyects);
                         }
                     }
                 };
                 thread.start();
-            }else{
-                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario,R.string.por_favor_valide_su_conexion_a_internet, register.this);
+            } else {
+                ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                        .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
+                        register.this);
                 progressDialog.dismiss();
             }
         } catch (Exception e) {
@@ -1420,8 +1513,8 @@ public class register extends AppCompatActivity {
     }
 
     /**
-    * Metodo encargado de establecer la lista de proyectos.
-    */
+     * Metodo encargado de establecer la lista de proyectos.
+     */
     public void SetProyectsList(final List<Proyect> proyects) {
         this.runOnUiThread(new Runnable() {
             @Override
@@ -1433,11 +1526,12 @@ public class register extends AppCompatActivity {
         });
     }
 
-     /**
-    * Método encargado de mostrar un mensaje generico en finalizacion de un hilo.
-    * @param title titulo del mensaje
-    * @param message contenido del mensaje
-    */
+    /**
+     * Método encargado de mostrar un mensaje generico en finalizacion de un hilo.
+     *
+     * @param title   titulo del mensaje
+     * @param message contenido del mensaje
+     */
     public void showPopUpThread(final String title, final String message) {
         this.runOnUiThread(new Runnable() {
             @Override
@@ -1452,7 +1546,6 @@ public class register extends AppCompatActivity {
 
         });
     }
-
 
 
 }

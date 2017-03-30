@@ -104,15 +104,18 @@ public class App {
     }
 
     public List<Discipline> getActivityDisciplineStimationForRegister(int codeFuncionality) {
-        return locator.getReportRepository().getActivityDisciplineStimationForRegister(codeFuncionality);
+        return locator.getReportRepository().getActivityDisciplineStimationForRegister
+                (codeFuncionality);
     }
 
     public List<ActivityDiscipline> getActivity(int codeDiscipline) {
         return locator.getReportRepository().getActivity(codeDiscipline);
     }
 
-    public List<ActivityDiscipline> getFuncionalityActivityStimateForRegister(int codeDiscipline, int codeFuncionality) {
-        return locator.getReportRepository().getFuncionalityActivityStimateForRegister(codeDiscipline, codeFuncionality);
+    public List<ActivityDiscipline> getFuncionalityActivityStimateForRegister(int codeDiscipline,
+                                                                              int codeFuncionality) {
+        return locator.getReportRepository().getFuncionalityActivityStimateForRegister
+                (codeDiscipline, codeFuncionality);
     }
 
     public List<ViewTimesModel> GetViewTimesForCollaborator(String userCode) {
@@ -124,8 +127,10 @@ public class App {
     }
 
 
-    public List<TimesForManager> GetTimesForManager(String idManagerCode, Date startDate, Date finishDate) {
-        return locator.getTimesForManager().GetTimesForManager(idManagerCode, startDate, finishDate);
+    public List<TimesForManager> GetTimesForManager(String idManagerCode, Date startDate, Date
+            finishDate) {
+        return locator.getTimesForManager().GetTimesForManager(idManagerCode, startDate,
+                finishDate);
     }
 
     public Boolean DeleteTimes(Object times) {
@@ -137,8 +142,10 @@ public class App {
 
     }
 
-    public List<ViewTimesManagerDetail> GetTimesManagerDetail(String idManagerCode, Date startDate, Date finishDate) {
-        return locator.getTimesManagerDetail().GetTimesManagerDetail(idManagerCode, startDate, finishDate);
+    public List<ViewTimesManagerDetail> GetTimesManagerDetail(String idManagerCode, Date
+            startDate, Date finishDate) {
+        return locator.getTimesManagerDetail().GetTimesManagerDetail(idManagerCode, startDate,
+                finishDate);
     }
 
 

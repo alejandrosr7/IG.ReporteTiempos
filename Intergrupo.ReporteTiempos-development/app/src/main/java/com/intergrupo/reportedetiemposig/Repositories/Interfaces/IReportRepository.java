@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by yo on 28/11/15.
  */
-public interface IReportRepository  {
+public interface IReportRepository {
 
     TiemposResponse<List<Manager>> ListProyects();
 
@@ -41,7 +41,8 @@ public interface IReportRepository  {
 
     List<ActivityDiscipline> getActivity(int codeDiscipline);
 
-    List<ActivityDiscipline> getFuncionalityActivityStimateForRegister(int codeDiscipline, int codeFuncionality);
+    List<ActivityDiscipline> getFuncionalityActivityStimateForRegister(int codeDiscipline, int
+            codeFuncionality);
 
 
     Boolean EditReport(ReportTime register);

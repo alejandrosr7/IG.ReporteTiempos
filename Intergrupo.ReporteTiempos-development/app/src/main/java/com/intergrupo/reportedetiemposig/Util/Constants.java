@@ -103,4 +103,5 @@ public interface Constants {
     String CODIGO_ACTIVIDAD = "CodigoActividad";
 
     String CODIGO_DISCIPLINA = "CodigoDisciplina";
+    String STATUS_DEL_ERROR = "Status del error:";
 }

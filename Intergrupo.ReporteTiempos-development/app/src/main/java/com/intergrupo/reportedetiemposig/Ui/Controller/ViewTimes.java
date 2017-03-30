@@ -47,85 +47,86 @@ import butterknife.InjectView;
  * Created by Usuario on 1/05/2016.
  */
 public class ViewTimes extends AppCompatActivity {
-
+    
     AlertDialog alertDialog;
     ProgressDialog progressDialog;
     ArrayList<HashMap> listProyects = new ArrayList<>();
     HashMap<String, ArrayList<ViewTimesModel>> activityCollection = new HashMap<>();
-
+    
     List<ResumTimesForCollaborator> listResumTimesCollaborator = new ArrayList<>();
     List<ViewTimesModel> listTimesCollaborator = new ArrayList<>();
-
+    
     Integer currentWeek = null;
     Integer currentMonth = null;
     HashMap<Integer, Double> totalWeek = new HashMap<>();
     HashMap<Integer, Double> totalMonth = new HashMap<>();
-
+    
     ExpandableListAdapter expandableListAdapter;
-
+    
     Boolean monthly = false;
     Boolean weekly = true;
     ArrayList<Date> dateFilter = null;
-
+    
     @InjectView(R.id.tvByReport)
     TextView tvByReport;
-
+    
     @InjectView(R.id.tvReported)
     TextView tvReported;
-
-
+    
+    
     @InjectView(R.id.containerListView)
     RelativeLayout containerListView;
-
+    
     @InjectView(R.id.elvProyects)
     ExpandableListView elvProyects;
-
+    
     @InjectView(R.id.linear_byDate)
     LinearLayout linerByDate;
-
+    
     @InjectView(R.id.linear_weekly)
     LinearLayout linear_weekly;
-
+    
     @InjectView(R.id.linear_monthly)
     LinearLayout linear_monthly;
-
+    
     String userCode;
     ValidateInternet validateInternet = new ValidateInternet(this);
     Integer numberWeek;
     Integer numberMonth;
-
-
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_times);
-
+        
         initializeVisualElements();
     }
-
+    
     private void initializeVisualElements() {
         userCode = getIntent().getStringExtra(Constants.USER_CODIGO);
         this.progressDialog = new ProgressDialog(this);
         this.progressDialog.setMessage(Constants.POR_FAVOR_ESPERE);
         this.progressDialog.setCancelable(false);
-
+        
         ButterKnife.inject(this);
-
+        
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-
+    
+    
     public void onResume() {
         super.onResume();
         if (validateInternet.isConnected()) {
             getProyectsList(userCode, true);
-
         } else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, ViewTimes.this);
+            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                            .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
+                    ViewTimes.this);
         }
-
+        
     }
     
     /**
@@ -136,17 +137,17 @@ public class ViewTimes extends AppCompatActivity {
      * @param menu Objeto de tipo Menu al que se le asignara
      *             la opción de busqueda.
      */
-
+    
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_view_times, menu);
-
+        
         MenuItem searchItem = menu.findItem(R.id.search);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-
+        
         MenuItemCompat menuItem = new MenuItemCompat();
-
+        
         SearchView searchView = (SearchView) menuItem.getActionView(searchItem);
-
+        
         // LISTENER PARA EL EDIT TEXT DE LA BUSQUEDA
         if (searchView != null) {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -156,7 +157,7 @@ public class ViewTimes extends AppCompatActivity {
                         expandableListAdapter.filterData(query, dateFilter, weekly, monthly);
                     return false;
                 }
-
+                
                 @Override
                 public boolean onQueryTextChange(String newText) {
                     if (expandableListAdapter != null)
@@ -165,14 +166,15 @@ public class ViewTimes extends AppCompatActivity {
                 }
             });
         }
-
+        
         // LISTENER PARA LA APERTURA Y CIERRE DEL WIDGET
-        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat
+                .OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
                 return false;
             }
-
+            
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 return false;
@@ -180,8 +182,8 @@ public class ViewTimes extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
-
-
+    
+    
     /**
      * Método que obtiene la lista de proyectos con sus
      * respectivas horas reportadas asociados al colaborador en sesion,
@@ -203,21 +205,22 @@ public class ViewTimes extends AppCompatActivity {
             @Override
             public void run() {
                 listTimesCollaborator = App.getInstance().GetViewTimesForCollaborator(userCode);
-
+                
                 if (listTimesCollaborator == null) {
                     showProyects(false, Constants.MESSAGE_ERROR_GET_TIMES, update);
                 } else {
-
+                    
                     if (listTimesCollaborator.size() > 0) {
-
+                        
                         activityCollection = new HashMap<>();
                         Collections.sort(listTimesCollaborator, new Comparator<ViewTimesModel>() {
                             @Override
                             public int compare(ViewTimesModel lhs, ViewTimesModel rhs) {
-                                return new Integer(rhs.getCodigoProyecto()).compareTo(new Integer(lhs.getCodigoProyecto()));
+                                return new Integer(rhs.getCodigoProyecto()).compareTo(new Integer
+                                        (lhs.getCodigoProyecto()));
                             }
                         });
-
+                        
                         Integer idProyect = null;
                         Integer idNextProyect;
                         Double sumHours = 0d;
@@ -225,16 +228,21 @@ public class ViewTimes extends AppCompatActivity {
                         HashMap<String, Object> proyectMap = new HashMap<>();
                         ;
                         Integer i = 0;
-
-                        ArrayList<ViewTimesModel> timeReportedxProyect = new ArrayList<ViewTimesModel>();
+                        
+                        ArrayList<ViewTimesModel> timeReportedxProyect = new
+                                ArrayList<ViewTimesModel>();
                         if (listTimesCollaborator.size() == 1) {
                             if (listTimesCollaborator.get(0).getProyectoActivo()) {
-                                proyectMap.put(Constants.ID, listTimesCollaborator.get(0).getCodigoProyecto());
-                                proyectMap.put(Constants.PROYECT, listTimesCollaborator.get(0).getNombreProyecto());
-                                proyectMap.put(Constants.TIME, listTimesCollaborator.get(0).getHoras());
+                                proyectMap.put(Constants.ID, listTimesCollaborator.get(0)
+                                        .getCodigoProyecto());
+                                proyectMap.put(Constants.PROYECT, listTimesCollaborator.get(0)
+                                        .getNombreProyecto());
+                                proyectMap.put(Constants.TIME, listTimesCollaborator.get(0)
+                                        .getHoras());
                                 listProyect.add(proyectMap);
                                 timeReportedxProyect.add(listTimesCollaborator.get(0));
-                                activityCollection.put(listTimesCollaborator.get(0).getCodigoProyecto().toString(), timeReportedxProyect);
+                                activityCollection.put(listTimesCollaborator.get(0)
+                                        .getCodigoProyecto().toString(), timeReportedxProyect);
                             }
                         } else {
                             for (ViewTimesModel proyect : listTimesCollaborator) {
@@ -248,14 +256,17 @@ public class ViewTimes extends AppCompatActivity {
                                     idProyect = proyect.getCodigoProyecto();
                                     sumHours += proyect.getHoras();
                                     try {
-                                        idNextProyect = listTimesCollaborator.get(i + 1).getCodigoProyecto();
+                                        idNextProyect = listTimesCollaborator.get(i + 1)
+                                                .getCodigoProyecto();
                                     } catch (Exception e) {
                                         idNextProyect = null;
                                     }
-
+                                    
                                     if (!idProyect.equals(idNextProyect)) {
-                                        listProyect.add(getProyectMapData(proyectMap, proyect, sumHours));
-                                        activityCollection.put(proyect.getCodigoProyecto().toString(), timeReportedxProyect);
+                                        listProyect.add(getProyectMapData(proyectMap, proyect,
+                                                sumHours));
+                                        activityCollection.put(proyect.getCodigoProyecto()
+                                                .toString(), timeReportedxProyect);
                                         sumHours = 0d;
                                         timeReportedxProyect = new ArrayList<>();
                                     }
@@ -266,14 +277,17 @@ public class ViewTimes extends AppCompatActivity {
                                         sumHours += proyect.getHoras();
                                         timeReportedxProyect.add(proyect);
                                         try {
-                                            idNextProyect = listTimesCollaborator.get(i + 1).getCodigoProyecto();
+                                            idNextProyect = listTimesCollaborator.get(i + 1)
+                                                    .getCodigoProyecto();
                                         } catch (Exception e) {
                                             idNextProyect = null;
                                         }
-
+                                        
                                         if (!idProyect.equals(idNextProyect)) {
-                                            listProyect.add(getProyectMapData(proyectMap, proyect, sumHours));
-                                            activityCollection.put(proyect.getCodigoProyecto().toString(), timeReportedxProyect);
+                                            listProyect.add(getProyectMapData(proyectMap,
+                                                    proyect, sumHours));
+                                            activityCollection.put(proyect.getCodigoProyecto()
+                                                    .toString(), timeReportedxProyect);
                                             sumHours = 0d;
                                             timeReportedxProyect = new ArrayList<>();
                                         }
@@ -282,22 +296,25 @@ public class ViewTimes extends AppCompatActivity {
                                         sumHours += proyect.getHoras();
                                         timeReportedxProyect.add(proyect);
                                         try {
-                                            idNextProyect = listTimesCollaborator.get(i + 1).getCodigoProyecto();
+                                            idNextProyect = listTimesCollaborator.get(i + 1)
+                                                    .getCodigoProyecto();
                                         } catch (Exception e) {
                                             idNextProyect = null;
                                         }
-
+                                        
                                         if (!idProyect.equals(idNextProyect)) {
-                                            listProyect.add(getProyectMapData(proyectMap, proyect, sumHours));
-                                            activityCollection.put(proyect.getCodigoProyecto().toString(), timeReportedxProyect);
+                                            listProyect.add(getProyectMapData(proyectMap,
+                                                    proyect, sumHours));
+                                            activityCollection.put(proyect.getCodigoProyecto()
+                                                    .toString(), timeReportedxProyect);
                                             sumHours = 0d;
                                             timeReportedxProyect = new ArrayList<>();
                                         }
-
+                                        
                                     }
                                 }
-
-
+                                
+                                
                             }
                         }
                         listProyects.addAll(listProyect);
@@ -311,16 +328,17 @@ public class ViewTimes extends AppCompatActivity {
         };
         thread.start();
     }
-
-    private HashMap getProyectMapData(HashMap<String, Object> proyectMapMethod, ViewTimesModel proyectName, Double sumHoursMethod) {
+    
+    private HashMap getProyectMapData(HashMap<String, Object> proyectMapMethod, ViewTimesModel
+            proyectName, Double sumHoursMethod) {
         proyectMapMethod.put(Constants.ID, proyectName.getCodigoProyecto());
         proyectMapMethod.put(Constants.PROYECT, proyectName.getNombreProyecto());
         proyectMapMethod.put(Constants.TIME, sumHoursMethod);
-
+        
         return proyectMapMethod;
     }
-
-
+    
+    
     /**
      * Método encargado de establecer las listas de los proyectos
      * con sus respectivos reportes en la actividad.
@@ -338,39 +356,46 @@ public class ViewTimes extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (correct) {
-                        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.elvProyects);
-                        expandableListAdapter = new ExpandableListAdapter(ViewTimes.this, listProyects, activityCollection);
+                        ExpandableListView expandableListView = (ExpandableListView) findViewById
+                                (R.id.elvProyects);
+                        expandableListAdapter = new ExpandableListAdapter(ViewTimes.this,
+                                listProyects, activityCollection);
                         expandableListView.setAdapter(expandableListAdapter);
                         expandableListAdapter.filterData(new String(), null, weekly, monthly);
-
+                        
                     } else {
                         if (update) {
-                            ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.elvProyects);
-                            expandableListAdapter = new ExpandableListAdapter(ViewTimes.this, new ArrayList<HashMap>(), new HashMap<String, ArrayList<ViewTimesModel>>());
+                            ExpandableListView expandableListView = (ExpandableListView)
+                                    findViewById(R.id.elvProyects);
+                            expandableListAdapter = new ExpandableListAdapter(ViewTimes.this, new
+                                    ArrayList<HashMap>(), new HashMap<String,
+                                    ArrayList<ViewTimesModel>>());
                             expandableListView.setAdapter(expandableListAdapter);
                         }
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimes.this);
+                        
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder
+                                (ViewTimes.this);
                         alertDialogBuilder.setTitle(R.string.advertencia);
                         alertDialogBuilder.setMessage(error);
-                        alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
+                        alertDialogBuilder.setPositiveButton(R.string.aceptar, new
+                                DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
                         alertDialogBuilder.show();
                     }
-
-
                     getResumTimes(userCode);
-
+                    
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
         }
+        progressDialog.dismiss();
     }
-
+    
     /**
      * Método que obtiene la sumatoria de los reportes de la
      * ultima semana y del ultimo mes y posteriormente los
@@ -379,20 +404,22 @@ public class ViewTimes extends AppCompatActivity {
      * @param userCode Codigo del colaborar.
      */
     public void getResumTimes(final String userCode) {
-
+        
         Thread thread = new Thread() {
             @Override
             public void run() {
-                listResumTimesCollaborator = App.getInstance().GetResumTimesForCollaborator(userCode);
+                listResumTimesCollaborator = App.getInstance().GetResumTimesForCollaborator
+                        (userCode);
                 if (listResumTimesCollaborator != null) {
-
-
-                    Collections.sort(listResumTimesCollaborator, new Comparator<ResumTimesForCollaborator>() {
-                        @Override
-                        public int compare(ResumTimesForCollaborator lhs, ResumTimesForCollaborator rhs) {
-                            return new Integer(rhs.getSemana()).compareTo(new Integer(lhs.getSemana()));
-                        }
-                    });
+                    Collections.sort(listResumTimesCollaborator, new
+                            Comparator<ResumTimesForCollaborator>() {
+                                @Override
+                                public int compare(ResumTimesForCollaborator lhs,
+                                                   ResumTimesForCollaborator rhs) {
+                                    return new Integer(rhs.getSemana()).compareTo(new Integer(lhs
+                                            .getSemana()));
+                                }
+                            });
                     Calendar calendarioActual = new GregorianCalendar();
                     numberWeek = calendarioActual.get(Calendar.WEEK_OF_YEAR);
                     if (calendarioActual.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
@@ -401,11 +428,13 @@ public class ViewTimes extends AppCompatActivity {
                     numberMonth = calendarioActual.get(Calendar.MONTH) + 1;
                     totalWeek = new HashMap<>();
                     Double sum;
-
+                    
                     for (ResumTimesForCollaborator resumeTime : listResumTimesCollaborator) {
-
-                        sum = resumeTime.getLunes() + resumeTime.getMartes() + resumeTime.getMiercoles() + resumeTime.getJueves() + resumeTime.getViernes() + resumeTime.getSabado() + resumeTime.getDomingo();
-
+                        
+                        sum = resumeTime.getLunes() + resumeTime.getMartes() + resumeTime
+                                .getMiercoles() + resumeTime.getJueves() + resumeTime.getViernes
+                                () + resumeTime.getSabado() + resumeTime.getDomingo();
+                        
                         if (currentWeek == null) {
                             currentWeek = resumeTime.getSemana();
                         }
@@ -418,16 +447,16 @@ public class ViewTimes extends AppCompatActivity {
                         if (currentMonth == null) {
                             currentMonth = resumeTime.getMes();
                         }
-
+                        
                         if (totalMonth.containsKey(resumeTime.getMes())) {
                             Double last = totalMonth.get(resumeTime.getMes());
                             totalMonth.put(resumeTime.getMes(), last + sum);
                         } else {
                             totalMonth.put(resumeTime.getMes(), sum);
                         }
-
+                        
                     }
-
+                    
                     resumTimesFinish();
                 }
             }
@@ -451,23 +480,23 @@ public class ViewTimes extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
-
+    
+    
     /**
      * Metodo que establece resumen de horas reportadas semanalmente
      * en la parte superior de la actividad
      */
     @OnClick(R.id.linear_weekly)
     public void WeeklyInfo() {
-
+        
         linear_weekly.setBackgroundColor(getResources().getColor(R.color.gray));
         linear_monthly.setBackground(getResources().getDrawable(R.drawable.border));
         linerByDate.setBackground(getResources().getDrawable(R.drawable.border));
-
+        
         if (numberWeek != null && totalWeek != null && totalWeek.get(numberWeek) != null) {
-
+            
             Double byReported = 45d - totalWeek.get(numberWeek);
             tvByReport.setText(byReported < 0 ? "0" : byReported.toString());
             tvReported.setText(totalWeek.get(numberWeek).toString());
@@ -477,7 +506,8 @@ public class ViewTimes extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimes.this);
             alertDialogBuilder.setTitle(R.string.advertencia);
             alertDialogBuilder.setMessage(Constants.MESSAGE_COLLABORATOR_WITHOUT_TIMES);
-            alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface
+                    .OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -491,17 +521,17 @@ public class ViewTimes extends AppCompatActivity {
         if (expandableListAdapter != null) {
             expandableListAdapter.filterData(new String(), null, weekly, monthly);
         }
-
-
+        
+        
     }
-
+    
     /**
      * Metodo que establece resumen de horas reportadas mensualmente
      * en la parte superior de la actividad
      */
     @OnClick(R.id.linear_monthly)
     public void MonthlyInfo() {
-
+        
         linear_weekly.setBackground(getResources().getDrawable(R.drawable.border));
         linear_monthly.setBackgroundColor(getResources().getColor(R.color.gray));
         linerByDate.setBackground(getResources().getDrawable(R.drawable.border));
@@ -515,7 +545,8 @@ public class ViewTimes extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimes.this);
             alertDialogBuilder.setTitle(R.string.advertencia);
             alertDialogBuilder.setMessage(Constants.MESSAGE_COLLABORATOR_WITHOUT_TIMES);
-            alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface
+                    .OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -529,9 +560,9 @@ public class ViewTimes extends AppCompatActivity {
         if (expandableListAdapter != null) {
             expandableListAdapter.filterData(new String(), null, weekly, monthly);
         }
-
+        
     }
-
+    
     /**
      * Metodo encargado de mostrar los calendarios para
      * filtrar los reportes por un rango de fechas especifico.
@@ -541,25 +572,28 @@ public class ViewTimes extends AppCompatActivity {
         linear_weekly.setBackground(getResources().getDrawable(R.drawable.border));
         linear_monthly.setBackground(getResources().getDrawable(R.drawable.border));
         linerByDate.setBackgroundColor(getResources().getColor(R.color.gray));
-
+        
         Calendar now = Calendar.getInstance();
         DatePickerDialog dpd = DatePickerDialog.newInstance(
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int
+                            dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
                         Date startDate = new Date(year - 1900, monthOfYear, dayOfMonth);
                         Date finishDate = new Date(yearEnd - 1900, monthOfYearEnd, dayOfMonthEnd);
                         weekly = false;
                         monthly = false;
                         if (startDate.getTime() > finishDate.getTime()) {
-                            Toast.makeText(ViewTimes.this, Constants.MESSAGE_USER_DATE_LESS, Toast.LENGTH_LONG).show();
+                            Toast.makeText(ViewTimes.this, Constants.MESSAGE_USER_DATE_LESS,
+                                    Toast.LENGTH_LONG).show();
                         } else {
                             dateFilter = new ArrayList<Date>();
                             dateFilter.add(startDate);
                             dateFilter.add(finishDate);
-                            expandableListAdapter.filterData(new String(), dateFilter, weekly, monthly);
+                            expandableListAdapter.filterData(new String(), dateFilter, weekly,
+                                    monthly);
                         }
-
+                        
                     }
                 },
                 now.get(Calendar.YEAR),
@@ -574,13 +608,13 @@ public class ViewTimes extends AppCompatActivity {
         gregorianCalendar.add(Calendar.WEEK_OF_YEAR, -2);
         dpd.setMinDate(gregorianCalendar);
     }
-
+    
     public void EditTime(ViewTimesModel activity) {
         Intent intent = new Intent(ViewTimes.this, register.class);
         intent.putExtra(Constants.TIMES, activity);
         startActivity(intent);
     }
-
+    
     /**
      * Metodo encargado de mostrar un mensaje de confirmacion al tratar de
      * eliminar un registro de tiempo.
@@ -593,63 +627,65 @@ public class ViewTimes extends AppCompatActivity {
         alert.setTitle(Constants.TITLE_DELETE_TIME);
         alert.setMessage(Constants.DELETE_CONFIRMATION_MESSAGE);
         alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
+            
             public void onClick(DialogInterface dialog, int whichButton) {
                 alertDialog.dismiss();
                 ProgressDialog progressDialogdelete = new ProgressDialog(ViewTimes.this);
                 progressDialogdelete.show();
                 DeleteTime(activity, progressDialogdelete);
-
+                
             }
         });
         alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-
+            
             public void onClick(DialogInterface dialog, int whichButton) {
                 alertDialog.dismiss();
-
+                
             }
         });
         alertDialog = alert.create();
         alertDialog.show();
     }
-
+    
     /**
      * Metodo encargado de eliminar un reporte de tiempos luego de
      * confirmar este.
      *
-     * @param activity             contexto de la actividad entregado por el metodo "ConfirmationDeleteTime"
+     * @param activity             contexto de la actividad entregado por el metodo
+     *                             "ConfirmationDeleteTime"
      * @param progressDialogdelete instancia del progress.
      */
-    public void DeleteTime(final ViewTimesModel activity, final ProgressDialog progressDialogdelete) {
-
+    public void DeleteTime(final ViewTimesModel activity, final ProgressDialog
+            progressDialogdelete) {
+        
         Thread thread = new Thread() {
             @Override
             public void run() {
                 Boolean delete = true;
                 try {
-
+                    
                     HashMap<String, ArrayList<HashMap>> timeToDeleted = new HashMap();
                     ArrayList codes = new ArrayList();
                     HashMap activityCode = new HashMap();
                     activityCode.put(Constants.CODIGO, activity.getCodigoActividad());
-
+                    
                     codes.add(activityCode);
                     timeToDeleted.put(Constants.CODIGOS, codes);
-
-
+                    
+                    
                     delete = App.getInstance().DeleteTimes(timeToDeleted);
                 } catch (Exception e) {
                     e.printStackTrace();
                     delete = false;
                 }
                 ConfirmDeletedTimes(delete, progressDialogdelete);
-
-
+                
+                
             }
         };
         thread.start();
     }
-
+    
     /**
      * Metodo encargado de informar si el reporte se elimino correctamente.
      *
@@ -657,7 +693,8 @@ public class ViewTimes extends AppCompatActivity {
      *                             reporte se realizo con exito o no
      * @param progressDialogdelete instancia del progress.
      */
-    public void ConfirmDeletedTimes(final Boolean delete, final ProgressDialog progressDialogdelete) {
+    public void ConfirmDeletedTimes(final Boolean delete, final ProgressDialog
+            progressDialogdelete) {
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
@@ -667,17 +704,18 @@ public class ViewTimes extends AppCompatActivity {
                         Toast.makeText(ViewTimes.this, Constants.DELETED_TIME, Toast.LENGTH_LONG);
                         getProyectsList(userCode, true);
                     } else {
-                        Toast.makeText(ViewTimes.this, R.string.error_eliminando_tiempo, Toast.LENGTH_LONG);
+                        Toast.makeText(ViewTimes.this, R.string.error_eliminando_tiempo, Toast
+                                .LENGTH_LONG);
                     }
-
+                    
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     public void FilterByDate(String date) {
         try {
             DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY);
@@ -692,5 +730,5 @@ public class ViewTimes extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    
 }

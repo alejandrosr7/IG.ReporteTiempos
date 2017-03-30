@@ -44,7 +44,9 @@ public class Error {
     public Error(RetrofitError error) {
         if(error.getResponse() != null){
 
-            Log.d("Status del error:", String.valueOf(error.getResponse().getStatus()));
+            Log.d(Constants.STATUS_DEL_ERROR, String.valueOf(error.getResponse()
+                    .getStatus
+                    ()));
         }
         if (error.isNetworkError()) {
             this.setCode(Constants.NETWORK_ERROR_CODE);

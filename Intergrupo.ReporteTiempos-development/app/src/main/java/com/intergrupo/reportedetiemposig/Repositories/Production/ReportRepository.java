@@ -20,7 +20,7 @@ import retrofit.RetrofitError;
 /**
  * Created by yo on 28/11/15.
  */
-public class ReportRepository implements IReportRepository{
+public class ReportRepository implements IReportRepository {
 
 
     @Override
@@ -94,7 +94,7 @@ public class ReportRepository implements IReportRepository{
         try {
             int soloActivos = 1;
             int IdFuncionalidadActual = -1;
-            return client.Getfunctionality(codeProyect, soloActivos, IdFuncionalidadActual );
+            return client.Getfunctionality(codeProyect, soloActivos, IdFuncionalidadActual);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
@@ -136,17 +136,17 @@ public class ReportRepository implements IReportRepository{
     }
 
     @Override
-    public List<ActivityDiscipline> getFuncionalityActivityStimateForRegister(int codeDiscipline, int codeFuncionality) {
+    public List<ActivityDiscipline> getFuncionalityActivityStimateForRegister(int codeDiscipline,
+                                                                              int codeFuncionality) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         try {
-            return client.getFuncionalityActivityStimateForRegister(codeDiscipline,codeFuncionality);
+            return client.getFuncionalityActivityStimateForRegister(codeDiscipline,
+                    codeFuncionality);
         } catch (RetrofitError retrofitError) {
             retrofitError.getBody();
         }
         return null;
     }
-
-
 
 
     @Override

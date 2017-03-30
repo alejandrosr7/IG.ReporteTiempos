@@ -66,9 +66,12 @@ public class Login extends AppCompatActivity {
 
 
     /*
-     * @Login: Toma los valores usuario y contraseña, estos son validados, si no cumple los requisitos necesarios, el sistema
-     * arrojará un mensaje negativo y en caso de cumplirlos obtiene la instancia del singleton de la App luego implementa
-     * el método consultUser, al cual se le envía 3 parámetros, el retorno de este método determinará cual mensaje será mostrado
+     * @Login: Toma los valores usuario y contraseña, estos son validados, si no cumple los
+     * requisitos necesarios, el sistema
+     * arrojará un mensaje negativo y en caso de cumplirlos obtiene la instancia del singleton de
+      * la App luego implementa
+     * el método consultUser, al cual se le envía 3 parámetros, el retorno de este método
+     * determinará cual mensaje será mostrado
      * al usuario.
      */
     @OnClick(R.id.Login_btnLogin)
@@ -109,7 +112,10 @@ public class Login extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string.apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet, Login.this);
+                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                                    .apreciado_usuario, R.string
+                            .por_favor_valide_su_conexion_a_internet,
+                            Login.this);
                 }
             });
         }
@@ -120,8 +126,7 @@ public class Login extends AppCompatActivity {
         SecurePreferences settings = new SecurePreferences(this);
         if (Login_chkRememberData.isChecked()) {
             settings.put(Constants.REMEMBER_ACCESS, Constants.TRUE);
-        }
-        if (!Login_chkRememberData.isChecked()) {
+        } else {
             settings.put(Constants.REMEMBER_ACCESS, null);
         }
     }
@@ -140,9 +145,11 @@ public class Login extends AppCompatActivity {
                     finish();
                 } else {
                     if (tiemposResponse != null) {
-                        Toast.makeText(Login.this, tiemposResponse.getTexto(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this, tiemposResponse.getTexto(), Toast.LENGTH_LONG)
+                                .show();
                     } else {
-                        Toast.makeText(Login.this, Constants.MESSAGE_USER_ERROR, Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this, Constants.MESSAGE_USER_ERROR, Toast
+                                .LENGTH_LONG).show();
                     }
                 }
             }
@@ -154,7 +161,8 @@ public class Login extends AppCompatActivity {
         sharedPreferencesUserData.put(Constants.USER_NAME, tiemposResponse.getName());
         sharedPreferencesUserData.put(Constants.USER_LASTNAME, tiemposResponse.getLastname());
         sharedPreferencesUserData.put(Constants.URLUSERPHOTO, tiemposResponse.getUrlphoto());
-        sharedPreferencesUserData.put(Constants.USER_CODIGO, tiemposResponse.getCodeuser().toString());
+        sharedPreferencesUserData.put(Constants.USER_CODIGO, tiemposResponse.getCodeuser()
+                .toString());
         sharedPreferencesUserData.put(Constants.IG_USER, tiemposResponse.getManager().toString());
     }
 
@@ -170,7 +178,8 @@ public class Login extends AppCompatActivity {
 
     private boolean validatePasswordField() {
         if (TextUtils.isEmpty(EdPassword.getText().toString().trim())) {
-            showPopup(getResources().getString(R.string.campos_incompletos), getResources().getString(R.string.debes_ingresar_una_contrasenia), EdPassword);
+            showPopup(getResources().getString(R.string.campos_incompletos), getResources()
+                    .getString(R.string.debes_ingresar_una_contrasenia), EdPassword);
             return false;
         }
         return true;
@@ -178,12 +187,14 @@ public class Login extends AppCompatActivity {
 
     private Boolean validateUserField() {
         if (TextUtils.isEmpty(EdUser.getText().toString().trim())) {
-            showPopup(getResources().getString(R.string.campos_incompletos), getResources().getString(R.string.debes_ingresar_tu_correo_electronico), EdUser);
+            showPopup(getResources().getString(R.string.campos_incompletos), getResources()
+                    .getString(R.string.debes_ingresar_tu_correo_electronico), EdUser);
             return false;
         }
         if (EdUser.getText().toString().contains("@")) {
             if (validation.isNotCorrectEmail(EdUser.getText().toString().trim())) {
-                showPopup(getResources().getString(R.string.campos_incompletos), getResources().getString(R.string.message_email_invalid), EdUser);
+                showPopup(getResources().getString(R.string.campos_incompletos), getResources()
+                        .getString(R.string.message_email_invalid), EdUser);
                 return false;
             }
         }
