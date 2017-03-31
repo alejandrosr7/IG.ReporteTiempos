@@ -60,7 +60,7 @@
                         android:fontFamily="sans-serif"
                         android:hint="@string/id_del_usuario"
                         android:inputType="textEmailAddress"
-                        android:text="mlmartinez"
+                        android:text="@string/user_id_collaborator"
                         android:textAppearance="?android:attr/textAppearanceMedium"/>
                 </LinearLayout>
             </LinearLayout>
@@ -109,7 +109,7 @@
                         android:fontFamily="sans-serif"
                         android:hint="@string/contrasenia"
                         android:inputType="textPassword"
-                        android:text="Mishijos201703"
+                        android:text="@string/password_collaborator"
                         android:textAppearance="?android:attr/textAppearanceMedium"/>
                 </LinearLayout>
             </LinearLayout>

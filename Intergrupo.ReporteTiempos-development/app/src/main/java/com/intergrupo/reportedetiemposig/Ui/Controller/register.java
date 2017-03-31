@@ -120,8 +120,6 @@ public class register extends AppCompatActivity {
     
     Integer currentWeek = null;
     HashMap<Integer, Double> totalWeek = new HashMap<>();
-    HashMap<Integer, Double> totalMonth = new HashMap<>();
-    
     
     /**
      * Método encargado de inicializar variables y de
@@ -360,7 +358,6 @@ public class register extends AppCompatActivity {
                         ClassificationConceptHourList = App.getInstance()
                                 .GetClassificationConceptHour(codeTypeHour);
                         SetClassificationConceptHour();
-                        return;
                     }
                 };
                 thread.start();
@@ -656,6 +653,7 @@ public class register extends AppCompatActivity {
     /**
      * Método que obtiene la lista de gerentes
      */
+    //TODO: manager
     @OnClick(R.id.register_edManager)
     public void GetManager() {
         progressDialog.show();
@@ -712,7 +710,6 @@ public class register extends AppCompatActivity {
                         }
                         
                         setDiscipline();
-                        return;
                     }
                 };
                 thread.start();
@@ -1352,7 +1349,6 @@ public class register extends AppCompatActivity {
                         tiemposResponse = App.getInstance().Register(register);
                     }
                     validateRegiter(tiemposResponse);
-                    return;
                 }
             };
             thread.start();

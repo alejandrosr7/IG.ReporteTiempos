@@ -139,10 +139,7 @@ public class Login extends AppCompatActivity {
             public void run() {
                 progressDialog.dismiss();
                 if (tiemposResponse != null && tiemposResponse.getCode() == 9) {
-                    createSecuredPreferences(tiemposResponse);
-                    Intent intent = new Intent(Login.this, MenuActivity.class);
-                    startActivity(intent);
-                    finish();
+                    startMenuActivity(tiemposResponse);
                 } else {
                     if (tiemposResponse != null) {
                         Toast.makeText(Login.this, tiemposResponse.getTexto(), Toast.LENGTH_LONG)
@@ -154,6 +151,13 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+    }
+    
+    private void startMenuActivity(final User tiemposResponse) {
+        createSecuredPreferences(tiemposResponse);
+        Intent intent = new Intent(Login.this, MenuActivity.class);
+        startActivity(intent);
+        finish();
     }
     
     private void createSecuredPreferences(final User tiemposResponse) {

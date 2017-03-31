@@ -43,7 +43,7 @@ public class Discipline {
      */
     @SerializedName("HorasEjecutadasDisciplina")
     @Expose
-    private Integer horasEjecutadasDisciplina;
+    private int horasEjecutadasDisciplina;
 
     /**
      * Permite obtener o establecer  las horas ejecutadas de a funcionnalidad
