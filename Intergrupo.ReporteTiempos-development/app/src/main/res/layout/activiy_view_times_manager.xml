@@ -30,7 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center|top"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:id="@+id/linear_weeklyg"
@@ -85,20 +86,13 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="15dp"></LinearLayout>
-
     <RelativeLayout
         android:id="@+id/containerListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="15dp"></LinearLayout>
 
         <ExpandableListView
             android:id="@+id/elvProyectg"

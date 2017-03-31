@@ -160,7 +160,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                                             ArrayList<ViewTimesManagerDetail>());
                             expandableListView.setAdapter(expandableListDetailAdapter);
                         }
-                        displayAlertDialog(error);                        
+                        displayAlertDialog(error);
                     }
                 }
             });
@@ -286,7 +286,6 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
 
         // LISTENER PARA EL EDIT TEXT
         if (searchView != null) {
-
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {

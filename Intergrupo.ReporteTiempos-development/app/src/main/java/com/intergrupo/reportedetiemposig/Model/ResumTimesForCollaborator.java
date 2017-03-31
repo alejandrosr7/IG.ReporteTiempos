@@ -7,9 +7,22 @@ import java.util.Date;
  */
 public class ResumTimesForCollaborator {
     
+    /**
+     * Permite obtener o establecer  el nombre
+     */
+    private Integer Identificador;
+    
+    private Integer Año;
+    
     private Integer Mes;
     
     private Integer Semana;
+    
+    private String NombreSemana;
+    
+    private String Funcionalidad;
+    
+    private String FechaActividad;
     
     private Double Lunes;
     
@@ -25,12 +38,44 @@ public class ResumTimesForCollaborator {
     
     private Double Domingo;
     
+    public Integer getIdentificador() {
+        return Identificador;
+    }
+    
+    public void setIdentificador(Integer identificador) {
+        Identificador = identificador;
+    }
+    
+    public Integer getAño() {
+        return Año;
+    }
+    
+    public void setAño(Integer año) {
+        Año = año;
+    }
+    
     public Integer getMes() {
         return Mes;
     }
     
+    public void setMes(Integer mes) {
+        Mes = mes;
+    }
+    
     public Integer getSemana() {
         return Semana;
+    }
+    
+    public String getNombreSemana() {
+        return NombreSemana;
+    }
+    
+    public String getFuncionalidad() {
+        return Funcionalidad;
+    }
+    
+    public String getFechaActividad() {
+        return FechaActividad;
     }
     
     public Double getLunes() {

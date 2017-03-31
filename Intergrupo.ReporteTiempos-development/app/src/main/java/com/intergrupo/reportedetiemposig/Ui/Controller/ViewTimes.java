@@ -519,7 +519,7 @@ public class ViewTimes extends AppCompatActivity {
         monthly = false;
         dateFilter = null;
         if (expandableListAdapter != null) {
-            expandableListAdapter.filterData(new String(), null, weekly, monthly);
+            expandableListAdapter.filterData("", null, weekly, monthly);
         }
         
         
@@ -558,7 +558,7 @@ public class ViewTimes extends AppCompatActivity {
         monthly = true;
         dateFilter = null;
         if (expandableListAdapter != null) {
-            expandableListAdapter.filterData(new String(), null, weekly, monthly);
+            expandableListAdapter.filterData("", null, weekly, monthly);
         }
         
     }
@@ -590,7 +590,7 @@ public class ViewTimes extends AppCompatActivity {
                             dateFilter = new ArrayList<Date>();
                             dateFilter.add(startDate);
                             dateFilter.add(finishDate);
-                            expandableListAdapter.filterData(new String(), dateFilter, weekly,
+                            expandableListAdapter.filterData("", dateFilter, weekly,
                                     monthly);
                         }
                         
@@ -701,11 +701,12 @@ public class ViewTimes extends AppCompatActivity {
                 public void run() {
                     progressDialogdelete.dismiss();
                     if (delete) {
-                        Toast.makeText(ViewTimes.this, Constants.DELETED_TIME, Toast.LENGTH_LONG);
+                        Toast.makeText(ViewTimes.this, Constants.DELETED_TIME, Toast.LENGTH_LONG)
+                                .show();
                         getProyectsList(userCode, true);
                     } else {
                         Toast.makeText(ViewTimes.this, R.string.error_eliminando_tiempo, Toast
-                                .LENGTH_LONG);
+                                .LENGTH_LONG).show();
                     }
                     
                 }
@@ -724,7 +725,7 @@ public class ViewTimes extends AppCompatActivity {
                 weekly = false;
                 monthly = false;
                 dateFilter.add(fecha);
-                expandableListAdapter.filterData(new String(), dateFilter, weekly, monthly);
+                expandableListAdapter.filterData("", dateFilter, weekly, monthly);
             }
         } catch (Exception e) {
             e.printStackTrace();

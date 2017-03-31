@@ -17,6 +17,4 @@ public interface IViewTimesRepository {
     List<ResumTimesForCollaborator> GetResumTimesForCollaborator(String codeUser);
 
     Boolean DeleteTime(Object codigos);
-
-
 }
