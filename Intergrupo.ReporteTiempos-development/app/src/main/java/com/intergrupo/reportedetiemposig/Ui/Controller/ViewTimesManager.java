@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-
+//TODO: cambia
 public class ViewTimesManager extends AppCompatActivity {
     ProgressDialog progressDialog;
     SecurePreferences manager;
@@ -50,11 +50,11 @@ public class ViewTimesManager extends AppCompatActivity {
     HashMap<String, ArrayList<TimesForManager>> expandableListDetail;
     IValidateInternet iValidateInternet;
     String usercode;
-    @InjectView(R.id.linear_weeklyg)
+    @InjectView(R.id.linear_byDateDetail)
     LinearLayout linear_weekyg;
-    @InjectView(R.id.linear_monthlyg)
+    @InjectView(R.id.linear_weeklyDetail)
     LinearLayout linear_monthlyg;
-    @InjectView(R.id.linear_byDate)
+    @InjectView(R.id.linear_monthlyDetail)
     LinearLayout linear_bydate;
     
     @Override
@@ -64,13 +64,13 @@ public class ViewTimesManager extends AppCompatActivity {
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activiy_view_times_manager);
+        setContentView(R.layout.activity_view_times_manager_detail);
         
         initializeVisualElementsAndResources();
     }
     
     private void initializeVisualElementsAndResources() {
-        expandableListView = (ExpandableListView) findViewById(R.id.elvProyectg);
+        expandableListView = (ExpandableListView) findViewById(R.id.elvCollaborator);
         expandableListDetail = new HashMap<>();
         expandableListTitle = new ArrayList<>();
         expandableListAdapter = new ExpandableListAdapterM(this, expandableListTitle,
@@ -79,7 +79,7 @@ public class ViewTimesManager extends AppCompatActivity {
         ButterKnife.inject(this);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         progressDialog = new ProgressDialog(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarM);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDetail);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         iValidateInternet = new ValidateInternet(ViewTimesManager.this);
@@ -235,7 +235,7 @@ public class ViewTimesManager extends AppCompatActivity {
                     progressDialog.dismiss();
                     if (correct) {
                         ExpandableListView expandableListView = (ExpandableListView) findViewById
-                                (R.id.elvProyectg);
+                                (R.id.elvCollaborator);
                         expandableListAdapterM = new ExpandableListAdapterM(ViewTimesManager
                                 .this, expandableListTitle, expandableListDetail);
                         expandableListView.setAdapter(expandableListAdapterM);
@@ -243,7 +243,7 @@ public class ViewTimesManager extends AppCompatActivity {
                     } else {
                         if (update) {
                             ExpandableListView expandableListView = (ExpandableListView)
-                                    findViewById(R.id.elvProyectg);
+                                    findViewById(R.id.elvCollaborator);
                             expandableListAdapterM = new ExpandableListAdapterM(ViewTimesManager
                                     .this, new ArrayList<TimesForManagerParent>(), new
                                     HashMap<String, ArrayList<TimesForManager>>());
@@ -286,7 +286,7 @@ public class ViewTimesManager extends AppCompatActivity {
     /**
      * Método que permite ejecutar el filtro semanal
      */
-    @OnClick(R.id.linear_weeklyg)
+    @OnClick(R.id.linear_weeklyDetail)
     public void week() {
         linear_weekyg.setBackgroundColor(getResources().getColor(R.color.gray));
         linear_monthlyg.setBackground(getResources().getDrawable(R.drawable.border));
@@ -306,7 +306,7 @@ public class ViewTimesManager extends AppCompatActivity {
     /**
      * Método que permite ejecutar el filtro mensual
      */
-    @OnClick(R.id.linear_monthlyg)
+    @OnClick(R.id.linear_monthlyDetail)
     public void month() {
         
         linear_weekyg.setBackground(getResources().getDrawable(R.drawable.border));
@@ -327,7 +327,7 @@ public class ViewTimesManager extends AppCompatActivity {
      * Método que permite ejecutar el filtro
      * por rango de fechas
      */
-    @OnClick(R.id.linear_byDate)
+    @OnClick(R.id.linear_byDateDetail)
     public void byDate() {
         
         linear_weekyg.setBackground(getResources().getDrawable(R.drawable.border));
