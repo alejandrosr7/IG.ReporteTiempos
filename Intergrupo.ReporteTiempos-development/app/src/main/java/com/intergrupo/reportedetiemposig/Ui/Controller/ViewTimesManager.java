@@ -80,6 +80,7 @@ public class ViewTimesManager extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         progressDialog = new ProgressDialog(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDetail);
+        toolbar.setTitle(R.string.por_proyecto);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         iValidateInternet = new ValidateInternet(ViewTimesManager.this);

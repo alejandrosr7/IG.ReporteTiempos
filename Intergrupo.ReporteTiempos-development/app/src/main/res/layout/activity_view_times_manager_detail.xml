@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blue"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/por_colaborador"/>
+            app:title="@string/por_colaborador_o_proyecto"/>
 
 
     </android.support.design.widget.AppBarLayout>

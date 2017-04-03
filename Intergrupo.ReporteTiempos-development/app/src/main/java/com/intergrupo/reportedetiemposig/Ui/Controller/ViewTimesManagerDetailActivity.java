@@ -69,6 +69,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         progressDialog = new ProgressDialog(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDetail);
+        toolbar.setTitle(R.string.por_colaborador);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         manager = new SecurePreferences(this);
