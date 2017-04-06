@@ -65,7 +65,7 @@
                             android:fontFamily="sans-serif"
                             android:hint="@string/id_del_usuario"
                             android:inputType="textEmailAddress"
-                            android:text="@string/user_id_manager"
+                            android:text="@string/user_id_collaborator"
                             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                     </android.support.design.widget.TextInputLayout>
@@ -109,8 +109,7 @@
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvEnterpriceName">
+                        android:layout_height="wrap_content" >
                         <EditText
                             android:id="@+id/Login_edPassword"
                             android:layout_width="match_parent"
@@ -121,7 +120,7 @@
                             android:fontFamily="sans-serif"
                             android:hint="@string/contrasenia"
                             android:inputType="textPassword"
-                            android:text="@string/password_manager"
+                            android:text="@string/password_collaborator"
                             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                     </android.support.design.widget.TextInputLayout>

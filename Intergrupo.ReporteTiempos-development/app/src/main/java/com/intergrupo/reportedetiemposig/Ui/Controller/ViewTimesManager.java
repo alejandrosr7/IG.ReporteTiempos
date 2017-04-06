@@ -362,7 +362,7 @@ public class ViewTimesManager extends AppCompatActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_view_times_manager, menu);
+        getMenuInflater().inflate(R.menu.menu_view_times, menu);
         
         MenuItem searchItem = menu.findItem(R.id.search);
         

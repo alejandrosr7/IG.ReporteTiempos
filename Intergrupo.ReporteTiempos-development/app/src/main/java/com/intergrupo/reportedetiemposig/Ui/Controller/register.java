@@ -664,7 +664,6 @@ public class register extends AppCompatActivity {
                     public void run() {
                         ManagerList = App.getInstance().GetManager();
                         setManager(ManagerList);
-                        return;
                     }
                 };
                 thread.start();
