@@ -443,8 +443,6 @@ public class register extends AppCompatActivity {
                     public void run() {
                         ProyectList = App.getInstance().GetProyect(codeManager);
                         SetProyect();
-                        
-                        return;
                     }
                 };
                 thread.start();
@@ -546,7 +544,6 @@ public class register extends AppCompatActivity {
                         public void run() {
                             functionalityList = App.getInstance().Getfunctionality(codeProyect);
                             Setfunctionality();
-                            return;
                         }
                     };
                     thread.start();
@@ -632,7 +629,6 @@ public class register extends AppCompatActivity {
                     public void run() {
                         ConceptHourList = App.getInstance().GetConceptHour();
                         SetConceptHour(ConceptHourList);
-                        return;
                     }
                 };
                 thread.start();
@@ -1347,7 +1343,7 @@ public class register extends AppCompatActivity {
                         
                         tiemposResponse = App.getInstance().Register(register);
                     }
-                    validateRegiter(tiemposResponse);
+                    validateRegister(tiemposResponse);
                 }
             };
             thread.start();
@@ -1366,7 +1362,7 @@ public class register extends AppCompatActivity {
      *
      * @param reg Booleano que determina si el reporte fue llevado a cabo con exito o no
      */
-    public void validateRegiter(final Boolean reg) {
+    public void validateRegister(final Boolean reg) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {

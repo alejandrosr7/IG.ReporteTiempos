@@ -74,64 +74,9 @@ public class Discipline {
         return CodigoDisciplina;
     }
     
-    public void setCodigoDisciplina(Integer codigoDisciplina) {
-        CodigoDisciplina = codigoDisciplina;
-    }
-    
-    public Integer getCodigoFuncionalidad() {
-        return codigoFuncionalidad;
-    }
-    
-    public void setCodigoFuncionalidad(Integer codigoFuncionalidad) {
-        this.codigoFuncionalidad = codigoFuncionalidad;
-    }
-    
-    public Integer getCodigoMaestroProceso() {
-        return codigoMaestroProceso;
-    }
-    
-    public void setCodigoMaestroProceso(Integer codigoMaestroProceso) {
-        this.codigoMaestroProceso = codigoMaestroProceso;
-    }
-    
-    public Integer getCodigoProyecto() {
-        return codigoProyecto;
-    }
-    
-    public void setCodigoProyecto(Integer codigoProyecto) {
-        this.codigoProyecto = codigoProyecto;
-    }
-    
-    public String getNombreDisciplina() {
-        return nombreDisciplina;
-    }
-    
-    public void setNombreDisciplina(String nombreDisciplina) {
-        this.nombreDisciplina = nombreDisciplina;
-    }
-    
-    public String getNombreFuncionalidad() {
-        return nombreFuncionalidad;
-    }
-    
-    public void setNombreFuncionalidad(String nombreFuncionalidad) {
-        this.nombreFuncionalidad = nombreFuncionalidad;
-    }
-    
-    public String getNombreMaestroProceso() {
-        return nombreMaestroProceso;
-    }
-    
-    public void setNombreMaestroProceso(String nombreMaestroProceso) {
-        this.nombreMaestroProceso = nombreMaestroProceso;
-    }
-    
     public String getNombreMaestroProcesoDisciplina() {
         return nombreMaestroProcesoDisciplina;
     }
     
-    public void setNombreMaestroProcesoDisciplina(String nombreMaestroProcesoDisciplina) {
-        this.nombreMaestroProcesoDisciplina = nombreMaestroProcesoDisciplina;
-    }
     
 }

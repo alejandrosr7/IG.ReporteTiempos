@@ -8,8 +8,6 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ClassificationConceptHour {
 
-
-
     @SerializedName("Nombre")
     @Expose
     private String Name;

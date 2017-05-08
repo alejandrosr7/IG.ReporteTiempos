@@ -231,8 +231,9 @@ public class ViewTimes extends AppCompatActivity {
                         
                         ArrayList<ViewTimesModel> timeReportedxProyect = new
                                 ArrayList<ViewTimesModel>();
-                        if (listTimesCollaborator.size() == 1) {
-                            if (listTimesCollaborator.get(0).getProyectoActivo()) {
+                        //TODO: era un if anidado dentro del otro... entonces se simplificó a uno
+                        //TODO: solo con un AND
+                        if (listTimesCollaborator.size() == 1 && listTimesCollaborator.get(0).getProyectoActivo()) {
                                 proyectMap.put(Constants.ID, listTimesCollaborator.get(0)
                                         .getCodigoProyecto());
                                 proyectMap.put(Constants.PROYECT, listTimesCollaborator.get(0)
@@ -243,7 +244,7 @@ public class ViewTimes extends AppCompatActivity {
                                 timeReportedxProyect.add(listTimesCollaborator.get(0));
                                 activityCollection.put(listTimesCollaborator.get(0)
                                         .getCodigoProyecto().toString(), timeReportedxProyect);
-                            }
+                            
                         } else {
                             for (ViewTimesModel proyect : listTimesCollaborator) {
                                 if (!proyect.getProyectoActivo()) {
