@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
         iValidateInternet = new ValidateInternet(Login.this);
         
         this.progressDialog = new ProgressDialog(this);
-        this.progressDialog.setMessage(Constants.USER_NAME);
+        this.progressDialog.setMessage(Constants.POR_FAVOR_ESPERE);
         this.progressDialog.setCancelable(false);
     }
     

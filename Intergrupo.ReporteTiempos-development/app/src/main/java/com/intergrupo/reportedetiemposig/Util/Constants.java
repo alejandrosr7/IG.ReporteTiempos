@@ -14,7 +14,6 @@ public interface Constants {
 
 
     String PREFS = "MyPrefs   File";
-    String USER_TOKEN = "userToken";
     String USER_NAME = "username";
     String USER_LASTNAME = "userLastName";
     String USER_CODIGO = "UserCodigo";
