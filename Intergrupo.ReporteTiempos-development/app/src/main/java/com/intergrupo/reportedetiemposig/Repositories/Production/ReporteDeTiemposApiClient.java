@@ -1,25 +1,13 @@
 package com.intergrupo.reportedetiemposig.Repositories.Production;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Looper;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.intergrupo.reportedetiemposig.CallBack.Callback;
-import com.intergrupo.reportedetiemposig.Helper.ApplicationContext;
-import com.intergrupo.reportedetiemposig.Model.App;
-import com.intergrupo.reportedetiemposig.Util.Constants;
 import com.squareup.okhttp.OkHttpClient;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
@@ -30,7 +18,7 @@ import retrofit.converter.GsonConverter;
 public class ReporteDeTiemposApiClient {
 
     //Url de VPN
-    private static final String API_BASE_PATH = "https://reportetiempos.intergrupo.com:444/api/";
+    private static final String API_BASE_PATH = "https://reportetiempos.intergrupo.com:444/api";
 
     private static ReporteDeTiemposApiClient INSTANCE = new ReporteDeTiemposApiClient();
 

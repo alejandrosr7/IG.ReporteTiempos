@@ -1,8 +1,20 @@
-package com.intergrupo.reportedetiemposig.Model;
-
-import android.content.Context;
+package com.intergrupo.reportedetiemposig;
 
 import com.intergrupo.reportedetiemposig.CallBack.Callback;
+import com.intergrupo.reportedetiemposig.Model.ActivityDiscipline;
+import com.intergrupo.reportedetiemposig.Model.ClassificationConceptHour;
+import com.intergrupo.reportedetiemposig.Model.ConceptHour;
+import com.intergrupo.reportedetiemposig.Model.Discipline;
+import com.intergrupo.reportedetiemposig.Model.Error;
+import com.intergrupo.reportedetiemposig.Model.Login;
+import com.intergrupo.reportedetiemposig.Model.Manager;
+import com.intergrupo.reportedetiemposig.Model.Proyect;
+import com.intergrupo.reportedetiemposig.Model.ReportTime;
+import com.intergrupo.reportedetiemposig.Model.ResumTimesForCollaborator;
+import com.intergrupo.reportedetiemposig.Model.TimesForManager;
+import com.intergrupo.reportedetiemposig.Model.ViewTimesManagerDetail;
+import com.intergrupo.reportedetiemposig.Model.ViewTimesModel;
+import com.intergrupo.reportedetiemposig.Model.functionality;
 import com.intergrupo.reportedetiemposig.Repositories.RepositoryLocator;
 
 import java.util.Date;
@@ -15,7 +27,7 @@ public class App {
 
     private static App instance;
     private static RepositoryLocator locator;
-    
+
     private App() {
         locator = RepositoryLocator.getInstance();
     }
@@ -34,7 +46,7 @@ public class App {
      */
 
 
-    public void ConsultUser(IGLogin login, final Callback<Boolean> callback) {
+    public void ConsultUser(Login login, final Callback<Boolean> callback) {
         locator.getSecurityRepository().SignIn(login, new Callback<Boolean>() {
             @Override
             public void complete(Boolean data) {
@@ -48,7 +60,7 @@ public class App {
         });
 
     }
-    
+
 
     public Boolean Register(ReportTime register) {
         return locator.getReportRepository().Register(register);

@@ -13,9 +13,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.intergrupo.reportedetiemposig.Helper.CustomAlertdialog;
 import com.intergrupo.reportedetiemposig.Helper.IValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.SecurePreferences;
-import com.intergrupo.reportedetiemposig.Helper.ShowAlertDialogValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.ValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.Validation;
 import com.intergrupo.reportedetiemposig.Model.*;
@@ -29,42 +29,43 @@ import butterknife.OnClick;
 import com.intergrupo.reportedetiemposig.Util.Constants;
 
 public class Login extends AppCompatActivity {
-    
-    ProgressDialog progressDialog;
-    Validation validation = new Validation();
-    
-    AlertDialog alertDialog;
-    IValidateInternet iValidateInternet;
+
+    private ProgressDialog progressDialog;
+    private Validation validation = new Validation();
+    private AlertDialog alertDialog;
+    private IValidateInternet iValidateInternet;
+    private CustomAlertdialog customAlertdialog;
+
     @InjectView(R.id.Login_edUser)
     EditText EdUser;
-    
+
     @InjectView(R.id.Login_edPassword)
     EditText EdPassword;
-    
+
     @InjectView(R.id.Login_btnLogin)
     Button Login_btnLogin;
-    
+
     @InjectView(R.id.Login_chkRememberData)
     CheckBox Login_chkRememberData;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-        
+        customAlertdialog = new CustomAlertdialog();
         initializeVisualElemetsAndMethods();
     }
-    
+
     private void initializeVisualElemetsAndMethods() {
         iValidateInternet = new ValidateInternet(Login.this);
-        
+
         this.progressDialog = new ProgressDialog(this);
         this.progressDialog.setMessage(Constants.POR_FAVOR_ESPERE);
         this.progressDialog.setCancelable(false);
     }
-    
-    
+
+
     /*
      * @Login: Toma los valores usuario y contraseña, estos son validados, si no cumple los
      * requisitos necesarios, el sistema
@@ -83,36 +84,36 @@ public class Login extends AppCompatActivity {
         }
         Login_btnLogin.setEnabled(true);
     }
-    
-    private IGLogin createAndSetUser() {
-        IGLogin login = new IGLogin();
+
+    private com.intergrupo.reportedetiemposig.Model.Login createAndSetUser() {
+        com.intergrupo.reportedetiemposig.Model.Login login = new com.intergrupo.reportedetiemposig.Model.Login();
         login.setUsuario(EdUser.getText().toString());
         login.setContrasena(EdPassword.getText().toString());
         return login;
     }
-    
-    private void loginUser(final IGLogin igLogin) {
+
+    private void loginUser(final com.intergrupo.reportedetiemposig.Model.Login login) {
         progressDialog.show();
         Thread thread = new Thread() {
             @Override
             public void run() {
-                verifyInternetConnection(igLogin);
+                verifyInternetConnection(login);
             }
         };
         thread.start();
-        
+
     }
-    
-    private void verifyInternetConnection(final IGLogin igLogin) {
+
+    private void verifyInternetConnection(final com.intergrupo.reportedetiemposig.Model.Login login) {
         if (iValidateInternet.isConnected()) {
-            User tiemposResponse = mApp.getInstance().SingInSincrono(igLogin);
+            User tiemposResponse = mApp.getInstance().SingInSincrono(login);
             verificarLogin(tiemposResponse);
         } else {
             progressDialog.dismiss();
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+                    customAlertdialog.showAlertDialogValidateInternet(R.string
                                     .apreciado_usuario, R.string
                                     .por_favor_valide_su_conexion_a_internet,
                             Login.this);
@@ -120,8 +121,8 @@ public class Login extends AppCompatActivity {
             });
         }
     }
-    
-    
+
+
     private void rememberData() {
         SecurePreferences settings = new SecurePreferences(this);
         if (Login_chkRememberData.isChecked()) {
@@ -130,10 +131,10 @@ public class Login extends AppCompatActivity {
             settings.put(Constants.REMEMBER_ACCESS, null);
         }
     }
-    
-    
+
+
     private void verificarLogin(final User tiemposResponse) {
-        
+
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -152,14 +153,14 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-    
+
     private void startMenuActivity(final User tiemposResponse) {
         createSecuredPreferences(tiemposResponse);
         Intent intent = new Intent(Login.this, MenuActivity.class);
         startActivity(intent);
         finish();
     }
-    
+
     private void createSecuredPreferences(final User tiemposResponse) {
         SecurePreferences sharedPreferencesUserData = new SecurePreferences(Login.this);
         sharedPreferencesUserData.put(Constants.USER_NAME, tiemposResponse.getName());
@@ -169,8 +170,8 @@ public class Login extends AppCompatActivity {
                 .toString());
         sharedPreferencesUserData.put(Constants.IG_USER, tiemposResponse.getManager().toString());
     }
-    
-    
+
+
     /**
      * Valida los campos antes de iniciar sesión
      *
@@ -179,7 +180,7 @@ public class Login extends AppCompatActivity {
     private Boolean ValidateData() {
         return (validateUserField() && validatePasswordField());
     }
-    
+
     private boolean validatePasswordField() {
         if (TextUtils.isEmpty(EdPassword.getText().toString().trim())) {
             showPopup(getResources().getString(R.string.campos_incompletos), getResources()
@@ -188,7 +189,7 @@ public class Login extends AppCompatActivity {
         }
         return true;
     }
-    
+
     private Boolean validateUserField() {
         if (TextUtils.isEmpty(EdUser.getText().toString().trim())) {
             showPopup(getResources().getString(R.string.campos_incompletos), getResources()
@@ -204,7 +205,7 @@ public class Login extends AppCompatActivity {
         }
         return true;
     }
-    
+
     /**
      * Permite mostrar un popup informando campos vacíos en el registro.
      *
@@ -212,7 +213,7 @@ public class Login extends AppCompatActivity {
      * @param editText EditText el cual hará focus donde haya error o esté vacío.
      */
     private void showPopup(String title, String message, final EditText editText) {
-        
+
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(title);
         alert.setMessage(message);
@@ -228,7 +229,7 @@ public class Login extends AppCompatActivity {
         alertDialog = alert.create();
         alertDialog.show();
     }
-    
-    
+
+
 }
 

@@ -2,8 +2,6 @@ package com.intergrupo.reportedetiemposig.Helper;
 
 import android.app.Application;
 
-import com.intergrupo.reportedetiemposig.Model.App;
-
 /**
  * Created by mauricio on 18/11/15.
  */

@@ -39,7 +39,7 @@ public class DialogSearch extends Dialog {
     @InjectView(R.id.lst_alert_selection)
     ListView lstAlertSelection;
 
-     @InjectView(R.id.lbl_alert_selection_empty)
+    @InjectView(R.id.lbl_alert_selection_empty)
     TextView lblAlertSelectionEmpty;
 
     @InjectView(R.id.btn_alert_selection_clear)
@@ -47,7 +47,6 @@ public class DialogSearch extends Dialog {
 
     @InjectView(R.id.btn_alert_selection_cancel)
     Button btnAlertSelectionCancel;
-
 
 
     public DialogSearch(Context context, ArrayList<String> items, String title, String searchText, IDialogSelection alertSelection) {
@@ -82,7 +81,7 @@ public class DialogSearch extends Dialog {
                 btnAlertSelectionClear.setVisibility(View.VISIBLE);
             }
 
-            lstAlertSelection.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,itemsCopy));
+            lstAlertSelection.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, itemsCopy));
         }
 
         @Override

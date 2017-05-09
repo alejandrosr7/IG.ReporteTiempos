@@ -1,77 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
 
-    <View android:focusable="true"
-        android:focusableInTouchMode="true"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="0px" />
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/txt_alert_selection_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/buscar"
+            android:layout_gravity="center"
             android:layout_weight="85"
-            android:layout_gravity="center"/>
+            android:hint="@string/buscar" />
 
         <ImageButton
             android:id="@+id/btn_alert_selection_clear"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="15"
-            android:src="@drawable/ic_clear_black_24dp"
-            style="?android:attr/buttonBarButtonStyle"
-            android:contentDescription="@string/limpiar"
             android:layout_gravity="center"
-            android:visibility="gone"/>
+            android:layout_weight="15"
+            android:contentDescription="@string/limpiar"
+            android:src="@drawable/ic_clear_black_24dp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp" />
 
     <ListView
         android:id="@+id/lst_alert_selection"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/lbl_alert_selection_empty"
+        style="@style/Base.TextAppearance.AppCompat.Headline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/no_hay_registros_seleccionados"
-        android:gravity="center"
-        android:visibility="gone"
-        style="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:gravity="center"
+        android:text="@string/no_hay_registros_seleccionados"
+        android:visibility="gone" />
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        style="?android:attr/buttonBarStyle">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_alert_selection_cancel"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cancelar"
-            style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black" />
     </LinearLayout>
 
 

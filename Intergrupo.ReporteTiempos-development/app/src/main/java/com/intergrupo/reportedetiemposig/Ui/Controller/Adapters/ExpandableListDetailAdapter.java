@@ -1,4 +1,4 @@
-package com.intergrupo.reportedetiemposig.Helper;
+package com.intergrupo.reportedetiemposig.Ui.Controller.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -56,15 +56,15 @@ public class ExpandableListDetailAdapter extends BaseExpandableListAdapter {
         switch (expandedListPosition) {
             case 0:
                 expandedListTextView.setText(R.string.administrativas);
-                numbergreen.setText(viewTimesManagerDetail.getAdministrativeHour()+"");
+                numbergreen.setText(viewTimesManagerDetail.getAdministrativeHour() + "");
                 break;
             case 1:
                 expandedListTextView.setText(R.string.novedades);
-                numbergreen.setText(viewTimesManagerDetail.getNewnessHour()+"");
+                numbergreen.setText(viewTimesManagerDetail.getNewnessHour() + "");
                 break;
             case 2:
                 expandedListTextView.setText(R.string.productivas);
-                numbergreen.setText(viewTimesManagerDetail.getProductiveHour()+"");
+                numbergreen.setText(viewTimesManagerDetail.getProductiveHour() + "");
                 break;
         }
         return convertView;
@@ -122,7 +122,7 @@ public class ExpandableListDetailAdapter extends BaseExpandableListAdapter {
 
         query = query.toLowerCase();
 
-          this.expandableListTitleCopy.clear();
+        this.expandableListTitleCopy.clear();
 //        this._listDataChild.clear();
 
 

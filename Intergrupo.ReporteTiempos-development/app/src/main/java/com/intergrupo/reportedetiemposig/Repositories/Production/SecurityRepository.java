@@ -1,13 +1,9 @@
 package com.intergrupo.reportedetiemposig.Repositories.Production;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.intergrupo.reportedetiemposig.CallBack.Callback;
-import com.intergrupo.reportedetiemposig.Model.IGLogin;
-import com.intergrupo.reportedetiemposig.Model.ReportTime;
-import com.intergrupo.reportedetiemposig.Model.TiemposResponse;
+import com.intergrupo.reportedetiemposig.Model.Login;
 import com.intergrupo.reportedetiemposig.Model.User;
 import com.intergrupo.reportedetiemposig.Model.UserError;
 import com.intergrupo.reportedetiemposig.Repositories.Interfaces.ISecurityRepository;
@@ -17,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by mauriciocaro on 23/06/15.
@@ -26,12 +21,12 @@ import retrofit.client.Response;
 public class SecurityRepository implements ISecurityRepository {
 
     @Override
-    public void SignIn(IGLogin login, Callback<Boolean> callback) {
+    public void SignIn(Login login, Callback<Boolean> callback) {
 
     }
 
     @Override
-    public User SignInSincrono(IGLogin login) {
+    public User SignInSincrono(Login login) {
         IRestClient client = ReporteDeTiemposApiClient.getInstance().getClient();
         User usuario = new User();
         try {

@@ -21,9 +21,8 @@ public class Validation {
 
 
     public boolean validateHoursReport(Double hours) {
-        return hours > 0.0 && hours<=24;
+        return hours > 0.0 && hours <= 24;
     }
-
 
 
 }

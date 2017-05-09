@@ -8,9 +8,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.intergrupo.reportedetiemposig.Helper.CustomAlertdialog;
 import com.intergrupo.reportedetiemposig.Helper.IValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.SecurePreferences;
-import com.intergrupo.reportedetiemposig.Helper.ShowAlertDialogValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.ValidateInternet;
 import com.intergrupo.reportedetiemposig.R;
 import com.intergrupo.reportedetiemposig.Util.Constants;
@@ -23,36 +23,37 @@ import butterknife.OnClick;
  * Created by LeidyZuluaga on 9/05/16.
  */
 public class MenuActivity extends AppCompatActivity {
-    
+
     @InjectView(R.id.Menu_Name_User)
     TextView nameUser;
-    
+
     String manager;
-    
+
     @InjectView(R.id.menu_photo)
     ImageView menu_photo;
-    
+
     @InjectView(R.id.settingsMenu)
     ImageView settings;
     String userCode;
-    
+
     @InjectView(R.id.first_item_menu)
     TextView firstItemMenu;
-    
+
     @InjectView(R.id.second_item_menu)
     TextView secondItemMenu;
-    
-    IValidateInternet iValidateInternet;
-    
+
+    private IValidateInternet iValidateInternet;
+    private CustomAlertdialog customAlertdialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.inject(this);
-        
+        customAlertdialog = new CustomAlertdialog();
         initializeVisualElementsAndResources();
     }
-    
+
     private void initializeVisualElementsAndResources() {
         SecurePreferences settings = new SecurePreferences(this);
         String userName = settings.getString(Constants.USER_NAME);
@@ -66,8 +67,8 @@ public class MenuActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.expandir, R.anim.slide_out_right);
         iValidateInternet = new ValidateInternet(MenuActivity.this);
     }
-    
-    
+
+
     /**
      * Metodo que valida si ingresa un gerente al menú
      * para mostrar las opciones del gerente
@@ -80,7 +81,7 @@ public class MenuActivity extends AppCompatActivity {
             secondItemMenu.setText(R.string.second_item_menu_manager);
         }
     }
-    
+
     /**
      * Metodo que valida si el usuario tiene foto
      *
@@ -91,10 +92,10 @@ public class MenuActivity extends AppCompatActivity {
             Picasso.with(this).load(photo).into(menu_photo);
         } else {
             Picasso.with(this).load(R.mipmap.photo).into(menu_photo);
-            
+
         }
     }
-    
+
     /**
      * Metodo que valida quién ingresó al menú
      * para redireccionar a los módulos correspondientes
@@ -111,14 +112,14 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+            customAlertdialog.showAlertDialogValidateInternet(R.string
                             .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
                     MenuActivity.this);
-            
+
         }
-        
+
     }
-    
+
     /**
      * Metodo que valida quien ingresó al menú
      * para redireccionar a los módulos correspondientes
@@ -136,20 +137,20 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } else {
-            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R.string
+            customAlertdialog.showAlertDialogValidateInternet(R.string
                             .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
                     MenuActivity.this);
         }
-        
+
     }
-    
+
     /**
      * Metodo que permite cerrar la aplicación al ir atrás
      */
     public void onBackPressed() {
         moveTaskToBack(true);
     }
-    
+
     /**
      * Metodo que permite cerrar sesión
      */
@@ -168,7 +169,7 @@ public class MenuActivity extends AppCompatActivity {
         });
         popupMenup.show();
     }
-    
+
     private void deleteSharedPreferences() {
         SecurePreferences settings = new SecurePreferences(MenuActivity.this);
         settings.put(Constants.REMEMBER_ACCESS, null);
@@ -176,10 +177,10 @@ public class MenuActivity extends AppCompatActivity {
         finish();
         startLoginActivity();
     }
-    
+
     private void startLoginActivity() {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
-    
+
 }

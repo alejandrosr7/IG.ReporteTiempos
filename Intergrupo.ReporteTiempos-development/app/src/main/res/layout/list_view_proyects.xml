@@ -10,25 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_weight="1"
-        android:singleLine="true"
-        android:textIsSelectable="false"
         android:gravity="center"
+        android:singleLine="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#6E6C5C"
-        android:textStyle="bold"/>
+        android:textIsSelectable="false"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvHoursItem"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_weight="1"
         android:layout_alignParentTop="true"
-        android:singleLine="true"
-        android:textIsSelectable="false"
+        android:layout_weight="1"
         android:gravity="center"
-        android:textSize="35dp"
+        android:singleLine="true"
         android:textColor="@color/green"
-        android:textStyle="bold"/>
+        android:textIsSelectable="false"
+        android:textSize="35dp"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

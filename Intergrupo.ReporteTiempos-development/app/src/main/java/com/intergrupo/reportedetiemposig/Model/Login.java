@@ -5,7 +5,7 @@ package com.intergrupo.reportedetiemposig.Model;
  *
  * Entidad para el inicio de sesión de la aplicación
  */
-public class IGLogin {
+public class Login {
 
 
     /**
@@ -18,10 +18,10 @@ public class IGLogin {
      */
     private String Contrasena;
 
-    public IGLogin() {
+    public Login() {
     }
 
-    public IGLogin(String Usuario, String Contrasena) {
+    public Login(String Usuario, String Contrasena) {
         this.Usuario = Usuario;
         this.Contrasena = Contrasena;
     }

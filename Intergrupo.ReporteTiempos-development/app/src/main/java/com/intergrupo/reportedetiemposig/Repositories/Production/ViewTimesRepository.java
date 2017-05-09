@@ -16,7 +16,7 @@ import retrofit.RetrofitError;
 /**
  * Created by Usuario on 14/05/2016.
  */
-public class ViewTimesRepository  implements IViewTimesRepository {
+public class ViewTimesRepository implements IViewTimesRepository {
 
     @Override
     public List<ViewTimesModel> GetListTimesForCollaborator(String codeUser) {
@@ -24,7 +24,7 @@ public class ViewTimesRepository  implements IViewTimesRepository {
 
         try {
             List<ViewTimesModel> timesForCollaborator;
-            if(codeUser != null){
+            if (codeUser != null) {
                 timesForCollaborator = client.GetTimesForCollaborator(codeUser);
             } else {
                 return null;
@@ -43,7 +43,7 @@ public class ViewTimesRepository  implements IViewTimesRepository {
 
         try {
             List<ResumTimesForCollaborator> resumTimesForCollaborator;
-            if(codeUser != null){
+            if (codeUser != null) {
                 resumTimesForCollaborator = client.GetResumTimesForCollaborator(codeUser);
             } else {
                 return null;

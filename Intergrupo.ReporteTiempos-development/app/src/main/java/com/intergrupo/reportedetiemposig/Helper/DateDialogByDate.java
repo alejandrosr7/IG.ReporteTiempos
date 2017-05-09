@@ -22,6 +22,7 @@ import butterknife.InjectView;
 
 @SuppressLint("ValidFragment")
 public class DateDialogByDate extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
     @InjectView(R.id.linear_byDate)
     LinearLayout linear_byDate;
     View v;

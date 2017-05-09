@@ -15,7 +15,7 @@ public class ClassificationConceptHour {
     @SerializedName("CodigoMaestroTipoHora")
     @Expose
     private Integer codeMasterTypeHour;
-    
+
     public Integer getCodeMasterTypeHour() {
         return codeMasterTypeHour;
     }

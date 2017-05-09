@@ -5,5 +5,6 @@ package com.intergrupo.reportedetiemposig.Helper;
  */
 
 public interface IValidateInternet {
+
     boolean isConnected();
 }

@@ -9,14 +9,14 @@ import java.util.Date;
  * Created by mauricio on 9/04/16.
  */
 public class Proyect {
-    
+
     /**
      * Permite obtener o establecer el código del proyecto
      */
     @SerializedName("CodigoProyecto")
     @Expose
     private Integer CodigoProyecto;
-    
+
     /**
      * Permite obtener o establecer las horas del proyecto
      */
@@ -30,7 +30,7 @@ public class Proyect {
     @SerializedName("Nombre")
     @Expose
     private String Nombre;
-    
+
     /**
      * Permite obtener o establecer la descripción del tipo de estimación
      */
@@ -45,7 +45,6 @@ public class Proyect {
     @Expose
     private Integer codigoMaestroMarcoTrabajo;
 
-    
 
     public Integer getCodigoProyecto() {
         return CodigoProyecto;

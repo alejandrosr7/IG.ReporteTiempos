@@ -11,12 +11,12 @@ import java.util.List;
 /**
  * Created by Usuario on 14/05/2016.
  */
-public class TestViewTimesRepository implements IViewTimesRepository{
+public class TestViewTimesRepository implements IViewTimesRepository {
 
 
     @Override
     public ArrayList<ViewTimesModel> GetListTimesForCollaborator(String codeUser) {
-        ArrayList<ViewTimesModel> times=  new ArrayList<ViewTimesModel>();
+        ArrayList<ViewTimesModel> times = new ArrayList<ViewTimesModel>();
         ViewTimesModel time = new ViewTimesModel();
         time.setCodigoActividad(1);
         time.setDescripcion("Actividad 1 EPM");
@@ -52,8 +52,6 @@ public class TestViewTimesRepository implements IViewTimesRepository{
         time.setHoras(3.5);
 
         times.add(time);
-
-
 
 
         return times;

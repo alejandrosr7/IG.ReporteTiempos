@@ -10,6 +10,7 @@ import java.util.List;
  * Created by USUARIO on 14/08/2016.
  */
 public class TestViewTimesDetail implements IViewTimesManagerDetail {
+
     @Override
     public List<ViewTimesManagerDetail> GetTimesManagerDetail(String idGerentCode, Date
             fechaInicio, Date fechaFin) {

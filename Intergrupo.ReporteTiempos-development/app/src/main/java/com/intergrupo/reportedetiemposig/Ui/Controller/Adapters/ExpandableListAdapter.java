@@ -1,4 +1,4 @@
-package com.intergrupo.reportedetiemposig.Helper;
+package com.intergrupo.reportedetiemposig.Ui.Controller.Adapters;
 
 /**
  * Created by Usuario on 5/05/2016.

@@ -31,7 +31,7 @@
     <string name="campos_incompletos">Campos incompletos</string>
     <string name="title_invalid_fields">Campos no válidos</string>
     <string name="debes_ingresar_tu_correo_electronico">Debes ingresar tu correo electrónico.</string>
-    <string name="message_email_invalid">Correo electrónico no válido, por favor verifiquelo.</string>
+    <string name="message_email_invalid">Correo electrónico no válido, por favor verifique.</string>
     <string name="debes_ingresar_una_contrasenia">Debes ingresar una contraseña.</string>
 
     <!-- Hint para la actividad registro de tiempos-->
@@ -40,10 +40,10 @@
     <string name="hintSelectClassificationConceptHour">Selecciona la clasificación</string>
     <string name="hintSelectProyect">Seleccione el proyecto</string>
     <string name="hintSelectfunctionality">Seleccione la funcionalidad</string>
-    <string name="hintSelectActivity">Seleccione actividad</string>
+    <string name="hintSelectActivity">Seleccione la actividad</string>
     <string name="hintSelectActivityCompleted">Actividad completada</string>
     <string name="hintSelectdiscipline">Seleccione disciplina</string>
-    <string name="hintSelectDate">Seleccione Fecha</string>
+    <string name="hintSelectDate">Seleccione la fecha</string>
     <string name="hintHours">Esfuerzo en horas</string>
     <string name="hintDescription">Descripción de la actividad</string>
 
@@ -56,7 +56,7 @@
     <string name="mdtp_from">DESDE</string>
     <string name="mdtp_to">HASTA</string>
     <string name="apreciado_usuario">Apreciado usuario</string>
-    <string name="por_favor_valide_su_conexion_a_internet">Por favor valide su conexión a internet</string>
+    <string name="por_favor_valide_su_conexion_a_internet">Por favor valide su conexión a internet.</string>
     <string name="first_item_menu_manager">Por colaborador</string>
     <string name="second_item_menu_manager">Por proyecto</string>
 
@@ -92,11 +92,6 @@
     <string name="ciento_treinta">130</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
     <string name="por_colaborador">Por colaborador</string>
-
-    <string name="user_id_manager">mlmartinez</string>
-    <string name="password_manager">Mishijos201705</string>
-    <string name="user_id_collaborator">lzuluagab</string>
-    <string name="password_collaborator">Intergrupo2016.</string>
     <string name="por_colaborador_o_proyecto">Colaborador o Proyecto</string>
 
 

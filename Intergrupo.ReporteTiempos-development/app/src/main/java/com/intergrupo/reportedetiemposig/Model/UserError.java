@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by mauriciocarogutierrez on 10/21/16.
  * Entidad que permite capturar el error de autenticaciòn al iniciar sesiòn
- *
  */
 
 public class UserError {

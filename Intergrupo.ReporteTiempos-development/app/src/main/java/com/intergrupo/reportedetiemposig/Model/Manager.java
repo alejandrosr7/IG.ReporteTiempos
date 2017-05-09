@@ -14,7 +14,7 @@ public class Manager {
     @SerializedName("CodigoEmpleado")
     @Expose
     private Integer codeUser;
-    
+
     /**
      * Permite obtener o establecer el nombre del empleado
      */
@@ -51,7 +51,7 @@ public class Manager {
     public String getFirtNames() {
         return firtNames;
     }
-    
+
     public String getLastNames() {
         return lastNames;
     }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical"
-              tools:context=".Ui.Controller.ViewTimesManagerDetailActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Ui.Controller.ViewTimesManagerDetailActivity">
 
 
     <android.support.design.widget.AppBarLayout
@@ -20,7 +21,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blue"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/por_colaborador_o_proyecto"/>
+            app:title="@string/por_colaborador_o_proyecto" />
 
 
     </android.support.design.widget.AppBarLayout>
@@ -29,9 +30,9 @@
         android:id="@+id/linearContainer1"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:baselineAligned="false"
         android:gravity="center|top"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/linear_weeklyDetail"
@@ -46,8 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/weekly"
-                />
+                android:text="@string/weekly" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,8 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/monthly"
-                />
+                android:text="@string/monthly" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,8 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/byDate"
-                />
+                android:text="@string/byDate" />
         </LinearLayout>
 
     </LinearLayout>
@@ -100,8 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="15dp"
-            android:childIndicatorRight="@dimen/activity_vertical_margin">
-        </ExpandableListView>
+            android:childIndicatorRight="@dimen/activity_vertical_margin"></ExpandableListView>
 
 
     </RelativeLayout>

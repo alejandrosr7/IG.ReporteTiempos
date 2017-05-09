@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@mipmap/back_perfil"
-              android:gravity="center"
-              android:orientation="vertical"
-              tools:context=".Ui.Controller.MenuActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/back_perfil"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Ui.Controller.MenuActivity">
 
 
     <FrameLayout
@@ -24,7 +24,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="5dp"
             android:clickable="true"
-            android:src="@drawable/ic_more_vert_black_24dp"/>
+            android:src="@drawable/ic_more_vert_black_24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:scaleType="centerCrop"
-                app:sriv_oval="true"/>
+                app:sriv_oval="true" />
 
             <TextView
                 android:id="@+id/Menu_Name_User"
@@ -48,7 +48,7 @@
                 android:text="Leidy Carolina Zuluaga Bastidas"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/white"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                 android:gravity="bottom|center"
                 android:text="@string/que_quieres_hacer_hoy"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
         </LinearLayout>
 
 
@@ -80,7 +80,7 @@
                 android:id="@+id/menu_ivReportarTiempos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/reportar_tiempos"/>
+                android:src="@mipmap/reportar_tiempos" />
 
             <TextView
                 android:id="@+id/first_item_menu"
@@ -89,7 +89,7 @@
                 android:gravity="center"
                 android:text="@string/reportar_tiempos"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
 
         </LinearLayout>
@@ -114,7 +114,7 @@
                 android:id="@+id/menu_ivVerReportes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ver_reporte"/>
+                android:src="@mipmap/ver_reporte" />
 
 
             <TextView
@@ -124,7 +124,7 @@
                 android:gravity="center"
                 android:text="@string/ver_reportes"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

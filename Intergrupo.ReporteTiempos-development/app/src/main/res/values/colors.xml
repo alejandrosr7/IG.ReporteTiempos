@@ -4,13 +4,10 @@
     <color name="colorPrimaryDark">#023F86</color>
     <color name="colorAccent">#023F86</color>
     <color name="white">#FFFFFF</color>
-    <color name="mdtp_accent_color">#009688</color>
-    <color name="mdtp_accent_color_dark">#00796b</color>
     <color name="gray">#DDE0E3</color>
-    <color name="tranparent">#00FFFFFF</color>
-    <color name="colorWhite">#FFFFFF</color>
     <color name="blue">#014BA0</color>
     <color name="blue_title">#034CA1</color>
     <color name="red">#B71400</color>
     <color name="green">#46A724</color>
+    <color name="black">#46A724</color>
 </resources>

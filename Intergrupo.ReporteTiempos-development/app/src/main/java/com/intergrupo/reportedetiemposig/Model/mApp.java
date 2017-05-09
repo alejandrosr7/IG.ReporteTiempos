@@ -18,7 +18,7 @@ public class mApp {
         locator = RepositoryLocator.getInstance();
     }
 
-    public User SingInSincrono(IGLogin igLogin) {
-        return locator.getSecurityRepository().SignInSincrono(igLogin);
+    public User SingInSincrono(Login login) {
+        return locator.getSecurityRepository().SignInSincrono(login);
     }
 }

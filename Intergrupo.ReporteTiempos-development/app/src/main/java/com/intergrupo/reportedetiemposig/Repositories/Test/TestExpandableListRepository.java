@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 public class TestExpandableListRepository implements IViewTimesMRepository {
 
     public static HashMap<String, List<String>> getData() {
-         HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
+        HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
 
-    List<String> epmMovilidad = new ArrayList<>();
+        List<String> epmMovilidad = new ArrayList<>();
         epmMovilidad.add("Juan Camilo");
         epmMovilidad.add("Fernando Restrepo");
         epmMovilidad.add("Leidy Carolina Zuluaga");
@@ -24,7 +25,7 @@ public class TestExpandableListRepository implements IViewTimesMRepository {
         epmMovilidad.add("Natalia Bustamante");
 
 
-        List<String> sura= new ArrayList<>();
+        List<String> sura = new ArrayList<>();
         sura.add("Juan Camilo");
         sura.add("Fernando Restrepo");
         sura.add("Leidy Carolina Zuluaga");
@@ -40,8 +41,8 @@ public class TestExpandableListRepository implements IViewTimesMRepository {
         Marketing.add("Natalia Bustamante");
 
         expandableListDetail.put("EPM MOVILIDAD", epmMovilidad);
-        expandableListDetail.put("Sura",sura);
-        expandableListDetail.put("Marketing personal",Marketing);
+        expandableListDetail.put("Sura", sura);
+        expandableListDetail.put("Marketing personal", Marketing);
         return expandableListDetail;
     }
 

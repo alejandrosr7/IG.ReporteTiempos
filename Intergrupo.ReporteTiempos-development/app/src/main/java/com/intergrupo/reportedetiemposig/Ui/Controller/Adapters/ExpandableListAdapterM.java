@@ -1,4 +1,4 @@
-package com.intergrupo.reportedetiemposig.Helper;
+package com.intergrupo.reportedetiemposig.Ui.Controller.Adapters;
 
 /**
  * Created by USUARIO on 23/05/2016.
@@ -30,7 +30,7 @@ public class ExpandableListAdapterM extends BaseExpandableListAdapter {
 
     public ExpandableListAdapterM(Context context, ArrayList<TimesForManagerParent>
             expandableListTitleOriginal, HashMap<String, ArrayList<TimesForManager>>
-            expandableListDetailOriginal) {
+                                          expandableListDetailOriginal) {
 
         this.context = context;
         this.expandableListTitleOriginal = expandableListTitleOriginal;

@@ -14,12 +14,12 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
-import com.intergrupo.reportedetiemposig.Helper.ExpandableListDetailAdapter;
+import com.intergrupo.reportedetiemposig.Helper.CustomAlertdialog;
+import com.intergrupo.reportedetiemposig.Ui.Controller.Adapters.ExpandableListDetailAdapter;
 import com.intergrupo.reportedetiemposig.Helper.IValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.SecurePreferences;
-import com.intergrupo.reportedetiemposig.Helper.ShowAlertDialogValidateInternet;
 import com.intergrupo.reportedetiemposig.Helper.ValidateInternet;
-import com.intergrupo.reportedetiemposig.Model.App;
+import com.intergrupo.reportedetiemposig.App;
 import com.intergrupo.reportedetiemposig.Model.ViewTimesManagerDetail;
 import com.intergrupo.reportedetiemposig.R;
 import com.intergrupo.reportedetiemposig.Util.Constants;
@@ -27,26 +27,29 @@ import com.intergrupo.reportedetiemposig.Util.Constants;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class ViewTimesManagerDetailActivity extends AppCompatActivity {
-    ProgressDialog progressDialog;
-    SecurePreferences manager;
-    ExpandableListDetailAdapter expandableListDetailAdapter;
-    ArrayList<ViewTimesManagerDetail> listDetail;
-    ExpandableListView expandableListView;
-    String usercode;
+
+    private ProgressDialog progressDialog;
+    private SecurePreferences manager;
+    private ExpandableListDetailAdapter expandableListDetailAdapter;
+    private ArrayList<ViewTimesManagerDetail> listDetail;
+    private ExpandableListView expandableListView;
+    private String usercode;
+    private IValidateInternet iValidateInternet;
+    private CustomAlertdialog customAlertdialog;
+
     @InjectView(R.id.linear_byDateDetail)
     LinearLayout linear_byDateDetail;
     @InjectView(R.id.linear_weeklyDetail)
     LinearLayout linear_weeklyDetail;
     @InjectView(R.id.linear_monthlyDetail)
     LinearLayout linear_monthlyDetail;
-    IValidateInternet iValidateInternet;
+
 
     /**
      * Created by LeidyZuluaga on 13/06/16.
@@ -55,7 +58,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_times_manager_detail);
-
+        customAlertdialog = new CustomAlertdialog();
         initializeVisualElements();
 
     }
@@ -113,9 +116,9 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowAlertDialogValidateInternet.showAlertDialogValidateInternet(R
-                                    .string.apreciado_usuario, R.string
-                                    .por_favor_valide_su_conexion_a_internet,
+                            customAlertdialog.showAlertDialogValidateInternet(R
+                                            .string.apreciado_usuario, R.string
+                                            .por_favor_valide_su_conexion_a_internet,
                                     ViewTimesManagerDetailActivity.this);
 
                         }
@@ -169,7 +172,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    
+
     private void displayAlertDialog(String error) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder
                 (ViewTimesManagerDetailActivity.this);
@@ -184,7 +187,7 @@ public class ViewTimesManagerDetailActivity extends AppCompatActivity {
                 });
         alertDialogBuilder.show();
     }
-    
+
     /**
      * Método que retorna un Calendar con la fechaa que le envían
      *

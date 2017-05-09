@@ -1,5 +1,7 @@
 package com.intergrupo.reportedetiemposig.Helper;
+
 import java.util.Calendar;
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,11 +18,14 @@ import butterknife.InjectView;
 
 @SuppressLint("ValidFragment")
 public class DateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
     @InjectView(R.id.edDate)
     EditText edDate;
-    public DateDialog(View view){
-        edDate=(EditText)view;
+
+    public DateDialog(View view) {
+        edDate = (EditText) view;
     }
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 
@@ -38,10 +43,9 @@ public class DateDialog extends DialogFragment implements DatePickerDialog.OnDat
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         //show to the selected date in the text box
-        String date=day+"-"+(month+1)+"-"+year;
+        String date = day + "-" + (month + 1) + "-" + year;
         edDate.setText(date);
     }
-
 
 
 }

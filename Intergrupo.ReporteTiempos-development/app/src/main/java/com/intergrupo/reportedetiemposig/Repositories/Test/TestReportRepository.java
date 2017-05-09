@@ -4,16 +4,12 @@ import com.intergrupo.reportedetiemposig.Model.ActivityDiscipline;
 import com.intergrupo.reportedetiemposig.Model.ClassificationConceptHour;
 import com.intergrupo.reportedetiemposig.Model.ConceptHour;
 import com.intergrupo.reportedetiemposig.Model.Discipline;
-import com.intergrupo.reportedetiemposig.Model.IGLogin;
 import com.intergrupo.reportedetiemposig.Model.Manager;
 import com.intergrupo.reportedetiemposig.Model.Proyect;
 import com.intergrupo.reportedetiemposig.Model.ReportTime;
-import com.intergrupo.reportedetiemposig.Model.TiemposResponse;
-import com.intergrupo.reportedetiemposig.Model.User;
 import com.intergrupo.reportedetiemposig.Model.functionality;
 import com.intergrupo.reportedetiemposig.Repositories.Interfaces.IReportRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
