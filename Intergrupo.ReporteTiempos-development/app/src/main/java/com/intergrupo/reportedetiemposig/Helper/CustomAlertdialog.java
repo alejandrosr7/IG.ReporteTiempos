@@ -21,8 +21,10 @@ import java.util.TimerTask;
  */
 
 public class CustomAlertdialog {
-
-    public void showAlertDialogInputData(Window windows, LayoutInflater inflate, Context context, String title, final EditText editText, String text, int length) {
+    
+    public void showAlertDialogInputData(Window windows, LayoutInflater inflate, Context context,
+                                         String title, final EditText editText, String text, int
+                                                 length) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = inflate;
         View content = inflater.inflate(R.layout.template_alert_dialog, null);
@@ -32,7 +34,8 @@ public class CustomAlertdialog {
         content.setMinimumWidth((int) (displayRectangle.width() * 0.9f));
         content.setMinimumHeight((int) (displayRectangle.height() * 0.5f));
         final EditText etInputData = (EditText) content.findViewById(R.id.edt_InputData);
-        builder.setView(content).setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+        builder.setView(content).setPositiveButton(R.string.aceptar, new DialogInterface
+                .OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 editText.setText(etInputData.getText().toString().trim());
@@ -52,19 +55,20 @@ public class CustomAlertdialog {
         builder.show();
         openKeyboard(etInputData, context);
     }
-
+    
     private void openKeyboard(final EditText editText, final Context context) {
         editText.postDelayed(new TimerTask() {
             @Override
             public void run() {
                 editText.requestFocus();
-                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context
+                        .INPUT_METHOD_SERVICE);
                 imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
             }
         }, 400);
     }
-
-    public static void showAlertDialogValidateInternet(int title, int message, Context context) {
+    
+    public static void showAlertDialogValidateInternet(String title, int message, Context context) {
         AlertDialog.Builder alertDialog;
         alertDialog = new AlertDialog.Builder(context);
         alertDialog.setTitle(title);
@@ -78,8 +82,7 @@ public class CustomAlertdialog {
             }
         });
         alertDialog.show();
-
     }
-
-
+    
+    
 }

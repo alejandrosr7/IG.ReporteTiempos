@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.intergrupo.reportedetiemposig.Helper.CustomAlertdialog;
+import com.intergrupo.reportedetiemposig.Helper.SecurePreferences;
 import com.intergrupo.reportedetiemposig.Ui.Controller.Adapters.ExpandableListAdapter;
 import com.intergrupo.reportedetiemposig.Helper.ValidateInternet;
 import com.intergrupo.reportedetiemposig.App;
@@ -94,6 +95,7 @@ public class ViewTimes extends AppCompatActivity {
     ValidateInternet validateInternet = new ValidateInternet(this);
     Integer numberWeek;
     Integer numberMonth;
+    private String userName;
 
 
     @Override
@@ -115,6 +117,8 @@ public class ViewTimes extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        SecurePreferences settings = new SecurePreferences(this);
+        userName = settings.getString(Constants.USER_NAME);
     }
 
 
@@ -123,8 +127,7 @@ public class ViewTimes extends AppCompatActivity {
         if (validateInternet.isConnected()) {
             getProyectsList(userCode, true);
         } else {
-            customAlertdialog.showAlertDialogValidateInternet(R.string
-                            .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
+            customAlertdialog.showAlertDialogValidateInternet(userName, R.string.por_favor_valide_su_conexion_a_internet,
                     ViewTimes.this);
         }
 

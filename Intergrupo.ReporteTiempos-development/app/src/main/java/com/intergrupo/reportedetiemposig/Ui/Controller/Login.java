@@ -113,8 +113,7 @@ public class Login extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    customAlertdialog.showAlertDialogValidateInternet(R.string
-                                    .apreciado_usuario, R.string
+                    customAlertdialog.showAlertDialogValidateInternet(Constants.APRECIADO_USUARIO, R.string
                                     .por_favor_valide_su_conexion_a_internet,
                             Login.this);
                 }

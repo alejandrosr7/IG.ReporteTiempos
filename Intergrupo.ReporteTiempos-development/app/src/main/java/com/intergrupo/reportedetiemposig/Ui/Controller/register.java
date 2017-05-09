@@ -117,6 +117,7 @@ public class register extends AppCompatActivity {
     Boolean showPopup = true;
     Boolean isUpdate = false;
     Boolean checkbox = false;
+    private String userName;
 //    Boolean showManagerPopUp = true;
 
     //Elementos para validar el maximo de horas reportados en una semana, esto luego se eliminara
@@ -239,8 +240,7 @@ public class register extends AppCompatActivity {
                     }
                     GetConceptHour();
                 } else {
-                    customAlertdialog.showAlertDialogValidateInternet(R.string
-                                    .apreciado_usuario, R.string
+                    customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                     .por_favor_valide_su_conexion_a_internet,
                             register.this);
                 }
@@ -292,8 +292,7 @@ public class register extends AppCompatActivity {
                             GetConceptHour();
                         }
                     } else {
-                        customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                        customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet, register.this);
                     }
                 }
@@ -313,6 +312,7 @@ public class register extends AppCompatActivity {
         this.progressDialog.setMessage(Constants.POR_FAVOR_ESPERE);
         this.progressDialog.setCancelable(false);
         SecurePreferences settings = new SecurePreferences(this);
+        userName = settings.getString(Constants.USER_NAME);
         codigoUsuario = settings.getString(Constants.USER_CODIGO);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         editClassificationConceptHour.setInputType(InputType.TYPE_NULL);
@@ -352,8 +352,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             } else {
-                customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet,
                         register.this);
                 progressDialog.dismiss();
@@ -437,8 +436,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             } else {
-                customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet,
                         register.this);
                 progressDialog.dismiss();
@@ -538,8 +536,7 @@ public class register extends AppCompatActivity {
                     };
                     thread.start();
                 } else {
-                    customAlertdialog.showAlertDialogValidateInternet(R.string
-                                    .apreciado_usuario, R.string
+                    customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                     .por_favor_valide_su_conexion_a_internet,
                             register.this);
                     progressDialog.dismiss();
@@ -623,8 +620,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             } else {
-                customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet,
                         register.this);
                 progressDialog.dismiss();
@@ -654,8 +650,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             } else {
-                customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet,
                         register.this);
                 progressDialog.dismiss();
@@ -699,8 +694,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             } else {
-                customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet,
                         register.this);
                 progressDialog.dismiss();
@@ -822,8 +816,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             } else {
-                customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet,
                         register.this);
                 progressDialog.dismiss();
@@ -1279,8 +1272,7 @@ public class register extends AppCompatActivity {
                 }
             } else {
                 //TODO:implementar esconder progress
-                customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet,
                         register.this);
                 progressDialog.dismiss();
@@ -1475,8 +1467,7 @@ public class register extends AppCompatActivity {
                 };
                 thread.start();
             } else {
-                customAlertdialog.showAlertDialogValidateInternet(R.string
-                                .apreciado_usuario, R.string
+                customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                 .por_favor_valide_su_conexion_a_internet,
                         register.this);
                 progressDialog.dismiss();

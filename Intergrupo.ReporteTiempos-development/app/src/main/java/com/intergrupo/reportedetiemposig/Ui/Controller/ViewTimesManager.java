@@ -58,6 +58,8 @@ public class ViewTimesManager extends AppCompatActivity {
     LinearLayout linear_monthlyg;
     @InjectView(R.id.linear_monthlyDetail)
     LinearLayout linear_bydate;
+    
+    private String userName;
 
     @Override
 
@@ -87,6 +89,7 @@ public class ViewTimesManager extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         iValidateInternet = new ValidateInternet(ViewTimesManager.this);
         manager = new SecurePreferences(this);
+        userName = manager.getString(Constants.USER_NAME);
         usercode = manager.getString(Constants.USER_CODIGO);
         week();
     }
@@ -202,8 +205,7 @@ public class ViewTimesManager extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            customAlertdialog.showAlertDialogValidateInternet(R
-                                    .string.apreciado_usuario, R.string
+                            customAlertdialog.showAlertDialogValidateInternet(userName, R.string
                                     .por_favor_valide_su_conexion_a_internet, ViewTimesManager
                                     .this);
 

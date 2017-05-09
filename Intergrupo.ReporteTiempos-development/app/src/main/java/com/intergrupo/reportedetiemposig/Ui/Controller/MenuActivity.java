@@ -44,6 +44,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private IValidateInternet iValidateInternet;
     private CustomAlertdialog customAlertdialog;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void initializeVisualElementsAndResources() {
         SecurePreferences settings = new SecurePreferences(this);
-        String userName = settings.getString(Constants.USER_NAME);
+        userName = settings.getString(Constants.USER_NAME);
         String userLastName = settings.getString(Constants.USER_LASTNAME);
         String urlImage = settings.getString(Constants.URLUSERPHOTO);
         manager = settings.getString(Constants.IG_USER);
@@ -112,8 +113,8 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } else {
-            customAlertdialog.showAlertDialogValidateInternet(R.string
-                            .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
+            customAlertdialog.showAlertDialogValidateInternet(userName,
+                    R.string.por_favor_valide_su_conexion_a_internet,
                     MenuActivity.this);
 
         }
@@ -137,8 +138,8 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         } else {
-            customAlertdialog.showAlertDialogValidateInternet(R.string
-                            .apreciado_usuario, R.string.por_favor_valide_su_conexion_a_internet,
+            customAlertdialog.showAlertDialogValidateInternet(userName,
+                    R.string.por_favor_valide_su_conexion_a_internet,
                     MenuActivity.this);
         }
 
