@@ -167,7 +167,6 @@ public class register extends AppCompatActivity {
         editActivity.setInputType(InputType.TYPE_NULL);
 
         edDescrptionActivity.setFocusable(false);
-        edDescrptionActivity.setInputType(InputType.TYPE_NULL);
         edDescrptionActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

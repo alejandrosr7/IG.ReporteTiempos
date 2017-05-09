@@ -220,8 +220,7 @@ public class ViewTimes extends AppCompatActivity {
                         Collections.sort(listTimesCollaborator, new Comparator<ViewTimesModel>() {
                             @Override
                             public int compare(ViewTimesModel lhs, ViewTimesModel rhs) {
-                                return new Integer(rhs.getCodigoProyecto()).compareTo(new Integer
-                                        (lhs.getCodigoProyecto()));
+                                return rhs.getCodigoProyecto().compareTo(lhs.getCodigoProyecto());
                             }
                         });
 
@@ -275,7 +274,6 @@ public class ViewTimes extends AppCompatActivity {
                                         sumHours = 0d;
                                         timeReportedxProyect = new ArrayList<>();
                                     }
-                                    continue;
                                 } else {
                                     i += 1;
                                     if (idProyect.equals(proyect.getCodigoProyecto())) {
@@ -421,8 +419,8 @@ public class ViewTimes extends AppCompatActivity {
                                 @Override
                                 public int compare(ResumTimesForCollaborator lhs,
                                                    ResumTimesForCollaborator rhs) {
-                                    return new Integer(rhs.getSemana()).compareTo(new Integer(lhs
-                                            .getSemana()));
+                                    return rhs.getSemana().compareTo(lhs
+                                            .getSemana());
                                 }
                             });
                     Calendar calendarioActual = new GregorianCalendar();
