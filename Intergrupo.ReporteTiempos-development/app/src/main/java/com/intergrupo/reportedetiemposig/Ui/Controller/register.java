@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -190,8 +191,6 @@ public class register extends AppCompatActivity {
         DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY);
         String fecha = formatter.format(new Date());
         edDate.setText(fecha);
-
-
     }
 
 
@@ -317,6 +316,16 @@ public class register extends AppCompatActivity {
         editClassificationConceptHour.setInputType(InputType.TYPE_NULL);
         editProyect.setInputType(InputType.TYPE_NULL);
         editfunctionality.setInputType(InputType.TYPE_NULL);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+        
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -772,6 +781,7 @@ public class register extends AppCompatActivity {
                     } else {
                         showPopup(Constants.REGISTER_TITLE_DIALOG_DISCIPLINE, Constants
                                 .MESSAGE_NO_FOUND_DISCIPLINE);
+                        progressDialog.dismiss();
                     }
 
                 }

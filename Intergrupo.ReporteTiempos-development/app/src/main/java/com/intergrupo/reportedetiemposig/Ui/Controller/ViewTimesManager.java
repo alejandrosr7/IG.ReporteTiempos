@@ -11,6 +11,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
@@ -83,17 +84,46 @@ public class ViewTimesManager extends AppCompatActivity {
         ButterKnife.inject(this);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         progressDialog = new ProgressDialog(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDetail);
-        toolbar.setTitle(R.string.por_proyecto);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        loadToolbar();
         iValidateInternet = new ValidateInternet(ViewTimesManager.this);
         manager = new SecurePreferences(this);
         userName = manager.getString(Constants.USER_NAME);
         usercode = manager.getString(Constants.USER_CODIGO);
         week();
     }
-
+    
+    private void loadToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDetail);
+        toolbar.setTitle(R.string.por_proyecto);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+        
+        return super.onOptionsItemSelected(item);
+    }
+    
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+    
     /**
      * Método que permite ir atrás
      */

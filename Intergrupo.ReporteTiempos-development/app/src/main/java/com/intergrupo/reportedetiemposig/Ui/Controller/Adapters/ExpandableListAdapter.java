@@ -85,6 +85,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog;
                 alertDialog = new AlertDialog.Builder(_context);
+                alertDialog.setCancelable(false);
                 alertDialog.setTitle(Constants.REPORT);
                 alertDialog.setMessage(childText.getDescripcion());
                 alertDialog.setPositiveButton(R.string.aceptar, new DialogInterface

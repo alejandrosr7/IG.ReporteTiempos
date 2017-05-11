@@ -11,6 +11,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -111,17 +112,43 @@ public class ViewTimes extends AppCompatActivity {
         this.progressDialog = new ProgressDialog(this);
         this.progressDialog.setMessage(Constants.POR_FAVOR_ESPERE);
         this.progressDialog.setCancelable(false);
-
         ButterKnife.inject(this);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SecurePreferences settings = new SecurePreferences(this);
         userName = settings.getString(Constants.USER_NAME);
+        loadToolbar();
     }
-
-
+    
+    private void loadToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+        
+        return super.onOptionsItemSelected(item);
+    }
+    
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+    
+    
     public void onResume() {
         super.onResume();
         if (validateInternet.isConnected()) {
@@ -378,6 +405,7 @@ public class ViewTimes extends AppCompatActivity {
 
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder
                                 (ViewTimes.this);
+                        alertDialogBuilder.setCancelable(false);
                         alertDialogBuilder.setTitle(R.string.advertencia);
                         alertDialogBuilder.setMessage(error);
                         alertDialogBuilder.setPositiveButton(R.string.aceptar, new
@@ -507,6 +535,7 @@ public class ViewTimes extends AppCompatActivity {
             tvByReport.setText(R.string.cuarenta_y_cinco);
             tvReported.setText(R.string.cero);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimes.this);
+            alertDialogBuilder.setCancelable(false);
             alertDialogBuilder.setTitle(R.string.advertencia);
             alertDialogBuilder.setMessage(Constants.MESSAGE_COLLABORATOR_WITHOUT_TIMES);
             alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface
@@ -546,6 +575,7 @@ public class ViewTimes extends AppCompatActivity {
             tvByReport.setText(R.string.ciento_ochenta);
             tvReported.setText(R.string.cero);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ViewTimes.this);
+            alertDialogBuilder.setCancelable(false);
             alertDialogBuilder.setTitle(R.string.advertencia);
             alertDialogBuilder.setMessage(Constants.MESSAGE_COLLABORATOR_WITHOUT_TIMES);
             alertDialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface
