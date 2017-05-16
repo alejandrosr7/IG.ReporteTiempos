@@ -1256,7 +1256,7 @@ public class register extends AppCompatActivity {
                     double Horas = Double.valueOf(edHour.getText().toString());
                     String fecha = (edDate.getText().toString());
                     fecha = fecha.replace("-", "/");
-                    DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY);
+                    DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY_REPORT);
                     Date dateObject = formatter.parse(fecha);
 
 
@@ -1397,7 +1397,7 @@ public class register extends AppCompatActivity {
         if (TextUtils.isEmpty(editDiscipline.getText().toString().trim())) {
             error += "- " + Constants.REGISTER_TITLE_DIALOG_DISCIPLINE + "\n";
         }
-        if (!TextUtils.isEmpty(editActivity.getText().toString().trim())) {
+        if (TextUtils.isEmpty(editActivity.getText().toString().trim())) {
             error += "- " + Constants.REGISTER_TITLE_DIALOG_ACTIVITY + "\n";
         }
         if (TextUtils.isEmpty(editfunctionality.getText().toString().trim())) {
