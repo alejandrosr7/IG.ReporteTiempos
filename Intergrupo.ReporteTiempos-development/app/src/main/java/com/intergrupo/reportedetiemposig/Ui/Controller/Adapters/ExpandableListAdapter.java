@@ -86,20 +86,31 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 AlertDialog.Builder alertDialog;
                 alertDialog = new AlertDialog.Builder(_context);
                 alertDialog.setCancelable(false);
-                alertDialog.setTitle(Constants.REPORT);
-                alertDialog.setMessage(childText.getDescripcion());
-                alertDialog.setPositiveButton(R.string.aceptar, new DialogInterface
-                        .OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                alertDialog.show();
-
+                String fecha = (childText.getFechaActividad());
+                SimpleDateFormat formatter = new SimpleDateFormat(Constants.YYYY_MM_DD);
+                try {
+                    Date projectDate = formatter.parse(fecha);
+                    String date = new SimpleDateFormat(Constants.DD_MM_YYYY).format(projectDate);
+                    alertDialog.setTitle(Constants.REPORT + date);
+                    alertDialog.setMessage(childText.getDescripcion());
+                    alertDialog.setPositiveButton(R.string.aceptar, new DialogInterface
+                            .OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                
+    
+    
             }
         });
-
+    
+    
         ImageView ivEdit = (ImageView) convertView.findViewById(R.id.ivEdit);
 
         ivEdit.setOnClickListener(new View.OnClickListener() {

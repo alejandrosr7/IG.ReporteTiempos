@@ -137,6 +137,23 @@ public class register extends AppCompatActivity {
         this.customAlertdialog = new CustomAlertdialog();
         initializeVisualElements();
     }
+    
+    private void initializeVisualElements() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.progressDialog = new ProgressDialog(this);
+        this.progressDialog.setMessage(Constants.POR_FAVOR_ESPERE);
+        this.progressDialog.setCancelable(false);
+        SecurePreferences settings = new SecurePreferences(this);
+        userName = settings.getString(Constants.USER_NAME);
+        codigoUsuario = settings.getString(Constants.USER_CODIGO);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+        editClassificationConceptHour.setInputType(InputType.TYPE_NULL);
+        editProyect.setInputType(InputType.TYPE_NULL);
+        editfunctionality.setInputType(InputType.TYPE_NULL);
+        cleanRegisterFields();
+    }
 
 
     /**
@@ -300,35 +317,7 @@ public class register extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
-    private void initializeVisualElements() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.progressDialog = new ProgressDialog(this);
-        this.progressDialog.setMessage(Constants.POR_FAVOR_ESPERE);
-        this.progressDialog.setCancelable(false);
-        SecurePreferences settings = new SecurePreferences(this);
-        userName = settings.getString(Constants.USER_NAME);
-        codigoUsuario = settings.getString(Constants.USER_CODIGO);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-        editClassificationConceptHour.setInputType(InputType.TYPE_NULL);
-        editProyect.setInputType(InputType.TYPE_NULL);
-        editfunctionality.setInputType(InputType.TYPE_NULL);
-    }
     
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
-        if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
-        }
-        
-        return super.onOptionsItemSelected(item);
-    }
-
-
     /**
      * Método que obtiene la lista de clasificaciones de los conceptos de hora
      * segun el concepto de hora seleccionado
@@ -1256,7 +1245,7 @@ public class register extends AppCompatActivity {
                     double Horas = Double.valueOf(edHour.getText().toString());
                     String fecha = (edDate.getText().toString());
                     fecha = fecha.replace("-", "/");
-                    DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY);
+                    DateFormat formatter = new SimpleDateFormat(Constants.DD_MM_YYYY_REPORT);
                     Date dateObject = formatter.parse(fecha);
 
 
@@ -1359,17 +1348,7 @@ public class register extends AppCompatActivity {
             public void run() {
                 progressDialog.dismiss();
                 if (reg != null && reg) {
-                    editManager.setText("");
-                    editConceptoHour.setText("");
-                    editClassificationConceptHour.setText("");
-                    editProyect.setText("");
-                    editfunctionality.setText("");
-                    editDiscipline.setText("");
-                    edDate.setText("");
-                    edHour.setText("");
-                    edDescrptionActivity.setText("");
-                    editActivity.setText("");
-                    checkBoxActivity.setChecked(false);
+                    cleanRegisterFields();
                     Toast.makeText(register.this, Constants.REGISTER_SUCCESS, Toast.LENGTH_SHORT)
                             .show();
                 } else {
@@ -1380,8 +1359,22 @@ public class register extends AppCompatActivity {
 
         });
     }
-
-
+    
+    private void cleanRegisterFields() {
+        editManager.setText("");
+        editConceptoHour.setText("");
+        editClassificationConceptHour.setText("");
+        editProyect.setText("");
+        editfunctionality.setText("");
+        editDiscipline.setText("");
+        edDate.setText("");
+        edHour.setText("");
+        edDescrptionActivity.setText("");
+        editActivity.setText("");
+        checkBoxActivity.setChecked(false);
+    }
+    
+    
     /**
      * Método encargado de validar los campos obligatorios del reporte
      *
@@ -1397,7 +1390,7 @@ public class register extends AppCompatActivity {
         if (TextUtils.isEmpty(editDiscipline.getText().toString().trim())) {
             error += "- " + Constants.REGISTER_TITLE_DIALOG_DISCIPLINE + "\n";
         }
-        if (!TextUtils.isEmpty(editActivity.getText().toString().trim())) {
+        if (TextUtils.isEmpty(editActivity.getText().toString().trim())) {
             error += "- " + Constants.REGISTER_TITLE_DIALOG_ACTIVITY + "\n";
         }
         if (TextUtils.isEmpty(editfunctionality.getText().toString().trim())) {

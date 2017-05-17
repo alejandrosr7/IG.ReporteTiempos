@@ -66,7 +66,7 @@ public interface Constants {
     String to = "Hasta";
 
     String MESSAGE_HOURS_REPORTED = "Ha sobrepasado las horas permitidas semanalmente";
-    String REPORT = "Descripción del reporte";
+    String REPORT = "Reporte del : ";
     String ADMINISTRATIVO = "Administrativo";
 
     String DESCRIPCION_DE_LA_ACTIVIDAD = "Descripción de la actividad";
@@ -75,6 +75,7 @@ public interface Constants {
     String DATE_PICKER = "DatePicker";
     String ADMINISTRATIVA = "Administrativa";
     String DD_MM_YYYY = "dd-MM-yyyy";
+    String DD_MM_YYYY_REPORT = "dd/MM/yyyy";
     String YYYY_MM_DD = "yyyy-MM-dd";
     String TIMES = "times";
     String LAST_REPORT_TXT = "lastReport.txt";
